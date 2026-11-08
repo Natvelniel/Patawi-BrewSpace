@@ -24,6 +24,7 @@ export const AdminDashboardView: React.FC = () => {
     products,
     updateProductStock,
     vouchers,
+    currentUser,
   } = useStore();
 
   const [showProductModal, setShowProductModal] = useState(false);
@@ -481,8 +482,15 @@ export const AdminDashboardView: React.FC = () => {
 
           <div className="bg-white rounded-3xl border border-[#ECE4DA] p-5 depth-card space-y-3 text-xs">
             <div className="flex items-center gap-3 pb-3 border-b border-[#F4EFE9]">
-              <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-[#C86826] shrink-0 bg-[#FAF7F2]">
-                <img src="/assets/66205.png" alt="Head Roaster" className="w-full h-full object-cover" />
+              <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-[#C86826] shrink-0 bg-[#FAF7F2] shadow-xs">
+                <img
+                  src={currentUser?.role === 'admin' ? currentUser.avatar : '/assets/9e21e.png'}
+                  alt="Head Roaster Budi Santoso"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).src = '/assets/9e21e.png';
+                  }}
+                />
               </div>
               <div>
                 <div className="flex items-center gap-1.5">

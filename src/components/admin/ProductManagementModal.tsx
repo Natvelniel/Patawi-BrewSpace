@@ -69,7 +69,7 @@ export const ProductManagementModal: React.FC<ProductManagementModalProps> = ({
       basePrice: priceNum,
       stock: stockNum,
       rating: productToEdit?.rating || 4.9,
-      image: productToEdit?.image || '/assets/8357a.png',
+      image: productToEdit?.image || '/assets/da276.png',
       tag: tag.trim() || undefined,
       brewMethods: ['Single Origin', 'Filter Roast', 'Espresso'],
     };

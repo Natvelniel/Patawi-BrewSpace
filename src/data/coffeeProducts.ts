@@ -18,7 +18,7 @@ export const DEMO_USERS: User[] = [
     role: 'admin',
     tier: 'Roastery Master',
     points: 3800,
-    avatar: '/assets/c1a30.png',
+    avatar: '/assets/9e21e.png',
     phone: '+62 811-2233-4455',
   },
   {
