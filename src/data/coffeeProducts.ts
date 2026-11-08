@@ -1,4 +1,37 @@
-import { CoffeeProduct, Order } from '../types';
+import { CoffeeProduct, Order, User } from '../types';
+
+export const DEMO_USERS: User[] = [
+  {
+    id: 'user-nathaniel',
+    name: 'Nathaniel Christian',
+    email: 'nathanielchristian1109@gmail.com',
+    role: 'customer',
+    tier: 'Gold Member',
+    points: 1250,
+    avatar: '/assets/9e21e.png',
+    phone: '+62 812-9988-7700',
+  },
+  {
+    id: 'user-budi',
+    name: 'Budi Santoso (Head Roaster)',
+    email: 'roastery.admin@patawicoffee.id',
+    role: 'admin',
+    tier: 'Roastery Master',
+    points: 3800,
+    avatar: '/assets/c1a30.png',
+    phone: '+62 811-2233-4455',
+  },
+  {
+    id: 'user-rian',
+    name: 'Rian Hidayat (GoSend Driver)',
+    email: 'rian.gosend@driver.id',
+    role: 'delivery',
+    tier: 'Silver Member',
+    points: 450,
+    avatar: '/assets/9e21e.png',
+    phone: '+62 856-7890-1234',
+  },
+];
 
 export const COFFEE_PRODUCTS: CoffeeProduct[] = [
   {
@@ -22,6 +55,7 @@ export const COFFEE_PRODUCTS: CoffeeProduct[] = [
     stock: 24,
     rating: 4.9,
     tag: 'Fresh Roast',
+    brewMethods: ['Single Origin', 'Filter Roast', 'Cold Brew'],
     description: 'Biji kopi arabika single origin dari ketinggian 1.500 MDPL Pantan Musara, Aceh Tengah. Diproses secara Anaerobic fermentation menghasilkan keasaman winey yang kompleks dan aftertaste karamel yang tebal.',
   },
   {
@@ -45,6 +79,7 @@ export const COFFEE_PRODUCTS: CoffeeProduct[] = [
     stock: 14,
     rating: 4.8,
     tag: 'Stok 14',
+    brewMethods: ['Single Origin', 'Filter Roast'],
     description: 'Tumbuh di pegunungan tinggi Tana Toraja pada ketinggian 1.800 MDPL. Proses Washed klasik menonjolkan aroma herbal segar, sentuhan citrus buah tropis, dan rasa manis gula aren alami.',
   },
   {
@@ -68,6 +103,7 @@ export const COFFEE_PRODUCTS: CoffeeProduct[] = [
     stock: 18,
     rating: 5.0,
     tag: 'Pilihan Barista',
+    brewMethods: ['Single Origin', 'Filter Roast', 'Cold Brew'],
     description: 'Dipanen dari dataran tinggi lereng Gunung Batur, Kintamani. Proses Anaerobic Honey memberikan notes marmalade jeruk yang cerah berpadu dengan keharuman bunga melati dan manis madu hutan.',
   },
   {
@@ -91,6 +127,7 @@ export const COFFEE_PRODUCTS: CoffeeProduct[] = [
     stock: 35,
     rating: 4.7,
     tag: 'House Blend',
+    brewMethods: ['Espresso', 'Cold Brew'],
     description: 'Kombinasi 70% Arabika Gayo & Toraja dengan 30% Robusta Dampit premium. Dirancang khusus untuk penikmat espresso dan susu dengan body mantap dan aftertaste cokelat hitam pekat.',
   },
   {
@@ -114,6 +151,7 @@ export const COFFEE_PRODUCTS: CoffeeProduct[] = [
     stock: 20,
     rating: 4.8,
     tag: 'Fresh Roast',
+    brewMethods: ['Single Origin', 'Filter Roast', 'Cold Brew'],
     description: 'Biji kopi dari dataran tinggi Ngada, Flores. Memiliki karakter rasa cokelat karamel yang legit dengan tingkat keasaman lembut yang sangat nyaman dinikmati setiap hari.',
   },
 ];

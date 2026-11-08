@@ -8,9 +8,11 @@ import {
   RoastLevel,
   PackageWeight,
   GrindProfile,
-  Voucher
+  Voucher,
+  User,
+  FilterCriteria,
 } from '../types';
-import { COFFEE_PRODUCTS, INITIAL_ORDERS } from '../data/coffeeProducts';
+import { COFFEE_PRODUCTS, INITIAL_ORDERS, DEMO_USERS } from '../data/coffeeProducts';
 
 interface StoreContextType {
   role: Role;
@@ -25,6 +27,21 @@ interface StoreContextType {
   setSelectedCategory: (cat: string) => void;
   selectedOrigin: string;
   setSelectedOrigin: (origin: string) => void;
+
+  // Auth
+  currentUser: User | null;
+  isLoggedIn: boolean;
+  login: (userOrEmail: string | User, password?: string) => void;
+  logout: () => void;
+  showAuthModal: boolean;
+  setShowAuthModal: (v: boolean) => void;
+
+  // Filter & Sort
+  filterCriteria: FilterCriteria;
+  setFilterCriteria: React.Dispatch<React.SetStateAction<FilterCriteria>>;
+  showFilterModal: boolean;
+  setShowFilterModal: (v: boolean) => void;
+  resetFilter: () => void;
   
   // Cart
   cart: CartItem[];
@@ -93,6 +110,71 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [selectedRoast, setSelectedRoast] = useState<RoastLevel>('Semua');
   const [selectedCategory, setSelectedCategory] = useState<string>('Semua');
   const [selectedOrigin, setSelectedOrigin] = useState<string>('Semua Asal');
+
+  // Auth state
+  const [currentUser, setCurrentUser] = useState<User | null>(DEMO_USERS[0]);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+
+  // Filter & Sort state
+  const [showFilterModal, setShowFilterModal] = useState(false);
+  const [filterCriteria, setFilterCriteria] = useState<FilterCriteria>({
+    category: 'Semua',
+    roast: 'Semua',
+    process: 'Semua',
+    maxPrice: 0,
+    sortBy: 'featured',
+  });
+
+  const login = (userOrEmail: string | User, _password?: string) => {
+    let targetUser: User;
+    if (typeof userOrEmail === 'string') {
+      const found = DEMO_USERS.find(
+        (u) =>
+          u.email.toLowerCase() === userOrEmail.toLowerCase() ||
+          u.name.toLowerCase().includes(userOrEmail.toLowerCase())
+      );
+      targetUser = found || {
+        id: `user-${Date.now()}`,
+        name: userOrEmail.split('@')[0] || 'Pelanggan Patawi',
+        email: userOrEmail,
+        role: 'customer',
+        tier: 'Gold Member',
+        points: 500,
+        avatar: '/assets/9e21e.png',
+        phone: '+62 812-3456-7890',
+      };
+    } else {
+      targetUser = userOrEmail;
+    }
+    setCurrentUser(targetUser);
+    setIsLoggedIn(true);
+    setRole(targetUser.role);
+    setShowAuthModal(false);
+    showToast(`Berhasil masuk sebagai ${targetUser.name}!`);
+  };
+
+  const logout = () => {
+    setCurrentUser(null);
+    setIsLoggedIn(false);
+    setRole('customer');
+    showToast('Anda telah keluar dari akun.');
+  };
+
+  const resetFilter = () => {
+    setSelectedCategory('Semua');
+    setSelectedRoast('Semua');
+    setSelectedOrigin('Semua Asal');
+    setSearchQuery('');
+    setFilterCriteria({
+      category: 'Semua',
+      roast: 'Semua',
+      process: 'Semua',
+      maxPrice: 0,
+      sortBy: 'featured',
+    });
+    showToast('Semua filter berhasil direset');
+  };
 
   // Load initial cart
   const [cart, setCart] = useState<CartItem[]>(() => {
@@ -414,6 +496,17 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         setSelectedCategory,
         selectedOrigin,
         setSelectedOrigin,
+        currentUser,
+        isLoggedIn,
+        login,
+        logout,
+        showAuthModal,
+        setShowAuthModal,
+        filterCriteria,
+        setFilterCriteria,
+        showFilterModal,
+        setShowFilterModal,
+        resetFilter,
         cart,
         addToCart,
         updateCartItemQty,

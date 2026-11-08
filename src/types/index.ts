@@ -17,6 +17,25 @@ export interface FlavorScores {
   cuppingScore?: number; // e.g., 86.5
 }
 
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: Role;
+  tier: 'Gold Member' | 'Silver Member' | 'Roastery Master';
+  points: number;
+  avatar: string;
+  phone: string;
+}
+
+export interface FilterCriteria {
+  category: string; // 'Semua' | 'Single Origin' | 'Espresso' | 'Filter Roast' | 'Cold Brew'
+  roast: RoastLevel; // 'Semua' | 'Light' | 'Medium' | 'Medium-Dark'
+  process: string;   // 'Semua' | 'Anaerobic' | 'Washed' | 'Anaerobic Honey' | 'House Blend'
+  maxPrice: number;  // 0 (unlimited) or specific price
+  sortBy: 'featured' | 'rating' | 'price-asc' | 'price-desc' | 'cupping';
+}
+
 export interface CoffeeProduct {
   id: string;
   name: string;
@@ -34,6 +53,7 @@ export interface CoffeeProduct {
   rating: number;
   tag?: string; // e.g. 'Fresh Roast', 'Pilihan Barista', 'Stok 14'
   description?: string;
+  brewMethods?: string[]; // e.g. ['Single Origin', 'Filter Roast', 'Cold Brew']
 }
 
 export interface CartItem {

@@ -11,6 +11,8 @@ import { AdminDashboardView } from './components/admin/AdminDashboardView';
 import { DeliveryDashboardView } from './components/delivery/DeliveryDashboardView';
 import { ProductDetailModal } from './components/catalog/ProductDetailModal';
 import { GrindGuideModal } from './components/home/GrindGuideModal';
+import { AuthModal } from './components/auth/AuthModal';
+import { FilterModal } from './components/catalog/FilterModal';
 import { Smartphone, Monitor, Sparkles } from 'lucide-react';
 
 const MainApp: React.FC = () => {
@@ -112,6 +114,8 @@ const MainApp: React.FC = () => {
         {/* Global Modals */}
         <ProductDetailModal />
         <GrindGuideModal />
+        <AuthModal />
+        <FilterModal />
 
         {/* Toast Notification */}
         {toastMessage && (

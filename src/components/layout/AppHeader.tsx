@@ -1,10 +1,10 @@
 import React from 'react';
 import { useStore } from '../../context/StoreContext';
 import { Role } from '../../types';
-import { Bell } from 'lucide-react';
+import { Bell, LogIn } from 'lucide-react';
 
 export const AppHeader: React.FC = () => {
-  const { role, setRole, orders, showToast } = useStore();
+  const { role, setRole, orders, showToast, currentUser, isLoggedIn, setShowAuthModal } = useStore();
 
   const roles: { id: Role; label: string }[] = [
     { id: 'customer', label: 'Customer' },
@@ -27,7 +27,7 @@ export const AppHeader: React.FC = () => {
           </span>
         </div>
 
-        {/* Action icons */}
+        {/* Action icons & Auth trigger */}
         <div className="flex items-center gap-2.5">
           <button
             onClick={() => showToast(`Anda memiliki ${activeOrdersCount} pesanan aktif`)}
@@ -41,17 +41,32 @@ export const AppHeader: React.FC = () => {
             )}
           </button>
 
-          {/* User Profile Avatar */}
-          <div className="w-8 h-8 rounded-full overflow-hidden border border-[#D9CEC5] shadow-xs shrink-0">
-            <img
-              src="/assets/9e21e.png"
-              alt="Profil Pengguna"
-              className="w-full h-full object-cover"
-              onError={(e) => {
-                (e.target as HTMLElement).style.display = 'none';
-              }}
-            />
-          </div>
+          {/* User Profile Avatar / Login Button */}
+          {isLoggedIn && currentUser ? (
+            <button
+              onClick={() => setShowAuthModal(true)}
+              className="flex items-center gap-2 p-1 pl-2.5 pr-1 rounded-full bg-[#EFE8E0]/70 hover:bg-[#E5DCD2] border border-[#ECE4DA] transition-all cursor-pointer active:scale-95"
+              title="Kelola Akun"
+            >
+              <span className="text-[11px] font-bold text-[#26160F] max-w-[80px] truncate hidden sm:inline">
+                {currentUser.name.split(' ')[0]}
+              </span>
+              <div className="w-7 h-7 rounded-full overflow-hidden border border-[#C86826] shadow-2xs shrink-0 bg-[#FAF7F2]">
+                <img
+                  src={currentUser.avatar}
+                  alt={currentUser.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </button>
+          ) : (
+            <button
+              onClick={() => setShowAuthModal(true)}
+              className="flex items-center gap-1.5 bg-[#26160F] hover:bg-[#3E2419] text-[#FDB882] px-3 py-1.5 rounded-full text-xs font-bold shadow-xs cursor-pointer active:scale-95 transition-all"
+            >
+              <LogIn className="w-3.5 h-3.5" /> Masuk
+            </button>
+          )}
         </div>
       </div>
 

@@ -1,6 +1,6 @@
 # Patawi-BrewSpace ☕
 
-> **Patawi Coffee** — Aplikasi Web Pemesanan Kopi Artisanal & Specialty Roastery. Dibuat berdasarkan Sistem Desain Figma Patawi Coffee secara interaktif, responsif, dan fungsional penuh. Berstandar **Production Ready** dengan kedalaman visual (*visual depth*), ritme spasi 8pt, serta *mobile safe-area viewport*.
+> **Patawi Coffee** — Aplikasi Web Pemesanan Kopi Artisanal & Specialty Roastery. Dibuat berdasarkan Sistem Desain Figma Patawi Coffee secara interaktif, responsif, dan fungsional penuh. Berstandar **Production Ready** dengan kedalaman visual (*visual depth*), ritme spasi 8pt, autentikasi multi-peran, dan filter interaktif multi-kriteria.
 
 [![Vite](https://img.shields.io/badge/Vite-6.x-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
 [![React](https://img.shields.io/badge/React-19.x-61DAFB?logo=react&logoColor=black)](https://react.dev/)
@@ -9,40 +9,43 @@
 
 ---
 
-## 📸 Preview Tampilan Aplikasi (Production-Ready)
+## 📸 Preview Tampilan Aplikasi (Fixed & Production-Ready)
 
-| Beranda & Promo | Live GPS & Radar Kurir | WhatsApp Care Hotline |
+| Beranda (Bebas Tabrakan) | Modal Autentikasi (1-Klik Demo) | Filter & Urutkan (Drawer) |
 | :---: | :---: | :---: |
-| <img src="docs/screenshots/home_mobile.png" width="260" alt="Beranda Mobile Patawi Coffee" /> | <img src="docs/screenshots/tracking_mobile.png" width="260" alt="Pelacakan Pesanan Live GPS" /> | <img src="docs/screenshots/whatsapp_hotline_mobile.png" width="260" alt="Hotline WhatsApp Prototipe" /> |
+| <img src="docs/screenshots/home_fixed_mobile.png" width="260" alt="Beranda Mobile Patawi Coffee" /> | <img src="docs/screenshots/auth_modal_mobile.png" width="260" alt="Modal Autentikasi Pengguna" /> | <img src="docs/screenshots/filter_modal_mobile.png" width="260" alt="Modal Filter Lengkap" /> |
 
-| Keranjang Belanja & Stepper | Modal Detail & Cupping | Desktop Bezel Frame Mode |
+| Filter Aktif (Cold Brew) | Katalog Biji Kopi Utuh | Pelacakan Pesanan Live GPS |
 | :---: | :---: | :---: |
-| <img src="docs/screenshots/cart_mobile.png" width="260" alt="Keranjang Belanja Mobile" /> | <img src="docs/screenshots/modal.png" width="260" alt="Modal Detail Varian Biji Kopi" /> | <img src="docs/screenshots/desktop_bezel.png" width="260" alt="Desktop Bezel Mockup" /> |
+| <img src="docs/screenshots/cold_brew_filtered.png" width="260" alt="Filter Kategori Cold Brew" /> | <img src="docs/screenshots/catalog_fixed_mobile.png" width="260" alt="Katalog Biji Kopi Mobile" /> | <img src="docs/screenshots/tracking_mobile.png" width="260" alt="Pelacakan Pesanan Live GPS" /> |
 
 ---
 
 ## 🌟 Fitur Utama
 
-- **Desain Otentik & Responsive (Mobile-First):**
-  - Mengadaptasi sistem desain dari Figma (`4w9MNCQRO1UHqnjsssakY4`).
-  - **Zero Drowning Navigation**: Dilengkapi `viewport-fit=cover`, padding aman `env(safe-area-inset-bottom)`, dan layout fleksibel penuh sehingga navigasi bawah tidak pernah terpotong di perangkat Android maupun iPhone.
-  - **Tipografi Harmonis**: `Playfair Display` (Serif untuk Judul/Brand) & `Plus Jakarta Sans` (UI Sans-serif).
-  - **Palet Artisan Earth-Tone**: `#26160F` (Dark Roast Espresso), `#FAF7F2` (Warm Milk Cream), `#C86826` (Caramel Honey).
-  - **Visual Depth Multi-Layer**: Menggunakan bayangan ambient halus (`rgba(38,22,15,0.05)`), pantulan tepi atas putih (*rim lighting*), dan frosted glass surface (`backdrop-blur-xl`).
+- **Desain Otentik & Bebas Tabrakan Visual (Anti-Slop Craft):**
+  - **Zero Badge Collisions**: Badge status di kiri atas dan tombol favorit di kanan atas gambar; rating bintang dipindahkan ke baris metadata di bawah gambar sehingga tidak ada elemen yang saling menumpuk.
+  - **Kategori Seduh Bebas Terpotong**: Menggunakan horizontal chip cards yang lapang (`Single Origin`, `Espresso`, `Filter Roast`, `Cold Brew`) lengkap dengan icon dan counter varian aktif tanpa teks terpotong (*no ellipsis*).
+  - **Judul Produk Utuh**: Judul kopi ditampilkan dalam 2 baris penuh (`line-clamp-2`), dan tag sangrai seperti `Light-Med` dilindungi `whitespace-nowrap` agar tidak terbelah dua baris.
+  - **Zero Drowning Navigation**: Dilengkapi `viewport-fit=cover`, padding aman `env(safe-area-inset-bottom)`, dan layout fleksibel penuh.
 
-- **Pelacakan Pesanan Real-Time (Live Tracking):**
-  - **Bip Live GPS Presisi**: Indikator radar konsentris hijau yang berkedip tepat di tengah badge Live GPS.
-  - **Pin Kurir Dinamis**: Ikon motor kurir GoSend berdenyut langsung di atas peta Jakarta.
-  - **WhatsApp Roastery Hotline**: Layanan pelanggan resmi prototipe dengan nomor bersih `+62 812-0000-8888`, tombol salin cepat, dan status online real-time.
-  - **Linimasa 6 Tahap Pengiriman**: *Pesanan Diterima → Konfirmasi Roastery → Roasting & Packing → Kurir Menuju Outlet → Diambil Kurir → Selesai*.
-  - **Pick Up di Outlet**: Menampilkan **PIN 4 Digit Barista** besar (`7 4 9 2`) serta panduan ambil di Counter Senopati.
+- **Fungsi Autentikasi & Manajemen Akun (Login System):**
+  - **Modal Autentikasi Cerdas (`AuthModal.tsx`)**: Form login dan registrasi dengan validasi email/kata sandi dan toggle visibilitas kata sandi.
+  - **1-Click Quick Demo Login**: Beralih akun seketika dalam 1 klik untuk pengujian:
+    - 👤 **Nathaniel Christian**: Pelanggan VIP Gold Member (1.250 Poin)
+    - ☕ **Budi Santoso**: Head Roaster Outlet Senopati (Admin)
+    - 🛵 **Rian Hidayat**: Mitra Kurir GoSend Express (Delivery)
+  - **Sinkronisasi Profil & Header**: Klik avatar di header atau menu profil langsung membuka manajemen akun, rincian poin, serta opsi keluar/logout fungsional.
 
-- **Eksplorasi Katalog & Beranda:**
-  - Pencarian real-time biji kopi berdasarkan nama, varietas origin, dan flavor notes.
-  - Banner promo interaktif dengan tombol klaim kode voucher otomatis.
-  - Filter metode seduh (*Single Origin, Espresso, Filter Roast, Cold Brew*).
-  - Filter profil sangrai (*Semua, Light, Medium, Medium-Dark*).
-  - Panduan ukuran gilingan (*Grind Size Guide Modal*).
+- **Sistem Filter & Sortir Interaktif Multi-Kriteria:**
+  - **Quick Filter Kategori**: Klik chip kategori metode seduh (misal: *Cold Brew*) langsung menyaring daftar produk secara instan dan menampilkan chip filter aktif yang dapat dihapus.
+  - **Advanced Filter Drawer (`FilterModal.tsx`)**:
+    - *Metode Seduh*: Semua, Single Origin, Espresso, Filter Roast, Cold Brew
+    - *Profil Sangrai*: Semua, Light, Medium, Medium-Dark
+    - *Proses Pascapanen*: Semua, Anaerobic, Washed, Honey, House Blend
+    - *Rentang Harga*: Semua, < Rp 85.000, Rp 85.000 - Rp 100.000, > Rp 100.000
+    - *Urutkan Berdasarkan*: Paling Sesuai, Rating Tertinggi, Harga Terendah, Harga Tertinggi, Cupping Score
+  - **Live Result Counter**: Tombol *Tampilkan X Biji Kopi* dinamis dan tombol *Reset Semua Filter*.
 
 - **Kustomisasi Varian Produk (Bottom Sheet Modal):**
   - Indikator profil rasa visual (Cupping Score, Keasaman, Ketebalan, Manis).
@@ -53,13 +56,14 @@
 - **Keranjang Belanja & Alur Checkout 3 Tahap:**
   - Stepper interaktif: *1. Keranjang → 2. Pengiriman → 3. Bayar*.
   - Kupon diskon promo (contoh: `PATAWIFRESH` & `BEANS20`).
-  - Pilihan opsi pengiriman: *GoSend Instant* atau *Pick Up di Outlet Senopati*.
+  - Pilihan pengiriman: *GoSend Instant* atau *Pick Up di Outlet Senopati*.
   - Simulator pembayaran dinamis **QRIS BCA** dengan countdown timer dan verifikasi otomatis.
 
-- **Multi-Role Header Switcher:**
-  - **Customer:** Pengalaman belanja pembeli.
-  - **Admin Patawi:** Manajemen antrean roasting station dan monitor suhu drum mesin sangrai (205°C).
-  - **Delivery Order:** Tampilan kurir GoSend untuk rute pengantaran paket kopi.
+- **Pelacakan Pesanan Real-Time (Live Tracking):**
+  - **Bip Live GPS Presisi**: Indikator radar konsentris hijau yang berkedip tepat di tengah badge Live GPS.
+  - **Pin Kurir Dinamis**: Ikon motor kurir GoSend berdenyut langsung di atas peta Jakarta.
+  - **WhatsApp Roastery Hotline**: Layanan pelanggan resmi prototipe dengan nomor bersih `+62 812-0000-8888`, tombol salin cepat, dan status online real-time.
+  - **PIN 4 Digit Barista**: Tampilan kode penjemputan outlet Senopati (`7 4 9 2`).
 
 ---
 
@@ -83,17 +87,18 @@ UI/
 ├── src/
 │   ├── components/
 │   │   ├── admin/            # Tampilan Dashboard Roastery Admin
+│   │   ├── auth/             # Modal Autentikasi Pengguna & Quick Demo Login
 │   │   ├── cart/             # Keranjang & Modal Pembayaran QRIS
-│   │   ├── catalog/          # Katalog Produk & Modal Varian (Cupping score, grind size)
+│   │   ├── catalog/          # Katalog Produk, Modal Varian, & Filter Drawer
 │   │   ├── delivery/         # Dashboard Kurir Pengiriman
-│   │   ├── home/             # Beranda, Banner Promo, & Modal Panduan Gilingan
-│   │   ├── layout/           # Header (Role Switcher) & Bottom Navigation
-│   │   ├── profile/          # Profil Member, Poin Patawi, & Pengaturan
+│   │   ├── home/             # Beranda, Chip Kategori, Banner Promo, & Panduan Gilingan
+│   │   ├── layout/           # Header (Role Switcher & Avatar Auth) & Bottom Navigation
+│   │   ├── profile/          # Profil Member, Poin Patawi, & Pengaturan Akun
 │   │   └── tracking/         # Pelacakan GPS, Chat Driver, Hotline WhatsApp, & PIN Barista
 │   ├── context/
-│   │   └── StoreContext.tsx  # Global State Management (Cart, Voucher, Orders, Roles)
+│   │   └── StoreContext.tsx  # Global State Management (Auth, Filter, Cart, Orders, Roles)
 │   ├── data/
-│   │   └── coffeeProducts.ts # Mock Data Biji Kopi Specialty & Pesanan Aktif
+│   │   └── coffeeProducts.ts # Mock Data Biji Kopi Specialty, Akun Demo, & Pesanan
 │   ├── types/
 │   │   └── index.ts          # Definisi TypeScript Interfaces & Enums
 │   ├── App.tsx               # Root Component dengan Device Frame & Safe-Area Layout
