@@ -75,17 +75,17 @@ export const HomeView: React.FC = () => {
   };
 
   return (
-    <div className="pb-28 pt-2 space-y-5 px-4 bg-[#FBF9F5] min-h-screen">
+    <div className="pb-8 pt-3 space-y-5 px-4 bg-[#FAF7F2] min-h-full">
       {/* 1. Search Bar */}
-      <div className="flex items-center gap-2">
-        <div className="flex-1 flex items-center bg-[#F5F3EF] rounded-xl px-3.5 py-2.5 border border-[#EAE8E4] shadow-xs">
-          <Search className="w-4 h-4 text-[#817470] mr-2 shrink-0" />
+      <div className="flex items-center gap-2.5">
+        <div className="flex-1 flex items-center bg-white rounded-2xl px-4 py-2.5 border border-[#ECE4DA] shadow-xs focus-within:border-[#26160F] transition-colors">
+          <Search className="w-4 h-4 text-[#75645C] mr-2.5 shrink-0" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Cari single origin, blend, sangrai..."
-            className="w-full bg-transparent text-[13px] text-[#2B1810] placeholder-[#817470] focus:outline-hidden"
+            className="w-full bg-transparent text-xs text-[#26160F] placeholder-[#75645C] focus:outline-hidden"
           />
         </div>
         <button
@@ -95,7 +95,7 @@ export const HomeView: React.FC = () => {
             setSearchQuery('');
             showToast('Filter pencarian direset');
           }}
-          className="w-11 h-11 flex items-center justify-center bg-[#EFEEEA] hover:bg-[#EAE8E4] rounded-xl border border-[#EAE8E4] text-[#4F4440] transition-colors shrink-0 shadow-xs cursor-pointer"
+          className="w-10 h-10 flex items-center justify-center bg-white hover:bg-[#F4EFE9] rounded-2xl border border-[#ECE4DA] text-[#5C4D46] transition-colors shrink-0 shadow-xs cursor-pointer active:scale-95"
           title="Reset / Opsi Filter"
         >
           <SlidersHorizontal className="w-4 h-4" />
@@ -103,7 +103,7 @@ export const HomeView: React.FC = () => {
       </div>
 
       {/* 2. Hero Promo Banner */}
-      <div className="relative overflow-hidden rounded-2xl bg-radial from-[#3A1F14] to-[#2B1810] text-white p-5 shadow-md">
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#2D1A12] via-[#24130C] to-[#1A0D07] text-white p-5 shadow-md">
         {/* Background Coffee Beans Image */}
         <div className="absolute right-0 top-0 bottom-0 w-[55%] opacity-40 mix-blend-screen pointer-events-none">
           <img
@@ -114,24 +114,24 @@ export const HomeView: React.FC = () => {
         </div>
 
         <div className="relative z-10 max-w-[70%]">
-          <div className="inline-flex items-center gap-1.5 bg-[#865225]/80 text-[#FDB882] text-[10px] font-bold px-2.5 py-0.8 rounded-full mb-2">
-            <Flame className="w-3 h-3 text-[#E08A44]" />
+          <div className="inline-flex items-center gap-1.5 bg-[#865225]/70 text-[#FDB882] text-[11px] font-bold px-3 py-1 rounded-full mb-2.5 border border-white/10">
+            <Flame className="w-3.5 h-3.5 text-[#E08A44]" />
             CONTOH PROMO
           </div>
-          <h2 className="font-serif text-[22px] font-bold text-white tracking-tight leading-tight">
+          <h2 className="font-serif text-[23px] font-bold text-white tracking-tight leading-tight">
             Profil Baru
           </h2>
-          <p className="text-[12px] text-[#D3C3BE] mt-1.5 leading-relaxed line-clamp-2">
+          <p className="text-xs text-[#E0D5CE] mt-1.5 leading-relaxed line-clamp-2">
             Diskon 20% biji kopi sangrai segar pilihan artisan! Gunakan kode kupon di keranjang.
           </p>
 
           <div className="flex items-center gap-2 mt-4">
-            <span className="text-[10px] font-semibold bg-[#1F140E] text-[#D3C3BE] px-2.5 py-1 rounded-md border border-[#4F4440]">
+            <span className="text-[11px] font-semibold bg-black/40 text-[#E0D5CE] px-2.5 py-1 rounded-lg border border-white/10">
               Beans Promo
             </span>
             <button
               onClick={handleClaimPromo}
-              className="inline-flex items-center gap-1 bg-[#FDB882] hover:bg-[#E08A44] text-[#2B1810] text-[12px] font-bold px-3 py-1.5 rounded-lg shadow-xs transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1 bg-[#FDB882] hover:bg-[#E08A44] text-[#26160F] text-xs font-bold px-3.5 py-1.5 rounded-xl shadow-xs transition-all cursor-pointer active:scale-95"
             >
               Klaim Promo <ArrowRight className="w-3 h-3" />
             </button>
@@ -140,20 +140,20 @@ export const HomeView: React.FC = () => {
       </div>
 
       {/* 3. Fresh Roast Guarantee Card */}
-      <div className="flex items-center gap-3 bg-[#F5F3EF] border border-[#EAE8E4] rounded-xl p-3.5 shadow-2xs">
-        <div className="p-2 bg-[#FBF9F5] rounded-xl text-[#865225] shrink-0 border border-[#EAE8E4]">
-          <ShieldCheck className="w-5 h-5 text-[#E08A44]" />
+      <div className="flex items-center gap-3 bg-white border border-[#ECE4DA] rounded-2xl p-3.5 shadow-2xs">
+        <div className="p-2.5 bg-[#FAF7F2] rounded-xl text-[#865225] shrink-0 border border-[#ECE4DA]">
+          <ShieldCheck className="w-5 h-5 text-[#C86826]" />
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
-            <h4 className="text-[13px] font-bold text-[#2B1810] truncate">
+            <h4 className="text-xs font-bold text-[#26160F] truncate">
               Jaminan Sangrai Segar
             </h4>
-            <span className="text-[9px] font-bold bg-[#EFEEEA] text-[#865225] px-1.5 py-0.2 rounded-md">
+            <span className="text-[10px] font-bold bg-[#F4EFE9] text-[#865225] px-2 py-0.5 rounded-md">
               MAKS. 7 HARI
             </span>
           </div>
-          <p className="text-[11px] text-[#817470] mt-0.5 truncate">
+          <p className="text-[11px] text-[#75645C] mt-0.5 truncate">
             Dikurasi dan disangrai tepat sebelum masa resting seduhan
           </p>
         </div>
@@ -161,18 +161,18 @@ export const HomeView: React.FC = () => {
 
       {/* 4. Kategori Pilihan (Icon Buttons) */}
       <div>
-        <div className="flex items-center justify-between mb-2.5">
+        <div className="flex items-center justify-between mb-3">
           <div>
-            <h3 className="font-serif text-[17px] font-bold text-[#2B1810]">
+            <h3 className="font-serif text-[18px] font-bold text-[#26160F]">
               Kategori Pilihan
             </h3>
-            <p className="text-[11px] text-[#817470]">
+            <p className="text-xs text-[#75645C]">
               Pilih metode seduh & karakter favoritmu
             </p>
           </div>
           <button
             onClick={() => setActiveTab('catalog')}
-            className="text-[12px] font-semibold text-[#865225] hover:underline"
+            className="text-xs font-bold text-[#865225] hover:underline"
           >
             Semua &gt;
           </button>
@@ -186,13 +186,13 @@ export const HomeView: React.FC = () => {
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(isSelected ? 'Semua' : cat.id)}
-                className={`flex flex-col items-center justify-center p-2.5 rounded-xl border text-center transition-all cursor-pointer ${
+                className={`flex flex-col items-center justify-center p-3 rounded-2xl border text-center transition-all cursor-pointer active:scale-95 ${
                   isSelected
-                    ? 'bg-[#2B1810] text-[#FDB882] border-[#2B1810] shadow-sm'
-                    : 'bg-white text-[#4F4440] border-[#EAE8E4] hover:bg-[#F5F3EF]'
+                    ? 'bg-[#26160F] text-[#FDB882] border-[#26160F] shadow-sm'
+                    : 'bg-white text-[#5C4D46] border-[#ECE4DA] hover:bg-[#F4EFE9]'
                 }`}
               >
-                <Icon className={`w-5 h-5 mb-1 ${isSelected ? 'text-[#FDB882]' : 'text-[#865225]'}`} />
+                <Icon className={`w-5 h-5 mb-1.5 ${isSelected ? 'text-[#FDB882]' : 'text-[#865225]'}`} />
                 <span className="text-[11px] font-semibold truncate w-full">
                   {cat.label}
                 </span>
@@ -204,20 +204,20 @@ export const HomeView: React.FC = () => {
 
       {/* 5. Filter Profil Sangrai (Pills) */}
       <div>
-        <span className="text-[10px] font-bold text-[#817470] tracking-wider uppercase block mb-1.5">
+        <span className="text-[11px] font-bold text-[#75645C] tracking-wider uppercase block mb-2">
           Filter Profil Sangrai:
         </span>
-        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
           {roastPills.map((roast) => {
             const isSelected = selectedRoast === roast;
             return (
               <button
                 key={roast}
                 onClick={() => setSelectedRoast(roast)}
-                className={`shrink-0 px-3 py-1.2 rounded-full text-[12px] font-semibold transition-all cursor-pointer ${
+                className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer active:scale-95 ${
                   isSelected
-                    ? 'bg-[#2B1810] text-white shadow-2xs'
-                    : 'bg-[#EFEEEA] text-[#4F4440] hover:bg-[#EAE8E4]'
+                    ? 'bg-[#26160F] text-white shadow-xs'
+                    : 'bg-white text-[#5C4D46] border border-[#ECE4DA] hover:bg-[#F4EFE9]'
                 }`}
               >
                 {roast === 'Semua' ? 'Semua Sangrai' : roast}
@@ -230,14 +230,14 @@ export const HomeView: React.FC = () => {
       {/* 6. Grid Produk */}
       <div>
         <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-1.5">
-            <h3 className="font-serif text-[18px] font-bold text-[#2B1810]">
-              Produk
+          <div className="flex items-center gap-2">
+            <h3 className="font-serif text-[18px] font-bold text-[#26160F]">
+              Produk Pilihan
             </h3>
-            <span className="w-2 h-2 rounded-full bg-[#E08A44]" />
+            <span className="w-2 h-2 rounded-full bg-[#C86826]" />
           </div>
-          <span className="text-[12px] text-[#817470]">
-            {filteredProducts.length} Varian
+          <span className="text-xs text-[#75645C] font-medium">
+            {filteredProducts.length} Varian Biji Kopi
           </span>
         </div>
 
@@ -247,23 +247,23 @@ export const HomeView: React.FC = () => {
             return (
               <div
                 key={p.id}
-                className="bg-white rounded-2xl border border-[#EAE8E4] p-2.5 flex flex-col justify-between shadow-2xs hover:shadow-sm transition-shadow"
+                className="bg-white rounded-3xl border border-[#ECE4DA] p-3 flex flex-col justify-between shadow-2xs hover:shadow-md transition-all group"
               >
                 {/* Image Box */}
-                <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-[#EFEEEA] mb-2.5">
+                <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-[#FAF7F2] mb-2.5">
                   <img
                     src={p.image}
                     alt={p.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   {/* Process Tag */}
-                  <span className="absolute top-2 left-2 text-[10px] font-bold bg-[#E89B58] text-white px-2 py-0.5 rounded-md shadow-xs">
+                  <span className="absolute top-2 left-2 text-[10px] font-bold bg-[#26160F]/80 text-[#FDB882] px-2 py-0.5 rounded-md backdrop-blur-xs">
                     {p.process}
                   </span>
                   {/* Heart / Favorite Button */}
                   <button
                     onClick={() => toggleFavorite(p.id)}
-                    className="absolute top-2 right-2 p-1.5 bg-white/90 backdrop-blur-xs rounded-full text-[#4F4440] hover:text-red-500 transition-colors shadow-xs"
+                    className="absolute top-2 right-2 w-7 h-7 bg-white/90 backdrop-blur-xs rounded-full text-[#75645C] hover:text-red-500 flex items-center justify-center transition-colors shadow-xs active:scale-90"
                   >
                     <Heart
                       className={`w-3.5 h-3.5 ${
@@ -275,12 +275,12 @@ export const HomeView: React.FC = () => {
 
                 {/* Info */}
                 <div className="flex-1 flex flex-col">
-                  <div className="flex items-center justify-between text-[10px] font-bold text-[#865225]">
+                  <div className="flex items-center justify-between text-[11px] font-bold text-[#865225]">
                     <span className="truncate">{p.region}</span>
-                    <span className="text-[#817470] shrink-0">{p.roastLevel}</span>
+                    <span className="text-[#75645C] font-semibold shrink-0">{p.roastLevel}</span>
                   </div>
-                  <h4 className="font-serif text-[15px] font-bold text-[#2B1810] mt-0.5 line-clamp-1">
-                    {p.subtitle || p.name}
+                  <h4 className="font-serif text-[15px] font-bold text-[#26160F] mt-0.5 line-clamp-1 leading-snug">
+                    {p.name}
                   </h4>
 
                   {/* Flavor chips */}
@@ -288,7 +288,7 @@ export const HomeView: React.FC = () => {
                     {p.flavorNotes.slice(0, 3).map((n, idx) => (
                       <span
                         key={idx}
-                        className="text-[9px] font-medium bg-[#F5F3EF] text-[#4F4440] px-1.5 py-0.5 rounded"
+                        className="text-[10px] font-medium bg-[#F4EFE9] text-[#5C4D46] px-1.5 py-0.5 rounded-md"
                       >
                         {n}
                       </span>
@@ -296,19 +296,19 @@ export const HomeView: React.FC = () => {
                   </div>
 
                   {/* Price & Add Button */}
-                  <div className="mt-auto flex items-center justify-between pt-1 border-t border-[#F5F3EF]">
+                  <div className="mt-auto flex items-center justify-between pt-2 border-t border-[#F4EFE9]">
                     <div>
-                      <span className="text-[10px] text-[#817470] block leading-tight">
+                      <span className="text-[10px] text-[#75645C] block leading-tight">
                         200 gram
                       </span>
-                      <span className="font-serif text-[14px] font-bold text-[#2B1810] leading-tight">
+                      <span className="font-serif text-[14px] font-bold text-[#26160F] leading-tight">
                         Rp {p.basePrice.toLocaleString('id-ID')}
                       </span>
                     </div>
 
                     <button
                       onClick={() => setSelectedProductModal(p)}
-                      className="w-8 h-8 rounded-lg bg-[#2B1810] hover:bg-[#1B1C1A] text-white flex items-center justify-center transition-colors shadow-2xs cursor-pointer"
+                      className="w-8 h-8 rounded-xl bg-[#26160F] hover:bg-[#C86826] text-white flex items-center justify-center transition-all shadow-xs cursor-pointer active:scale-95"
                       title="Pilih Varian & Tambah"
                     >
                       <ShoppingBag className="w-3.5 h-3.5 text-[#FDB882]" />
@@ -322,43 +322,43 @@ export const HomeView: React.FC = () => {
       </div>
 
       {/* 7. Banner Edukasi Penggilingan */}
-      <div className="bg-[#EFEEEA] rounded-2xl p-4 flex items-center justify-between gap-3 border border-[#EAE8E4]">
+      <div className="bg-[#EFE8E0] rounded-3xl p-4 flex items-center justify-between gap-3 border border-[#E2D7CC] shadow-2xs">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#2B1810] text-[#FDB882] flex items-center justify-center shrink-0">
+          <div className="w-10 h-10 rounded-2xl bg-[#26160F] text-[#FDB882] flex items-center justify-center shrink-0 shadow-xs">
             <BookOpen className="w-5 h-5" />
           </div>
           <div>
-            <h4 className="text-[13px] font-bold text-[#2B1810]">
+            <h4 className="text-xs font-bold text-[#26160F]">
               Butuh Biji yang Digiling?
             </h4>
-            <p className="text-[11px] text-[#817470] mt-0.5">
+            <p className="text-[11px] text-[#75645C] mt-0.5">
               Pilih gilingan Kasar (Cold Brew), Sedang (V60), atau Halus (Espresso)
             </p>
           </div>
         </div>
         <button
           onClick={() => setShowGrindGuide(true)}
-          className="shrink-0 bg-white text-[#2B1810] hover:bg-[#F5F3EF] text-[12px] font-bold px-3 py-1.5 rounded-xl border border-[#D3C3BE] shadow-2xs transition-colors cursor-pointer"
+          className="shrink-0 bg-white text-[#26160F] hover:bg-[#FAF7F2] text-xs font-bold px-3.5 py-1.5 rounded-xl border border-[#D9CEC5] shadow-xs transition-colors cursor-pointer active:scale-95"
         >
           Panduan
         </button>
       </div>
 
       {/* 8. Storytelling & Ethical Coffee Section */}
-      <div className="bg-[#F5F3EF] rounded-2xl p-4.5 border border-[#EAE8E4]">
-        <div className="flex items-center gap-1.5 text-[10px] font-bold text-[#865225] uppercase tracking-wider mb-1.5">
-          <Award className="w-3.5 h-3.5 text-[#E08A44]" />
+      <div className="bg-white rounded-3xl p-5 border border-[#ECE4DA] shadow-2xs">
+        <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#865225] uppercase tracking-wider mb-2">
+          <Award className="w-4 h-4 text-[#C86826]" />
           Etis & Berkelanjutan
         </div>
-        <h3 className="font-serif text-[18px] font-bold text-[#2B1810] leading-snug">
+        <h3 className="font-serif text-[18px] font-bold text-[#26160F] leading-snug">
           Dari Petani Lokal Langsung ke Cangkir Anda
         </h3>
-        <p className="text-[12px] text-[#4F4440] mt-2 leading-relaxed">
+        <p className="text-xs text-[#5C4D46] mt-2 leading-relaxed">
           Patawi Coffee bermitra langsung dengan lebih dari 40 keluarga petani kopi di Gayo, Toraja, Kintamani, dan Priangan. Tanpa perantara berlapis, memberikan harga panen yang adil untuk kesejahteraan mereka.
         </p>
         <button
           onClick={() => showToast('Membuka dokumentasi proses cupping & kemitraan petani Patawi')}
-          className="inline-flex items-center gap-1.5 text-[12px] font-bold text-[#865225] mt-3 hover:text-[#2B1810] transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs font-bold text-[#865225] mt-3 hover:text-[#26160F] transition-colors"
         >
           Pelajari Proses Cupping Kami <ArrowRight className="w-3.5 h-3.5" />
         </button>

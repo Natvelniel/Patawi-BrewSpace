@@ -59,19 +59,19 @@ export const ProductDetailModal: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 backdrop-blur-xs transition-opacity animate-in fade-in">
+    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 backdrop-blur-xs transition-opacity animate-in fade-in select-none">
       <div
-        className="w-full max-w-[480px] bg-[#FBF9F5] rounded-t-[28px] max-h-[92vh] flex flex-col shadow-2xl border-t border-[#EAE8E4] overflow-hidden animate-in slide-in-from-bottom duration-300"
+        className="w-full max-w-[412px] bg-[#FAF7F2] rounded-t-[32px] max-h-[90vh] flex flex-col shadow-2xl border-t border-[#ECE4DA] overflow-hidden animate-in slide-in-from-bottom duration-300"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Grab Handle */}
         <div className="pt-3 pb-1 flex justify-center">
-          <div className="w-12 h-1.5 bg-[#D3C3BE] rounded-full" />
+          <div className="w-12 h-1 bg-[#D9CEC5] rounded-full" />
         </div>
 
         {/* Header */}
-        <div className="px-5 py-3 flex items-start gap-3 border-b border-[#EAE8E4]">
-          <div className="w-16 h-16 rounded-xl overflow-hidden bg-[#EFEEEA] shrink-0 border border-[#EAE8E4]">
+        <div className="px-5 py-3 flex items-start gap-3 border-b border-[#ECE4DA] bg-white/70 backdrop-blur-xs">
+          <div className="w-16 h-16 rounded-2xl overflow-hidden bg-[#F4EFE9] shrink-0 border border-[#ECE4DA]">
             <img
               src={product.image}
               alt={product.name}
@@ -79,22 +79,22 @@ export const ProductDetailModal: React.FC = () => {
             />
           </div>
           <div className="flex-1 min-w-0">
-            <span className="text-[10px] font-bold text-[#865225] tracking-wider uppercase">
+            <span className="text-[11px] font-bold text-[#865225] tracking-wider uppercase">
               {product.region} • {product.altitude}
             </span>
-            <h3 className="font-serif text-[17px] font-bold text-[#2B1810] truncate leading-snug">
+            <h3 className="font-serif text-[18px] font-bold text-[#26160F] truncate leading-snug">
               {product.name}
             </h3>
             <div className="flex items-baseline gap-1 mt-0.5">
-              <span className="text-[16px] font-bold text-[#2B1810]">
+              <span className="font-serif text-[17px] font-bold text-[#26160F]">
                 Rp {calculatedUnitPrice.toLocaleString('id-ID')}
               </span>
-              <span className="text-[12px] text-[#817470]">/{selectedWeight}</span>
+              <span className="text-xs text-[#75645C]">/{selectedWeight}</span>
             </div>
           </div>
           <button
             onClick={() => setSelectedProductModal(null)}
-            className="p-1.5 rounded-full bg-[#EFEEEA] text-[#817470] hover:text-[#2B1810] hover:bg-[#EAE8E4] transition-colors"
+            className="w-8 h-8 rounded-full bg-[#EFE8E0] text-[#75645C] hover:text-[#26160F] hover:bg-[#E5DCD2] flex items-center justify-center transition-colors cursor-pointer active:scale-95"
           >
             <X className="w-4 h-4" />
           </button>
@@ -103,43 +103,43 @@ export const ProductDetailModal: React.FC = () => {
         {/* Scrollable Body */}
         <div className="flex-1 overflow-y-auto px-5 py-4 space-y-5 no-scrollbar">
           {/* Cupping Score & Flavor Profile Card */}
-          <div className="bg-white p-3.5 rounded-xl border border-[#EAE8E4] shadow-2xs">
-            <div className="flex items-center justify-between pb-2 border-b border-[#F5F3EF]">
-              <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#865225] uppercase tracking-wider">
-                <Sparkles className="w-3.5 h-3.5 text-[#E08A44]" />
+          <div className="bg-white p-4 rounded-2xl border border-[#ECE4DA] shadow-2xs">
+            <div className="flex items-center justify-between pb-2.5 border-b border-[#F4EFE9]">
+              <div className="flex items-center gap-1.5 text-xs font-bold text-[#865225] uppercase tracking-wider">
+                <Sparkles className="w-4 h-4 text-[#C86826]" />
                 Profil Rasa (Cupping Score {product.scores.cuppingScore || 86.5})
               </div>
-              <span className="text-[11px] font-medium text-[#817470]">
+              <span className="text-[11px] font-semibold text-[#75645C]">
                 {product.roastDate}
               </span>
             </div>
             {/* Visual Bars */}
             <div className="grid grid-cols-3 gap-3 mt-3">
               <div>
-                <div className="flex justify-between text-[11px] mb-1">
-                  <span className="text-[#817470]">Keasaman</span>
-                  <span className="font-semibold text-[#2B1810]">{product.scores.acidity}</span>
+                <div className="flex justify-between text-[11px] mb-1.5">
+                  <span className="text-[#75645C]">Keasaman</span>
+                  <span className="font-bold text-[#26160F]">{product.scores.acidity}</span>
                 </div>
-                <div className="w-full h-1.5 bg-[#EFEEEA] rounded-full overflow-hidden">
+                <div className="w-full h-2 bg-[#F4EFE9] rounded-full overflow-hidden">
                   <div className="h-full bg-[#E08A44] rounded-full w-[65%]" />
                 </div>
               </div>
               <div>
-                <div className="flex justify-between text-[11px] mb-1">
-                  <span className="text-[#817470]">Ketebalan</span>
-                  <span className="font-semibold text-[#2B1810]">{product.scores.body}</span>
+                <div className="flex justify-between text-[11px] mb-1.5">
+                  <span className="text-[#75645C]">Ketebalan</span>
+                  <span className="font-bold text-[#26160F]">{product.scores.body}</span>
                 </div>
-                <div className="w-full h-1.5 bg-[#EFEEEA] rounded-full overflow-hidden">
-                  <div className="h-full bg-[#2B1810] rounded-full w-[80%]" />
+                <div className="w-full h-2 bg-[#F4EFE9] rounded-full overflow-hidden">
+                  <div className="h-full bg-[#26160F] rounded-full w-[80%]" />
                 </div>
               </div>
               <div>
-                <div className="flex justify-between text-[11px] mb-1">
-                  <span className="text-[#817470]">Manis</span>
-                  <span className="font-semibold text-[#2B1810]">{product.scores.sweetness}</span>
+                <div className="flex justify-between text-[11px] mb-1.5">
+                  <span className="text-[#75645C]">Manis</span>
+                  <span className="font-bold text-[#26160F]">{product.scores.sweetness}</span>
                 </div>
-                <div className="w-full h-1.5 bg-[#EFEEEA] rounded-full overflow-hidden">
-                  <div className="h-full bg-[#D47A33] rounded-full w-[85%]" />
+                <div className="w-full h-2 bg-[#F4EFE9] rounded-full overflow-hidden">
+                  <div className="h-full bg-[#C86826] rounded-full w-[85%]" />
                 </div>
               </div>
             </div>
@@ -148,11 +148,11 @@ export const ProductDetailModal: React.FC = () => {
           {/* Size Selector */}
           <div>
             <div className="flex items-center justify-between mb-2">
-              <label className="text-[13px] font-bold text-[#2B1810]">
+              <label className="text-xs font-bold text-[#26160F]">
                 Pilih Berat / Ukuran Kemasan
               </label>
-              <span className="text-[11px] text-[#865225] font-medium">
-                Zipper Bag + Valve Kedap Udara
+              <span className="text-[11px] text-[#865225] font-semibold">
+                Zipper Bag + Degassing Valve
               </span>
             </div>
             <div className="grid grid-cols-3 gap-2.5">
@@ -166,25 +166,25 @@ export const ProductDetailModal: React.FC = () => {
                   <button
                     key={w}
                     onClick={() => setSelectedWeight(w)}
-                    className={`flex flex-col items-center justify-center p-3 rounded-xl border text-center transition-all cursor-pointer ${
+                    className={`flex flex-col items-center justify-center p-3 rounded-2xl border text-center transition-all cursor-pointer active:scale-95 ${
                       isSelected
-                        ? 'bg-[#2B1810] text-white border-[#2B1810] shadow-sm'
-                        : 'bg-white text-[#2B1810] border-[#EAE8E4] hover:bg-[#F5F3EF]'
+                        ? 'bg-[#26160F] text-white border-[#26160F] shadow-sm'
+                        : 'bg-white text-[#26160F] border-[#ECE4DA] hover:bg-[#F4EFE9]'
                     }`}
                   >
-                    <span className="text-[14px] font-bold">{w}</span>
+                    <span className="text-sm font-bold">{w}</span>
                     <span
-                      className={`text-[12px] mt-0.5 ${
-                        isSelected ? 'text-[#FDB882]' : 'text-[#817470]'
+                      className={`text-xs mt-0.5 ${
+                        isSelected ? 'text-[#FDB882]' : 'text-[#75645C]'
                       }`}
                     >
                       Rp {price.toLocaleString('id-ID')}
                     </span>
                     <span
-                      className={`mt-1 text-[9px] font-bold px-1.5 py-0.2 rounded-full ${
+                      className={`mt-1.5 text-[10px] font-bold px-2 py-0.5 rounded-full ${
                         isSelected
-                          ? 'bg-[#E08A44] text-white'
-                          : 'bg-[#F5F3EF] text-[#865225]'
+                          ? 'bg-[#C86826] text-white'
+                          : 'bg-[#F4EFE9] text-[#865225]'
                       }`}
                     >
                       {badge}
@@ -198,10 +198,10 @@ export const ProductDetailModal: React.FC = () => {
           {/* Grind Size Selector */}
           <div>
             <div className="flex items-center justify-between mb-2">
-              <label className="text-[13px] font-bold text-[#2B1810]">
+              <label className="text-xs font-bold text-[#26160F]">
                 Pilih Profil Gilingan (Grind Size)
               </label>
-              <span className="text-[11px] font-semibold text-[#865225]">
+              <span className="text-xs font-bold text-[#865225]">
                 {selectedGrind === 'whole'
                   ? 'Biji Utuh'
                   : selectedGrind === 'coarse'
@@ -218,33 +218,33 @@ export const ProductDetailModal: React.FC = () => {
                   <div
                     key={g.id}
                     onClick={() => setSelectedGrind(g.id)}
-                    className={`flex items-center gap-3 p-3 rounded-xl border transition-all cursor-pointer ${
+                    className={`flex items-center gap-3 p-3.5 rounded-2xl border transition-all cursor-pointer active:scale-98 ${
                       isSelected
-                        ? 'bg-[#FDF6F0] border-[#E08A44] shadow-2xs ring-1 ring-[#E08A44]/30'
-                        : 'bg-white border-[#EAE8E4] hover:bg-[#F5F3EF]'
+                        ? 'bg-[#FDF6F0] border-[#C86826] shadow-2xs ring-1 ring-[#C86826]/30'
+                        : 'bg-white border-[#ECE4DA] hover:bg-[#F4EFE9]'
                     }`}
                   >
                     <div
-                      className={`p-2 rounded-lg shrink-0 ${
+                      className={`p-2.5 rounded-xl shrink-0 ${
                         isSelected
-                          ? 'bg-[#2B1810] text-[#FDB882]'
-                          : 'bg-[#EFEEEA] text-[#817470]'
+                          ? 'bg-[#26160F] text-[#FDB882]'
+                          : 'bg-[#EFE8E0] text-[#75645C]'
                       }`}
                     >
                       <Coffee className="w-4 h-4" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
-                        <span className="text-[13px] font-bold text-[#2B1810]">
+                        <span className="text-xs font-bold text-[#26160F]">
                           {g.title}
                         </span>
                         {g.recommended && (
-                          <span className="text-[9px] font-bold bg-[#FDB882] text-[#2B1810] px-1.5 py-0.2 rounded-full">
+                          <span className="text-[10px] font-bold bg-[#FDB882] text-[#26160F] px-2 py-0.5 rounded-full">
                             Sangat Dianjurkan
                           </span>
                         )}
                       </div>
-                      <p className="text-[11px] text-[#817470] mt-0.5 truncate">
+                      <p className="text-[11px] text-[#75645C] mt-0.5 truncate">
                         {g.description}
                       </p>
                     </div>
@@ -252,8 +252,8 @@ export const ProductDetailModal: React.FC = () => {
                     <div
                       className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ${
                         isSelected
-                          ? 'border-[#2B1810] bg-[#2B1810]'
-                          : 'border-[#D3C3BE]'
+                          ? 'border-[#26160F] bg-[#26160F]'
+                          : 'border-[#D9CEC5]'
                       }`}
                     >
                       {isSelected && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
@@ -266,7 +266,7 @@ export const ProductDetailModal: React.FC = () => {
 
           {/* Special Notes */}
           <div>
-            <label className="text-[12px] font-semibold text-[#817470] block mb-1">
+            <label className="text-xs font-semibold text-[#75645C] block mb-1">
               Catatan Khusus untuk Roaster / Barista (Opsional)
             </label>
             <input
@@ -274,36 +274,36 @@ export const ProductDetailModal: React.FC = () => {
               value={customNotes}
               onChange={(e) => setCustomNotes(e.target.value)}
               placeholder="Contoh: Sangrai medium-dark, giling Aeropress fine..."
-              className="w-full px-3.5 py-2.5 rounded-xl border border-[#EAE8E4] bg-white text-[13px] text-[#2B1810] placeholder-[#817470] focus:outline-hidden focus:border-[#2B1810]"
+              className="w-full px-4 py-2.5 rounded-xl border border-[#ECE4DA] bg-white text-xs text-[#26160F] placeholder-[#75645C] focus:outline-hidden focus:border-[#26160F]"
             />
           </div>
         </div>
 
         {/* Sticky Footer */}
-        <div className="px-5 py-3.5 bg-white border-t border-[#EAE8E4] flex items-center gap-3">
+        <div className="px-5 py-3.5 bg-white border-t border-[#ECE4DA] flex items-center gap-3">
           <div>
-            <span className="text-[11px] text-[#817470] block leading-tight">
+            <span className="text-[11px] text-[#75645C] block leading-tight">
               Subtotal Pesanan
             </span>
-            <span className="font-serif text-[18px] font-bold text-[#2B1810] leading-tight">
+            <span className="font-serif text-[18px] font-bold text-[#26160F] leading-tight">
               Rp {subtotal.toLocaleString('id-ID')}
             </span>
           </div>
 
           {/* Quantity Counter */}
-          <div className="flex items-center bg-[#EFEEEA] rounded-xl px-2 py-1.5 ml-auto">
+          <div className="flex items-center bg-[#EFE8E0] rounded-xl px-2 py-1.5 ml-auto">
             <button
               onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-              className="p-1 rounded-lg hover:bg-white text-[#2B1810] transition-colors"
+              className="p-1 rounded-lg hover:bg-white text-[#26160F] transition-colors cursor-pointer"
             >
               <Minus className="w-3.5 h-3.5" />
             </button>
-            <span className="w-8 text-center text-[13px] font-bold text-[#2B1810]">
+            <span className="w-8 text-center text-xs font-bold text-[#26160F]">
               {quantity}
             </span>
             <button
               onClick={() => setQuantity((q) => q + 1)}
-              className="p-1 rounded-lg hover:bg-white text-[#2B1810] transition-colors"
+              className="p-1 rounded-lg hover:bg-white text-[#26160F] transition-colors cursor-pointer"
             >
               <Plus className="w-3.5 h-3.5" />
             </button>
@@ -312,7 +312,7 @@ export const ProductDetailModal: React.FC = () => {
           {/* Add to Cart CTA */}
           <button
             onClick={handleAdd}
-            className="flex items-center justify-center gap-1.5 bg-[#2B1810] hover:bg-[#1B1C1A] text-white px-5 py-2.5 rounded-xl font-bold text-[13px] shadow-sm transition-all cursor-pointer"
+            className="flex items-center justify-center gap-1.5 bg-[#26160F] hover:bg-[#C86826] text-white px-5 py-2.5 rounded-xl font-bold text-xs shadow-sm transition-all cursor-pointer active:scale-95"
           >
             <ShoppingBag className="w-4 h-4 text-[#FDB882]" />
             Tambah
