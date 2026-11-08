@@ -70,10 +70,11 @@ export const AppHeader: React.FC = () => {
         </div>
       </div>
 
-      {/* Role Switcher Pills */}
-      <div className="flex items-center gap-2 mt-3 overflow-x-auto no-scrollbar pb-1">
+      {/* Role Switcher Segmented Control (Zero Overflow & Balanced) */}
+      <div className="mt-3 bg-[#EFE8E0]/80 p-1 rounded-2xl border border-[#ECE4DA] grid grid-cols-3 gap-1 shadow-2xs">
         {roles.map((r) => {
           const isActive = role === r.id;
+          const displayLabel = r.id === 'customer' ? 'Customer' : r.id === 'admin' ? 'Admin' : 'Kurir';
           return (
             <button
               key={r.id}
@@ -81,13 +82,13 @@ export const AppHeader: React.FC = () => {
                 setRole(r.id);
                 showToast(`Mode dialihkan ke: ${r.label}`);
               }}
-              className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 cursor-pointer ${
+              className={`py-1.5 px-1 rounded-xl text-xs font-semibold text-center transition-all duration-200 cursor-pointer select-none truncate ${
                 isActive
-                  ? 'bg-[#26160F] text-[#FFFFFF] shadow-xs scale-102'
-                  : 'bg-[#EFE8E0] text-[#5C4D46] hover:bg-[#E5DCD2]'
+                  ? 'bg-[#26160F] text-white shadow-xs font-bold'
+                  : 'text-[#5C4D46] hover:text-[#26160F] hover:bg-white/50'
               }`}
             >
-              {r.label}
+              {displayLabel}
             </button>
           );
         })}

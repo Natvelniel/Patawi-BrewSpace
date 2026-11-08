@@ -279,10 +279,14 @@ export const CatalogView: React.FC = () => {
 
                 {/* Product Meta */}
                 <div className="flex-1 flex flex-col">
-                  {/* Region & Star Rating Moved Here for Clean Separation (NO COLLISION) */}
-                  <div className="flex items-center justify-between text-[11px] font-bold text-[#865225]">
-                    <span className="truncate uppercase tracking-wider">{p.region}</span>
-                    <span className="flex items-center gap-0.5 text-[#C86826] shrink-0 font-bold">
+                  {/* Region, Altitude & Star Rating Aligned (NO COLLISION) */}
+                  <div className="flex items-center justify-between text-[10.5px] font-bold text-[#865225]">
+                    <div className="flex items-center gap-1 min-w-0 pr-1">
+                      <span className="truncate uppercase tracking-wider">{p.region}</span>
+                      <span className="text-[#C86826] shrink-0">•</span>
+                      <span className="whitespace-nowrap text-[#75645C] text-[10px] shrink-0 font-semibold">{p.altitude}</span>
+                    </div>
+                    <span className="flex items-center gap-0.5 text-[#C86826] shrink-0 font-bold ml-auto">
                       <Star className="w-3 h-3 fill-[#C86826]" />
                       {p.rating}
                     </span>
@@ -294,7 +298,7 @@ export const CatalogView: React.FC = () => {
                   </h4>
 
                   {/* Flavor Notes Preview */}
-                  <p className="text-[11px] text-[#75645C] mt-0.5 truncate">
+                  <p className="text-[11px] text-[#75645C] mt-0.5 line-clamp-1 leading-relaxed">
                     {p.flavorNotes.join(', ')}
                   </p>
 

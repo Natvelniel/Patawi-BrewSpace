@@ -11,22 +11,26 @@
 
 ## 📸 Preview Tampilan Aplikasi (Fixed & Production-Ready)
 
-| Beranda (Bebas Tabrakan) | Modal Autentikasi (1-Klik Demo) | Filter & Urutkan (Drawer) |
+| Beranda (Segmented Role Bar) | Kustomisasi & Profil Cupping | Pilihan Gilingan Lengkap |
 | :---: | :---: | :---: |
-| <img src="docs/screenshots/home_fixed_mobile.png" width="260" alt="Beranda Mobile Patawi Coffee" /> | <img src="docs/screenshots/auth_modal_mobile.png" width="260" alt="Modal Autentikasi Pengguna" /> | <img src="docs/screenshots/filter_modal_mobile.png" width="260" alt="Modal Filter Lengkap" /> |
+| <img src="docs/screenshots/header_segmented_fixed.png" width="260" alt="Beranda Mobile Patawi Coffee dengan Segmented Control" /> | <img src="docs/screenshots/modal_cupping_verified.png" width="260" alt="Modal Profil Cupping Sejajar & Altitude MDPL" /> | <img src="docs/screenshots/modal_scrolled_grind.png" width="260" alt="Pilihan Gilingan Biji Utuh Lengkap Tanpa Truncate" /> |
 
-| Filter Aktif (Cold Brew) | Katalog Biji Kopi Utuh | Pelacakan Pesanan Live GPS |
+| Pelacakan Live GPS & Driver Card | Katalog Biji Kopi Aligned | Keranjang & Catatan Seduhan |
 | :---: | :---: | :---: |
-| <img src="docs/screenshots/cold_brew_filtered.png" width="260" alt="Filter Kategori Cold Brew" /> | <img src="docs/screenshots/catalog_fixed_mobile.png" width="260" alt="Katalog Biji Kopi Mobile" /> | <img src="docs/screenshots/tracking_mobile.png" width="260" alt="Pelacakan Pesanan Live GPS" /> |
+| <img src="docs/screenshots/tracking_driver_verified.png" width="260" alt="Pelacakan Pesanan & Driver Card Rapi" /> | <img src="docs/screenshots/catalog_view_verified.png" width="260" alt="Katalog Biji Kopi Presisi & Rapi" /> | <img src="docs/screenshots/cart_view_verified.png" width="260" alt="Keranjang Belanja dengan Catatan Seduhan Utuh" /> |
 
 ---
 
 ## 🌟 Fitur Utama
 
 - **Desain Otentik & Bebas Tabrakan Visual (Anti-Slop Craft):**
-  - **Zero Badge Collisions**: Badge status di kiri atas dan tombol favorit di kanan atas gambar; rating bintang dipindahkan ke baris metadata di bawah gambar sehingga tidak ada elemen yang saling menumpuk.
-  - **Kategori Seduh Bebas Terpotong**: Menggunakan horizontal chip cards yang lapang (`Single Origin`, `Espresso`, `Filter Roast`, `Cold Brew`) lengkap dengan icon dan counter varian aktif tanpa teks terpotong (*no ellipsis*).
-  - **Judul Produk Utuh**: Judul kopi ditampilkan dalam 2 baris penuh (`line-clamp-2`), dan tag sangrai seperti `Light-Med` dilindungi `whitespace-nowrap` agar tidak terbelah dua baris.
+  - **Segmented Role Switcher**: Kontrol navigasi 3 tab simetris (`Customer` | `Admin` | `Kurir`) dengan kontainer rounded-2xl dan elevasi tegas tanpa overflow pada layar terkecil sekalipun.
+  - **Profil Rasa Cupping Sejajar (3 Stat Cards)**: Menghapus tabrakan teks dan efek tangga zig-zag menjadi 3 micro-card vertikal presisi (Keasaman, Ketebalan, Manis) dengan progress bar lurus sejajar di dasar card.
+  - **Ketinggian MDPL & Badge Utuh**: Format `whitespace-nowrap` memastikan ketinggian `1.800 MDPL` tidak pernah pecah sendirian ke baris kedua.
+  - **Pilihan Profil Gilingan Utuh**: Judul dan lencana rekomendasi dipisahkan secara fleksibel; deskripsi alat seduh (*V60 Pour Over, Aeropress, Espresso Mesin, Moka Pot*) tampil 100% lengkap tanpa elipsis (`truncate`).
+  - **Kartu Driver & Rute Peta Rapi**: Nomor plat `B 4521 SRX` disematkan dalam micro-pill putih bersih dan nama motor `Honda Vario Hitam` tampil utuh tanpa pemotongan kata.
+  - **Catatan Keranjang Multi-Line**: Catatan gilingan khusus pesanan di keranjang belanja tampil lengkap dan rapi tanpa terpotong.
+  - **Zero Badge Collisions**: Badge status di kiri atas dan tombol favorit di kanan atas gambar; rating bintang diposisikan rapi di baris metadata.
   - **Zero Drowning Navigation**: Dilengkapi `viewport-fit=cover`, padding aman `env(safe-area-inset-bottom)`, dan layout fleksibel penuh.
 
 - **Fungsi Autentikasi & Manajemen Akun (Login System):**

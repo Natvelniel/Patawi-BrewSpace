@@ -79,10 +79,14 @@ export const ProductDetailModal: React.FC = () => {
             />
           </div>
           <div className="flex-1 min-w-0">
-            <span className="text-[11px] font-bold text-[#865225] tracking-wider uppercase">
-              {product.region} • {product.altitude}
-            </span>
-            <h3 className="font-serif text-[18px] font-bold text-[#26160F] truncate leading-snug">
+            <div className="flex items-center gap-1.5 text-[10.5px] font-bold text-[#865225] tracking-wide uppercase flex-wrap">
+              <span className="truncate">{product.region}</span>
+              <span className="text-[#C86826]">•</span>
+              <span className="whitespace-nowrap px-1.5 py-0.5 bg-[#F4EFE9] text-[#75645C] rounded-sm text-[10px] font-semibold">
+                {product.altitude}
+              </span>
+            </div>
+            <h3 className="font-serif text-[18px] font-bold text-[#26160F] leading-snug mt-0.5 line-clamp-2">
               {product.name}
             </h3>
             <div className="flex items-baseline gap-1 mt-0.5">
@@ -113,32 +117,38 @@ export const ProductDetailModal: React.FC = () => {
                 {product.roastDate}
               </span>
             </div>
-            {/* Visual Bars */}
-            <div className="grid grid-cols-3 gap-3 mt-3">
-              <div>
-                <div className="flex justify-between text-[11px] mb-1.5">
-                  <span className="text-[#75645C]">Keasaman</span>
-                  <span className="font-bold text-[#26160F]">{product.scores.acidity}</span>
-                </div>
-                <div className="w-full h-2 bg-[#F4EFE9] rounded-full overflow-hidden">
+            {/* Visual Bars / Micro-Cards (Vertical Stack - Zero Collision) */}
+            <div className="grid grid-cols-3 gap-2 mt-3">
+              <div className="bg-[#FAF7F2] p-2.5 rounded-xl border border-[#ECE4DA] flex flex-col justify-between">
+                <span className="text-[9.5px] font-bold text-[#75645C] uppercase tracking-wider block">
+                  Keasaman
+                </span>
+                <span className="text-xs font-extrabold text-[#26160F] my-1 block">
+                  {product.scores.acidity}
+                </span>
+                <div className="w-full h-1.5 bg-[#EAE3D9] rounded-full overflow-hidden mt-0.5">
                   <div className="h-full bg-[#E08A44] rounded-full w-[65%]" />
                 </div>
               </div>
-              <div>
-                <div className="flex justify-between text-[11px] mb-1.5">
-                  <span className="text-[#75645C]">Ketebalan</span>
-                  <span className="font-bold text-[#26160F]">{product.scores.body}</span>
-                </div>
-                <div className="w-full h-2 bg-[#F4EFE9] rounded-full overflow-hidden">
+              <div className="bg-[#FAF7F2] p-2.5 rounded-xl border border-[#ECE4DA] flex flex-col justify-between">
+                <span className="text-[9.5px] font-bold text-[#75645C] uppercase tracking-wider block">
+                  Ketebalan
+                </span>
+                <span className="text-xs font-extrabold text-[#26160F] my-1 block">
+                  {product.scores.body}
+                </span>
+                <div className="w-full h-1.5 bg-[#EAE3D9] rounded-full overflow-hidden mt-0.5">
                   <div className="h-full bg-[#26160F] rounded-full w-[80%]" />
                 </div>
               </div>
-              <div>
-                <div className="flex justify-between text-[11px] mb-1.5">
-                  <span className="text-[#75645C]">Manis</span>
-                  <span className="font-bold text-[#26160F]">{product.scores.sweetness}</span>
-                </div>
-                <div className="w-full h-2 bg-[#F4EFE9] rounded-full overflow-hidden">
+              <div className="bg-[#FAF7F2] p-2.5 rounded-xl border border-[#ECE4DA] flex flex-col justify-between">
+                <span className="text-[9.5px] font-bold text-[#75645C] uppercase tracking-wider block">
+                  Manis
+                </span>
+                <span className="text-xs font-extrabold text-[#26160F] my-1 block">
+                  {product.scores.sweetness}
+                </span>
+                <div className="w-full h-1.5 bg-[#EAE3D9] rounded-full overflow-hidden mt-0.5">
                   <div className="h-full bg-[#C86826] rounded-full w-[85%]" />
                 </div>
               </div>
@@ -218,14 +228,14 @@ export const ProductDetailModal: React.FC = () => {
                   <div
                     key={g.id}
                     onClick={() => setSelectedGrind(g.id)}
-                    className={`flex items-center gap-3 p-3.5 rounded-2xl border transition-all cursor-pointer active:scale-98 ${
+                    className={`flex items-start gap-3 p-3.5 rounded-2xl border transition-all cursor-pointer active:scale-98 ${
                       isSelected
-                        ? 'bg-[#FDF6F0] border-[#C86826] shadow-2xs ring-1 ring-[#C86826]/30'
-                        : 'bg-white border-[#ECE4DA] hover:bg-[#F4EFE9]'
+                        ? 'bg-[#FDF6F0] border-2 border-[#C86826] shadow-xs ring-1 ring-[#C86826]/20'
+                        : 'bg-white border border-[#ECE4DA] hover:bg-[#FAF7F2] hover:border-[#D9CEC5]'
                     }`}
                   >
                     <div
-                      className={`p-2.5 rounded-xl shrink-0 ${
+                      className={`p-2.5 rounded-xl shrink-0 mt-0.5 ${
                         isSelected
                           ? 'bg-[#26160F] text-[#FDB882]'
                           : 'bg-[#EFE8E0] text-[#75645C]'
@@ -234,23 +244,23 @@ export const ProductDetailModal: React.FC = () => {
                       <Coffee className="w-4 h-4" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center justify-between gap-1.5 flex-wrap">
                         <span className="text-xs font-bold text-[#26160F]">
                           {g.title}
                         </span>
                         {g.recommended && (
-                          <span className="text-[10px] font-bold bg-[#FDB882] text-[#26160F] px-2 py-0.5 rounded-full">
+                          <span className="text-[9.5px] font-extrabold bg-[#FDB882] text-[#26160F] px-2 py-0.5 rounded-full shrink-0 shadow-2xs">
                             Sangat Dianjurkan
                           </span>
                         )}
                       </div>
-                      <p className="text-[11px] text-[#75645C] mt-0.5 truncate">
+                      <p className="text-[11px] text-[#75645C] mt-1 leading-relaxed">
                         {g.description}
                       </p>
                     </div>
                     {/* Radio circle */}
                     <div
-                      className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ${
+                      className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 mt-1 ${
                         isSelected
                           ? 'border-[#26160F] bg-[#26160F]'
                           : 'border-[#D9CEC5]'

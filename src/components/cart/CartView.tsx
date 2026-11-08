@@ -167,7 +167,7 @@ export const CartView: React.FC = () => {
                       </button>
                     </div>
 
-                    <h4 className="font-serif text-[15px] font-bold text-[#26160F] truncate mt-0.5 leading-snug">
+                    <h4 className="font-serif text-[15px] font-bold text-[#26160F] line-clamp-2 mt-0.5 leading-snug">
                       {item.product.name}
                     </h4>
 
@@ -234,9 +234,9 @@ export const CartView: React.FC = () => {
                     </div>
                   ) : (
                     <>
-                      <div className="flex items-center gap-1.5 text-[#5C4D46] truncate mr-2">
-                        <Sliders className="w-3.5 h-3.5 text-[#865225] shrink-0" />
-                        <span className="truncate">
+                      <div className="flex items-start gap-1.5 text-[#5C4D46] mr-2 flex-1 min-w-0">
+                        <Sliders className="w-3.5 h-3.5 text-[#865225] shrink-0 mt-0.5" />
+                        <span className="text-[11px] leading-snug">
                           {item.notes || 'Belum ada catatan seduhan'}
                         </span>
                       </div>

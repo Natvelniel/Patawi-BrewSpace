@@ -118,21 +118,23 @@ export const TrackingView: React.FC = () => {
                   </div>
 
                   {/* Bottom Left ETA Strip */}
-                  <div className="absolute bottom-3 left-3 right-3 bg-[#26160F]/90 backdrop-blur-md rounded-xl p-2.5 flex items-center justify-between text-white border border-white/10 shadow-lg">
-                    <div className="flex items-center gap-2">
-                      <Navigation className="w-4 h-4 text-[#C86826] shrink-0" />
-                      <div>
-                        <span className="text-[10px] text-[#D9CEC5] block leading-tight">
+                  <div className="absolute bottom-3 left-3 right-3 bg-[#160C07]/92 backdrop-blur-md rounded-xl p-2.5 flex items-center justify-between text-white border border-white/15 shadow-xl">
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <div className="w-7 h-7 rounded-lg bg-[#C86826]/20 border border-[#C86826]/40 flex items-center justify-center shrink-0">
+                        <Navigation className="w-3.5 h-3.5 text-[#FDB882]" />
+                      </div>
+                      <div className="min-w-0">
+                        <span className="text-[9.5px] uppercase tracking-wider text-[#D9CEC5] block leading-tight font-medium">
                           Estimasi Tiba di Alamat
                         </span>
-                        <span className="text-xs font-bold leading-tight">
-                          11:15 WIB (±{order.courier?.etaMinutes || 20} Menit)
+                        <span className="text-xs font-bold leading-tight truncate block text-white mt-0.5">
+                          11:15 WIB <span className="text-[#FDB882] font-semibold">(±{order.courier?.etaMinutes || 20} Menit)</span>
                         </span>
                       </div>
                     </div>
                     <button
                       onClick={() => advanceOrderStatus(order.id)}
-                      className="bg-[#C86826] hover:bg-[#B3581C] text-white text-[10px] font-bold px-2.5 py-1 rounded-lg transition-colors cursor-pointer active:scale-95"
+                      className="bg-[#C86826] hover:bg-[#B3581C] text-white text-[10.5px] font-bold px-3 py-1.5 rounded-lg transition-colors cursor-pointer active:scale-95 shrink-0 shadow-xs ml-2"
                       title="Simulasi pergerakan kurir"
                     >
                       Perbarui Rute
@@ -142,36 +144,46 @@ export const TrackingView: React.FC = () => {
 
                 {/* Driver Profile Card */}
                 {order.courier && (
-                  <div className="mt-3.5 p-3 rounded-2xl bg-[#FAF7F2] border border-[#ECE4DA] flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="w-11 h-11 rounded-full overflow-hidden border border-[#D9CEC5] bg-[#EFE8E0]">
+                  <div className="mt-3.5 p-3.5 rounded-2xl bg-[#FAF7F2] border border-[#ECE4DA] flex items-center justify-between depth-card shadow-2xs">
+                    <div className="flex items-center gap-3 min-w-0 flex-1 mr-2">
+                      <div className="w-11 h-11 rounded-full overflow-hidden border border-[#D9CEC5] bg-[#EFE8E0] shrink-0 shadow-2xs">
                         <img
                           src={order.courier.avatar}
                           alt={order.courier.name}
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      <div>
-                        <h4 className="text-xs font-bold text-[#26160F]">
-                          {order.courier.name}
-                        </h4>
-                        <p className="text-[11px] text-[#75645C]">
-                          <strong className="text-[#26160F]">{order.courier.plateNumber}</strong> • {order.courier.vehicle}
-                        </p>
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                          <h4 className="text-xs font-bold text-[#26160F]">
+                            {order.courier.name}
+                          </h4>
+                          <span className="text-[9px] font-extrabold bg-[#EFE8E0] text-[#865225] px-1.5 py-0.2 rounded-sm shrink-0">
+                            Mitra Terverifikasi
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-1.5 text-[11px] text-[#75645C] mt-1 flex-wrap">
+                          <span className="font-mono font-bold text-[#26160F] bg-white border border-[#ECE4DA] px-1.5 py-0.2 rounded text-[10.5px] shadow-2xs">
+                            {order.courier.plateNumber}
+                          </span>
+                          <span className="text-[#5C4D46] font-medium whitespace-nowrap">
+                            {order.courier.vehicle}
+                          </span>
+                        </div>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 shrink-0">
                       <button
                         onClick={() => showToast(`Menghubungi driver ${order.courier?.name}...`)}
-                        className="w-9 h-9 rounded-full bg-[#FDF3EB] text-[#865225] hover:bg-[#FDB882] flex items-center justify-center transition-colors cursor-pointer active:scale-95"
+                        className="w-9 h-9 rounded-full bg-[#FDF3EB] text-[#865225] hover:bg-[#FDB882] flex items-center justify-center transition-colors cursor-pointer active:scale-95 border border-[#FDB882]/40 shadow-2xs"
                         title="Telepon Driver"
                       >
                         <Phone className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => setActiveDriverChat(true)}
-                        className="w-9 h-9 rounded-full bg-[#26160F] text-[#FDB882] hover:bg-[#1A0D07] flex items-center justify-center transition-colors cursor-pointer active:scale-95"
+                        className="w-9 h-9 rounded-full bg-[#26160F] text-[#FDB882] hover:bg-[#1A0D07] flex items-center justify-center transition-colors cursor-pointer active:scale-95 shadow-2xs"
                         title="Kirim Pesan ke Driver"
                       >
                         <MessageSquare className="w-4 h-4" />
@@ -407,10 +419,10 @@ export const TrackingView: React.FC = () => {
                 <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
               </div>
               <div className="flex-1 min-w-0">
-                <h4 className="font-serif text-[14px] font-bold text-[#26160F] truncate">
+                <h4 className="font-serif text-[14px] font-bold text-[#26160F] leading-snug line-clamp-2">
                   {item.title}
                 </h4>
-                <p className="text-[11px] text-[#75645C] mt-0.5 truncate">{item.detail}</p>
+                <p className="text-[11px] text-[#75645C] mt-0.5 leading-relaxed">{item.detail}</p>
                 <span className="font-serif text-[15px] font-bold text-[#26160F] mt-1 block">
                   Rp {item.total.toLocaleString('id-ID')}
                 </span>

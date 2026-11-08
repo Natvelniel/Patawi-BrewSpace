@@ -431,10 +431,14 @@ export const HomeView: React.FC = () => {
 
                   {/* Info Area */}
                   <div className="flex-1 flex flex-col">
-                    {/* Region & Star Rating Moved Here for Clean Separation */}
-                    <div className="flex items-center justify-between text-[11px] font-bold text-[#865225]">
-                      <span className="truncate">{p.region}</span>
-                      <span className="flex items-center gap-0.5 text-[#C86826] shrink-0 font-bold">
+                    {/* Region, Altitude & Star Rating Aligned */}
+                    <div className="flex items-center justify-between text-[10.5px] font-bold text-[#865225]">
+                      <div className="flex items-center gap-1 min-w-0 pr-1">
+                        <span className="truncate uppercase tracking-wider">{p.region}</span>
+                        <span className="text-[#C86826] shrink-0">•</span>
+                        <span className="whitespace-nowrap text-[#75645C] text-[10px] shrink-0 font-semibold">{p.altitude}</span>
+                      </div>
+                      <span className="flex items-center gap-0.5 text-[#C86826] shrink-0 font-bold ml-auto">
                         <Star className="w-3 h-3 fill-[#C86826]" />
                         {p.rating}
                       </span>
@@ -444,6 +448,11 @@ export const HomeView: React.FC = () => {
                     <h4 className="font-serif text-[15px] font-bold text-[#26160F] mt-1 line-clamp-2 min-h-[2.5rem] leading-snug">
                       {p.name}
                     </h4>
+
+                    {/* Flavor Notes Preview */}
+                    <p className="text-[11px] text-[#75645C] mt-0.5 line-clamp-1 leading-relaxed">
+                      {p.flavorNotes.join(', ')}
+                    </p>
 
                     {/* Roast & Process Pills (whitespace-nowrap solid) */}
                     <div className="flex items-center gap-1.5 mt-1.5 mb-2.5 flex-wrap">
