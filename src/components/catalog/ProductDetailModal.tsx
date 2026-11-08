@@ -245,11 +245,12 @@ export const ProductDetailModal: React.FC = () => {
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between gap-1.5 flex-wrap">
-                        <span className="text-xs font-bold text-[#26160F]">
+                        <span className="text-xs font-bold text-[#26160F] whitespace-nowrap">
                           {g.title}
                         </span>
                         {g.recommended && (
-                          <span className="text-[9.5px] font-extrabold bg-[#FDB882] text-[#26160F] px-2 py-0.5 rounded-full shrink-0 shadow-2xs">
+                          <span className="inline-flex items-center gap-1 text-[9.5px] font-extrabold bg-[#FDB882] text-[#26160F] px-2 py-0.5 rounded-full whitespace-nowrap shrink-0 shadow-2xs border border-[#C86826]/30">
+                            <Sparkles className="w-2.5 h-2.5 text-[#C86826] fill-[#C86826]" />
                             Sangat Dianjurkan
                           </span>
                         )}

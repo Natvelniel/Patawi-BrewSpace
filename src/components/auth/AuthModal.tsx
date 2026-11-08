@@ -22,6 +22,14 @@ export const AuthModal: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const maskEmail = (em: string) => {
+    const parts = em.split('@');
+    if (parts.length !== 2) return em;
+    const [usr, domain] = parts;
+    if (usr.length <= 4) return `${usr[0]}••••@${domain}`;
+    return `${usr.slice(0, 3)}••••••${usr.slice(-2)}@${domain}`;
+  };
+
   if (!showAuthModal) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -90,7 +98,9 @@ export const AuthModal: React.FC = () => {
                       </h4>
                       <Sparkles className="w-3.5 h-3.5 text-[#C86826] shrink-0" />
                     </div>
-                    <p className="text-xs text-[#75645C] truncate">{currentUser.email}</p>
+                    <p className="text-xs text-[#75645C] font-mono tracking-tight truncate">
+                      {currentUser.role === 'customer' ? maskEmail(currentUser.email) : currentUser.email}
+                    </p>
                     <span className="inline-flex items-center gap-1 mt-1 text-[10.5px] font-bold bg-[#FDF3EB] text-[#865225] px-2.5 py-0.5 rounded-full border border-[#FDB882]/40">
                       {currentUser.tier} • {currentUser.points.toLocaleString('id-ID')} Poin
                     </span>

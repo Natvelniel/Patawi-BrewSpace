@@ -11,19 +11,39 @@
 
 ## 📸 Preview Tampilan Aplikasi (Fixed & Production-Ready)
 
-| Beranda (Segmented Role Bar) | Kustomisasi & Profil Cupping | Pilihan Gilingan Lengkap |
+| Beranda (Metode Seduh & Produk) | Kustomisasi & Profil Cupping | Pilihan Gilingan Lengkap |
 | :---: | :---: | :---: |
-| <img src="docs/screenshots/header_segmented_fixed.png" width="260" alt="Beranda Mobile Patawi Coffee dengan Segmented Control" /> | <img src="docs/screenshots/modal_cupping_verified.png" width="260" alt="Modal Profil Cupping Sejajar & Altitude MDPL" /> | <img src="docs/screenshots/modal_scrolled_grind.png" width="260" alt="Pilihan Gilingan Biji Utuh Lengkap Tanpa Truncate" /> |
+| <img src="docs/screenshots/home_cards_verified.png" width="260" alt="Beranda Mobile Patawi Coffee dengan Kategori & Kartu Produk Aligned" /> | <img src="docs/screenshots/product_modal_verified.png" width="260" alt="Modal Profil Cupping Sejajar & Altitude MDPL" /> | <img src="docs/screenshots/grind_guide_verified.png" width="260" alt="Panduan Profil Gilingan Sangat Dianjurkan Rapi" /> |
 
-| Pelacakan Live GPS & Driver Card | Katalog Biji Kopi Aligned | Keranjang & Catatan Seduhan |
+| Pelacakan Live GPS & Hotline WA | Profil Akun (Email Disamarkan) | Dashboard Kurir (Connected Route) |
 | :---: | :---: | :---: |
-| <img src="docs/screenshots/tracking_driver_verified.png" width="260" alt="Pelacakan Pesanan & Driver Card Rapi" /> | <img src="docs/screenshots/catalog_view_verified.png" width="260" alt="Katalog Biji Kopi Presisi & Rapi" /> | <img src="docs/screenshots/cart_view_verified.png" width="260" alt="Keranjang Belanja dengan Catatan Seduhan Utuh" /> |
+| <img src="docs/screenshots/whatsapp_hotline_verified.png" width="260" alt="Pelacakan Pesanan & Hotline WhatsApp Resmi" /> | <img src="docs/screenshots/profile_masked_verified.png" width="260" alt="Profil Nathaniel Christian dengan Email Disamarkan" /> | <img src="docs/screenshots/delivery_dashboard_verified.png" width="260" alt="Dashboard Kurir dengan Rute Stepper Terhubung" /> |
 
 ---
 
 ## 🌟 Fitur Utama
 
-- **Desain Otentik & Bebas Tabrakan Visual (Anti-Slop Craft):**
+- **Navigasi Kontekstual Berdasarkan Peran (Role-Based Bottom Nav):**
+  - **Mode Customer**: 5 tab e-commerce lengkap (*Beranda, Katalog, Keranjang, Pesanan, Profil*).
+  - **Mode Kurir (Delivery Order)**: 4 tab operasional kurir (*Tugas Antar [badge aktif], Riwayat Selesai, Performa & Saldo, Profil Kurir*).
+  - **Mode Admin Roastery**: 4 tab operasional sangrai (*Antrean Pesanan [badge antrean], Stok Biji Kopi, Laporan Roastery, Profil Roaster*).
+  - Mengeliminasi menu belanja yang tidak relevan saat sedang bertugas sebagai kurir atau admin.
+
+- **Dashboard Pengantaran Mitra Kurir (`DeliveryDashboardView.tsx`):**
+  - **Header Kurir & Live Status**: Status online *Siap Antar* dengan dot hijau berdenyut, nomor plat motor `B 4521 SRX`, dan identitas terverifikasi.
+  - **3 Metrik Harian Kurir**: *Tugas Hari Ini (2 Selesai)*, *Tepat Waktu (100%)*, dan *Rating Mitra (★ 4.9)*.
+  - **Connected Stepper Route**: Rute visual dengan garis konektor vertikal yang kokoh menghubungkan Pick-up Outlet Senopati ke Drop-off Alamat Pelanggan.
+  - **Penerima Paket & Kontak**: Informasi penerima *Nathaniel Christian* dengan tombol telepon dan chat cepat.
+  - **Elevated Dispatch Action**: Tombol interaktif untuk memajukan status pengantaran hingga selesai serah terima.
+
+- **Privasi Pengguna & Penyamaran Email (`ProfileView.tsx` & `AuthModal.tsx`):**
+  - Nama akun tetap ditampilkan lengkap sebagai **Nathaniel Christian** (VIP Gold Member).
+  - Email disamarkan dengan fungsi masking privat: `nat••••••09@gmail.com` untuk standar keamanan data.
+
+- **Panduan Profil Gilingan Premium (`GrindGuideModal.tsx`):**
+  - Judul `Biji Utuh (Whole Bean)` tampil utuh tanpa terbelah kata `Bean)` ke baris baru.
+  - Lencana `Sangat Dianjurkan` diberi lencana aksen emas dengan ikon sparkles dan border premium.
+  - Kartu rekomendasi utama dibalut border tebal 2px oranye roastery (`border-2 border-[#C86826] bg-[#FAF5EF]`).
   - **Segmented Role Switcher**: Kontrol navigasi 3 tab simetris (`Customer` | `Admin` | `Kurir`) dengan kontainer rounded-2xl dan elevasi tegas tanpa overflow pada layar terkecil sekalipun.
   - **Profil Rasa Cupping Sejajar (3 Stat Cards)**: Menghapus tabrakan teks dan efek tangga zig-zag menjadi 3 micro-card vertikal presisi (Keasaman, Ketebalan, Manis) dengan progress bar lurus sejajar di dasar card.
   - **Ketinggian MDPL & Badge Utuh**: Format `whitespace-nowrap` memastikan ketinggian `1.800 MDPL` tidak pernah pecah sendirian ke baris kedua.

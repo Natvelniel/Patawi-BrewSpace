@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { StoreProvider, useStore } from './context/StoreContext';
 import { AppHeader } from './components/layout/AppHeader';
 import { BottomNav } from './components/layout/BottomNav';
@@ -18,6 +18,14 @@ import { Smartphone, Monitor, Sparkles } from 'lucide-react';
 const MainApp: React.FC = () => {
   const { role, activeTab, toastMessage } = useStore();
   const [isFullWidthDesktop, setIsFullWidthDesktop] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  // Auto scroll to top on tab or role switch
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = 0;
+    }
+  }, [role, activeTab]);
 
   const renderActiveView = () => {
     if (role === 'admin') return <AdminDashboardView />;
@@ -97,7 +105,7 @@ const MainApp: React.FC = () => {
         <AppHeader />
 
         {/* Scrollable View Area */}
-        <div className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar overscroll-contain relative">
+        <div ref={scrollContainerRef} className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar overscroll-contain relative">
           {renderActiveView()}
         </div>
 

@@ -5,6 +5,8 @@ import {
   Order,
   Role,
   ActiveTab,
+  DeliveryTab,
+  AdminTab,
   RoastLevel,
   PackageWeight,
   GrindProfile,
@@ -19,6 +21,10 @@ interface StoreContextType {
   setRole: (role: Role) => void;
   activeTab: ActiveTab;
   setActiveTab: (tab: ActiveTab) => void;
+  deliveryTab: DeliveryTab;
+  setDeliveryTab: (tab: DeliveryTab) => void;
+  adminTab: AdminTab;
+  setAdminTab: (tab: AdminTab) => void;
   searchQuery: string;
   setSearchQuery: (q: string) => void;
   selectedRoast: RoastLevel;
@@ -106,6 +112,8 @@ const VOUCHER_LIST: Voucher[] = [
 export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [role, setRole] = useState<Role>('customer');
   const [activeTab, setActiveTab] = useState<ActiveTab>('home');
+  const [deliveryTab, setDeliveryTab] = useState<DeliveryTab>('active');
+  const [adminTab, setAdminTab] = useState<AdminTab>('queue');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRoast, setSelectedRoast] = useState<RoastLevel>('Semua');
   const [selectedCategory, setSelectedCategory] = useState<string>('Semua');
@@ -488,6 +496,10 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         setRole,
         activeTab,
         setActiveTab,
+        deliveryTab,
+        setDeliveryTab,
+        adminTab,
+        setAdminTab,
         searchQuery,
         setSearchQuery,
         selectedRoast,

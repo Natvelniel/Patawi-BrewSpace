@@ -28,6 +28,15 @@ export const ProfileView: React.FC = () => {
 
   const favProducts = COFFEE_PRODUCTS.filter((p) => favorites.includes(p.id));
 
+  // Penyamaran email untuk privasi & keamanan pengguna (e.g. nat••••••09@gmail.com)
+  const maskEmail = (email: string) => {
+    const parts = email.split('@');
+    if (parts.length !== 2) return email;
+    const [name, domain] = parts;
+    if (name.length <= 4) return `${name[0]}••••@${domain}`;
+    return `${name.slice(0, 3)}••••••${name.slice(-2)}@${domain}`;
+  };
+
   return (
     <div className="pb-16 pt-3 px-4 bg-[#FAF7F2] min-h-full space-y-4">
       {/* User Header Card */}
@@ -48,7 +57,9 @@ export const ProfileView: React.FC = () => {
                 </h3>
                 <Sparkles className="w-4 h-4 text-[#C86826] shrink-0" />
               </div>
-              <p className="text-xs text-[#75645C] truncate">{currentUser.email}</p>
+              <p className="text-xs text-[#75645C] font-mono tracking-tight truncate mt-0.5">
+                {currentUser.role === 'customer' ? maskEmail(currentUser.email) : currentUser.email}
+              </p>
               <span className="inline-flex items-center gap-1 mt-1 text-[11px] font-bold bg-[#FDF3EB] text-[#865225] px-2.5 py-0.5 rounded-full border border-[#FDB882]/40">
                 {currentUser.tier} • Patawi Member
               </span>

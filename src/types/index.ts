@@ -2,6 +2,10 @@ export type Role = 'customer' | 'admin' | 'delivery';
 
 export type ActiveTab = 'home' | 'catalog' | 'cart' | 'tracking' | 'profile';
 
+export type DeliveryTab = 'active' | 'history' | 'earnings' | 'profile';
+
+export type AdminTab = 'queue' | 'inventory' | 'reports' | 'profile';
+
 export type RoastLevel = 'Semua' | 'Light' | 'Medium' | 'Medium-Dark';
 
 export type ProcessType = 'Anaerobic' | 'Washed' | 'Anaerobic Honey' | 'House Blend' | 'Natural';
