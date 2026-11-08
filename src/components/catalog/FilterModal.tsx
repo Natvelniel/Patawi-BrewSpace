@@ -1,6 +1,5 @@
 import React from 'react';
 import { useStore } from '../../context/StoreContext';
-import { COFFEE_PRODUCTS } from '../../data/coffeeProducts';
 import { RoastLevel } from '../../types';
 import { X, RotateCcw, Check, SlidersHorizontal, ArrowUpDown } from 'lucide-react';
 
@@ -12,6 +11,7 @@ export const FilterModal: React.FC = () => {
     setFilterCriteria,
     resetFilter,
     showToast,
+    products,
   } = useStore();
 
   if (!showFilterModal) return null;
@@ -34,7 +34,7 @@ export const FilterModal: React.FC = () => {
   ] as const;
 
   // Calculate live matching product count
-  const matchingCount = COFFEE_PRODUCTS.filter((p) => {
+  const matchingCount = products.filter((p) => {
     if (filterCriteria.category !== 'Semua') {
       if (p.brewMethods && !p.brewMethods.includes(filterCriteria.category)) return false;
       if (!p.brewMethods && filterCriteria.category === 'Single Origin' && p.process === 'House Blend') return false;

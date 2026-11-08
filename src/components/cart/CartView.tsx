@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useStore } from '../../context/StoreContext';
+import { CourierService, CustomerInfo, Order } from '../../types';
 import {
   Flame,
   Trash2,
@@ -13,8 +14,11 @@ import {
   Store,
   MapPin,
   ShoppingBag,
+  Package,
+  Zap,
 } from 'lucide-react';
 import { QRISPaymentModal } from './QRISPaymentModal';
+import { OrderConfirmationModal } from './OrderConfirmationModal';
 
 export const CartView: React.FC = () => {
   const {
@@ -30,18 +34,44 @@ export const CartView: React.FC = () => {
     removeVoucher,
     setActiveTab,
     showToast,
+    currentUser,
+    isLoggedIn,
   } = useStore();
 
   const [checkoutStep, setCheckoutStep] = useState<1 | 2>(1);
   const [deliveryType, setDeliveryType] = useState<'delivery' | 'pickup'>('delivery');
-  const [address, setAddress] = useState('Jl. Senopati No. 12, Kebayoran Baru, Jakarta Selatan');
+  const [courierService, setCourierService] = useState<CourierService>('gosend');
+  const [isGuestCheckout, setIsGuestCheckout] = useState(!isLoggedIn);
+  const [guestName, setGuestName] = useState('Budi Pratama');
+  const [guestEmail, setGuestEmail] = useState('budi.pratama@gmail.com');
+  const [guestPhone, setGuestPhone] = useState('+62 813-9876-5432');
+  const [destCity, setDestCity] = useState('Jakarta Selatan');
+  const [postalCode, setPostalCode] = useState('12190');
+  const [address, setAddress] = useState('Jl. Senopati No. 12, Kebayoran Baru');
   const [voucherInput, setVoucherInput] = useState('PATAWIFRESH');
   const [showQRIS, setShowQRIS] = useState(false);
+  const [confirmedOrder, setConfirmedOrder] = useState<Order | null>(null);
   const [editingNoteId, setEditingNoteId] = useState<string | null>(null);
   const [tempNote, setTempNote] = useState('');
 
-  const shippingFee = deliveryType === 'delivery' ? 15000 : 0;
+  const shippingFee = deliveryType === 'pickup' ? 0 : courierService === 'jne_yes' ? 35000 : courierService === 'jne_reg' ? 22000 : 15000;
   const grandTotal = total + shippingFee;
+
+  const customerInfo: CustomerInfo = isGuestCheckout || !currentUser ? {
+    name: guestName.trim() || 'Pelanggan Tamu',
+    email: guestEmail.trim() || 'tamu@patawibrew.com',
+    phone: guestPhone.trim() || '+62 812-0000-8888',
+    isGuest: true,
+    destinationCity: destCity,
+    postalCode: postalCode,
+  } : {
+    name: currentUser.name,
+    email: currentUser.email,
+    phone: currentUser.phone,
+    isGuest: false,
+    destinationCity: destCity,
+    postalCode: postalCode,
+  };
 
   const handleApplyVoucher = (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,23 +81,40 @@ export const CartView: React.FC = () => {
 
   if (cart.length === 0) {
     return (
-      <div className="pb-8 pt-8 px-5 bg-[#FAF7F2] min-h-full flex flex-col items-center justify-center text-center">
-        <div className="w-20 h-20 rounded-full bg-[#EFE8E0] flex items-center justify-center text-[#865225] mb-4 shadow-inner">
-          <ShoppingBag className="w-10 h-10" />
+      <>
+        {confirmedOrder && (
+          <OrderConfirmationModal
+            order={confirmedOrder}
+            onTrack={() => {
+              setConfirmedOrder(null);
+              setCheckoutStep(1);
+              setActiveTab('tracking');
+            }}
+            onHome={() => {
+              setConfirmedOrder(null);
+              setCheckoutStep(1);
+              setActiveTab('home');
+            }}
+          />
+        )}
+        <div className="pb-8 pt-8 px-5 bg-[#FAF7F2] min-h-full flex flex-col items-center justify-center text-center">
+          <div className="w-20 h-20 rounded-full bg-[#EFE8E0] flex items-center justify-center text-[#865225] mb-4 shadow-inner">
+            <ShoppingBag className="w-10 h-10" />
+          </div>
+          <h3 className="font-serif text-[22px] font-bold text-[#26160F]">
+            Keranjang Masih Kosong
+          </h3>
+          <p className="text-xs text-[#75645C] mt-1 max-w-[280px] leading-relaxed">
+            Belum ada biji kopi sangrai segar pilihan Anda di keranjang.
+          </p>
+          <button
+            onClick={() => setActiveTab('catalog')}
+            className="mt-6 bg-[#26160F] hover:bg-[#C86826] text-white px-6 py-2.5 rounded-xl font-bold text-xs shadow-sm transition-all cursor-pointer active:scale-95"
+          >
+            Eksplorasi Katalog Kopi
+          </button>
         </div>
-        <h3 className="font-serif text-[22px] font-bold text-[#26160F]">
-          Keranjang Masih Kosong
-        </h3>
-        <p className="text-xs text-[#75645C] mt-1 max-w-[280px] leading-relaxed">
-          Belum ada biji kopi sangrai segar pilihan Anda di keranjang.
-        </p>
-        <button
-          onClick={() => setActiveTab('catalog')}
-          className="mt-6 bg-[#26160F] hover:bg-[#C86826] text-white px-6 py-2.5 rounded-xl font-bold text-xs shadow-sm transition-all cursor-pointer active:scale-95"
-        >
-          Eksplorasi Katalog Kopi
-        </button>
-      </div>
+      </>
     );
   }
 
@@ -339,17 +386,128 @@ export const CartView: React.FC = () => {
             <ArrowLeft className="w-3.5 h-3.5" /> Kembali ke Keranjang
           </button>
 
-          {/* Delivery Method Options */}
+          {/* 1. Checkout Identity Mode (Guest vs Member) */}
+          <div className="bg-white rounded-3xl border border-[#ECE4DA] p-4.5 shadow-2xs space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="font-serif text-[16px] font-bold text-[#26160F]">
+                Identitas Pemesan
+              </span>
+              <span className="text-[10px] text-[#75645C] bg-[#FAF7F2] px-2 py-0.5 rounded-full border border-[#ECE4DA]">
+                {isGuestCheckout ? 'Tamu Tanpa Akun' : 'Member Terdaftar'}
+              </span>
+            </div>
+
+            {/* Toggle Segmented Pill */}
+            <div className="bg-[#FAF7F2] p-1 rounded-2xl border border-[#ECE4DA] grid grid-cols-2 gap-1">
+              <button
+                type="button"
+                onClick={() => setIsGuestCheckout(false)}
+                className={`py-2 px-2 rounded-xl text-xs font-semibold text-center transition-all cursor-pointer ${
+                  !isGuestCheckout
+                    ? 'bg-[#26160F] text-white shadow-xs font-bold'
+                    : 'text-[#5C4D46] hover:bg-white/60'
+                }`}
+              >
+                Gunakan Akun Member
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsGuestCheckout(true)}
+                className={`py-2 px-2 rounded-xl text-xs font-semibold text-center transition-all cursor-pointer ${
+                  isGuestCheckout
+                    ? 'bg-[#26160F] text-white shadow-xs font-bold'
+                    : 'text-[#5C4D46] hover:bg-white/60'
+                }`}
+              >
+                Checkout sebagai Tamu
+              </button>
+            </div>
+
+            {/* If Member */}
+            {!isGuestCheckout && currentUser && (
+              <div className="flex items-center gap-3 p-3 bg-[#FAF7F2] rounded-2xl border border-[#ECE4DA]">
+                <img
+                  src={currentUser.avatar}
+                  alt={currentUser.name}
+                  className="w-10 h-10 rounded-full object-cover border border-[#C86826] shrink-0"
+                />
+                <div className="min-w-0 flex-1 text-xs">
+                  <div className="flex items-center gap-1.5">
+                    <strong className="text-[#26160F] truncate">{currentUser.name}</strong>
+                    <span className="text-[9.5px] font-bold text-[#865225] bg-[#FDF3EB] px-1.5 py-0.2 rounded">
+                      VIP Gold
+                    </span>
+                  </div>
+                  <span className="text-[11px] text-[#75645C] font-mono block truncate">
+                    {currentUser.email}
+                  </span>
+                  <span className="text-[10.5px] text-[#75645C] block">
+                    {currentUser.phone}
+                  </span>
+                </div>
+              </div>
+            )}
+
+            {/* If Guest Form */}
+            {isGuestCheckout && (
+              <div className="space-y-2.5 pt-1 text-xs">
+                <div>
+                  <label className="text-[11px] font-bold text-[#75645C] block mb-1">
+                    Nama Lengkap Pemesan
+                  </label>
+                  <input
+                    type="text"
+                    value={guestName}
+                    onChange={(e) => setGuestName(e.target.value)}
+                    placeholder="Nama penerima paket"
+                    className="w-full bg-[#FAF7F2] border border-[#ECE4DA] rounded-xl px-3 py-2 text-xs text-[#26160F] focus:outline-hidden focus:border-[#C86826]"
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <div>
+                    <label className="text-[11px] font-bold text-[#75645C] block mb-1">
+                      Email (Untuk Kirim Invoice)
+                    </label>
+                    <input
+                      type="email"
+                      value={guestEmail}
+                      onChange={(e) => setGuestEmail(e.target.value)}
+                      placeholder="contoh@gmail.com"
+                      className="w-full bg-[#FAF7F2] border border-[#ECE4DA] rounded-xl px-3 py-2 text-xs text-[#26160F] focus:outline-hidden focus:border-[#C86826]"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[11px] font-bold text-[#75645C] block mb-1">
+                      Nomor WhatsApp
+                    </label>
+                    <input
+                      type="tel"
+                      value={guestPhone}
+                      onChange={(e) => setGuestPhone(e.target.value)}
+                      placeholder="+62 812-xxxx-xxxx"
+                      className="w-full bg-[#FAF7F2] border border-[#ECE4DA] rounded-xl px-3 py-2 text-xs text-[#26160F] focus:outline-hidden focus:border-[#C86826]"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* 2. Delivery & Courier Options */}
           <div className="space-y-2.5">
             <h4 className="font-serif text-[17px] font-bold text-[#26160F]">
-              Pilih Metode Pengambilan
+              Pilih Metode Pengiriman & Ekspedisi
             </h4>
 
             {/* Option 1: GoSend Instant */}
             <div
-              onClick={() => setDeliveryType('delivery')}
-              className={`p-4 rounded-3xl border transition-all cursor-pointer ${
-                deliveryType === 'delivery'
+              onClick={() => {
+                setDeliveryType('delivery');
+                setCourierService('gosend');
+              }}
+              className={`p-3.5 rounded-3xl border transition-all cursor-pointer ${
+                deliveryType === 'delivery' && courierService === 'gosend'
                   ? 'bg-white border-[#26160F] shadow-sm ring-1 ring-[#26160F]'
                   : 'bg-[#FAF7F2] border-[#ECE4DA] hover:bg-white'
               }`}
@@ -357,19 +515,19 @@ export const CartView: React.FC = () => {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div
-                    className={`p-2.5 rounded-2xl ${
-                      deliveryType === 'delivery'
+                    className={`p-2 rounded-2xl ${
+                      deliveryType === 'delivery' && courierService === 'gosend'
                         ? 'bg-[#26160F] text-[#FDB882]'
                         : 'bg-[#EFE8E0] text-[#75645C]'
                     }`}
                   >
-                    <Truck className="w-5 h-5" />
+                    <Truck className="w-4 h-4" />
                   </div>
                   <div>
                     <h5 className="text-xs font-bold text-[#26160F]">
-                      GoSend Instant Delivery
+                      GoSend Instant Delivery (Jakarta)
                     </h5>
-                    <span className="text-[11px] text-[#75645C]">
+                    <span className="text-[10.5px] text-[#75645C]">
                       Estimasi 25 - 40 Menit (Live GPS Track)
                     </span>
                   </div>
@@ -378,29 +536,91 @@ export const CartView: React.FC = () => {
                   Rp 15.000
                 </span>
               </div>
-
-              {deliveryType === 'delivery' && (
-                <div className="mt-3 pt-3 border-t border-[#F4EFE9]">
-                  <label className="text-[11px] font-bold text-[#75645C] block mb-1">
-                    Alamat Pengantaran
-                  </label>
-                  <div className="flex items-center gap-2 bg-[#FAF7F2] p-2.5 rounded-xl border border-[#ECE4DA]">
-                    <MapPin className="w-4 h-4 text-[#C86826] shrink-0" />
-                    <input
-                      type="text"
-                      value={address}
-                      onChange={(e) => setAddress(e.target.value)}
-                      className="w-full bg-transparent text-xs text-[#26160F] focus:outline-hidden"
-                    />
-                  </div>
-                </div>
-              )}
             </div>
 
-            {/* Option 2: Pickup in store */}
+            {/* Option 2: JNE Regular / SiCepat Standard */}
             <div
-              onClick={() => setDeliveryType('pickup')}
-              className={`p-4 rounded-3xl border transition-all cursor-pointer ${
+              onClick={() => {
+                setDeliveryType('delivery');
+                setCourierService('jne_reg');
+              }}
+              className={`p-3.5 rounded-3xl border transition-all cursor-pointer ${
+                deliveryType === 'delivery' && courierService === 'jne_reg'
+                  ? 'bg-white border-[#26160F] shadow-sm ring-1 ring-[#26160F]'
+                  : 'bg-[#FAF7F2] border-[#ECE4DA] hover:bg-white'
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div
+                    className={`p-2 rounded-2xl ${
+                      deliveryType === 'delivery' && courierService === 'jne_reg'
+                        ? 'bg-[#26160F] text-[#FDB882]'
+                        : 'bg-[#EFE8E0] text-[#75645C]'
+                    }`}
+                  >
+                    <Package className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h5 className="text-xs font-bold text-[#26160F]">
+                      JNE Regular / SiCepat Standard
+                    </h5>
+                    <span className="text-[10.5px] text-[#75645C]">
+                      Estimasi 2 - 3 Hari (Seluruh Indonesia)
+                    </span>
+                  </div>
+                </div>
+                <span className="text-xs font-bold text-[#26160F]">
+                  Rp 22.000
+                </span>
+              </div>
+            </div>
+
+            {/* Option 3: JNE YES Next Day */}
+            <div
+              onClick={() => {
+                setDeliveryType('delivery');
+                setCourierService('jne_yes');
+              }}
+              className={`p-3.5 rounded-3xl border transition-all cursor-pointer ${
+                deliveryType === 'delivery' && courierService === 'jne_yes'
+                  ? 'bg-white border-[#26160F] shadow-sm ring-1 ring-[#26160F]'
+                  : 'bg-[#FAF7F2] border-[#ECE4DA] hover:bg-white'
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div
+                    className={`p-2 rounded-2xl ${
+                      deliveryType === 'delivery' && courierService === 'jne_yes'
+                        ? 'bg-[#26160F] text-[#FDB882]'
+                        : 'bg-[#EFE8E0] text-[#75645C]'
+                    }`}
+                  >
+                    <Zap className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h5 className="text-xs font-bold text-[#26160F]">
+                      JNE YES (Next Day Delivery)
+                    </h5>
+                    <span className="text-[10.5px] text-[#75645C]">
+                      Garansi 1 Hari Tiba (Kilat Roastery)
+                    </span>
+                  </div>
+                </div>
+                <span className="text-xs font-bold text-[#26160F]">
+                  Rp 35.000
+                </span>
+              </div>
+            </div>
+
+            {/* Option 4: Pick Up Outlet */}
+            <div
+              onClick={() => {
+                setDeliveryType('pickup');
+                setCourierService('pickup');
+              }}
+              className={`p-3.5 rounded-3xl border transition-all cursor-pointer ${
                 deliveryType === 'pickup'
                   ? 'bg-white border-[#26160F] shadow-sm ring-1 ring-[#26160F]'
                   : 'bg-[#FAF7F2] border-[#ECE4DA] hover:bg-white'
@@ -409,24 +629,24 @@ export const CartView: React.FC = () => {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div
-                    className={`p-2.5 rounded-2xl ${
+                    className={`p-2 rounded-2xl ${
                       deliveryType === 'pickup'
                         ? 'bg-[#26160F] text-[#FDB882]'
                         : 'bg-[#EFE8E0] text-[#75645C]'
                     }`}
                   >
-                    <Store className="w-5 h-5" />
+                    <Store className="w-4 h-4" />
                   </div>
                   <div>
                     <h5 className="text-xs font-bold text-[#26160F]">
-                      Pick Up di Outlet Senopati
+                      Pick Up Sendiri di Outlet Senopati
                     </h5>
-                    <span className="text-[11px] text-[#75645C]">
+                    <span className="text-[10.5px] text-[#75645C]">
                       Dapatkan 4-Digit PIN untuk Barista
                     </span>
                   </div>
                 </div>
-                <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md">
+                <span className="text-[10.5px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md">
                   GRATIS
                 </span>
               </div>
@@ -440,6 +660,54 @@ export const CartView: React.FC = () => {
                 </div>
               )}
             </div>
+
+            {/* Address Field (If Delivery) */}
+            {deliveryType === 'delivery' && (
+              <div className="bg-white rounded-3xl border border-[#ECE4DA] p-4 shadow-2xs space-y-2.5">
+                <label className="text-[11px] font-bold text-[#75645C] block">
+                  Alamat Lengkap Pengantaran
+                </label>
+                <div className="flex items-center gap-2 bg-[#FAF7F2] p-2.5 rounded-xl border border-[#ECE4DA]">
+                  <MapPin className="w-4 h-4 text-[#C86826] shrink-0" />
+                  <input
+                    type="text"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    placeholder="Nama jalan, nomor rumah, RT/RW, instruksi satpam"
+                    className="w-full bg-transparent text-xs text-[#26160F] focus:outline-hidden"
+                  />
+                </div>
+
+                {courierService.startsWith('jne') && (
+                  <div className="grid grid-cols-2 gap-2 pt-1">
+                    <div>
+                      <label className="text-[10px] font-bold text-[#75645C] block mb-1">
+                        Kota / Kabupaten
+                      </label>
+                      <input
+                        type="text"
+                        value={destCity}
+                        onChange={(e) => setDestCity(e.target.value)}
+                        placeholder="Contoh: Bandung"
+                        className="w-full bg-[#FAF7F2] border border-[#ECE4DA] rounded-xl px-2.5 py-1.5 text-xs text-[#26160F] focus:outline-hidden"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-[10px] font-bold text-[#75645C] block mb-1">
+                        Kode Pos
+                      </label>
+                      <input
+                        type="text"
+                        value={postalCode}
+                        onChange={(e) => setPostalCode(e.target.value)}
+                        placeholder="Contoh: 40115"
+                        className="w-full bg-[#FAF7F2] border border-[#ECE4DA] rounded-xl px-2.5 py-1.5 text-xs text-[#26160F] focus:outline-hidden"
+                      />
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Final Summary Card */}
@@ -461,7 +729,7 @@ export const CartView: React.FC = () => {
             )}
 
             <div className="flex justify-between text-xs text-[#5C4D46]">
-              <span>Ongkos Kirim</span>
+              <span>Ongkos Kirim ({deliveryType === 'pickup' ? 'Pick Up' : courierService === 'gosend' ? 'GoSend Instant' : courierService === 'jne_yes' ? 'JNE YES' : 'JNE Regular'})</span>
               <span>{shippingFee > 0 ? `Rp ${shippingFee.toLocaleString('id-ID')}` : 'Gratis'}</span>
             </div>
 
@@ -491,12 +759,33 @@ export const CartView: React.FC = () => {
         <QRISPaymentModal
           deliveryType={deliveryType}
           address={address}
-          onSuccess={() => {
+          customerInfo={customerInfo}
+          courierService={courierService}
+          onSuccess={(newOrder) => {
             setShowQRIS(false);
+            setConfirmedOrder(newOrder);
+          }}
+          onClose={() => {
+            setShowQRIS(false);
+            showToast('Pembayaran QRIS ditutup. Keranjang belanja Anda tetap tersimpan!');
+          }}
+        />
+      )}
+
+      {/* Order Confirmation Screen Modal */}
+      {confirmedOrder && (
+        <OrderConfirmationModal
+          order={confirmedOrder}
+          onTrack={() => {
+            setConfirmedOrder(null);
             setCheckoutStep(1);
             setActiveTab('tracking');
           }}
-          onClose={() => setShowQRIS(false)}
+          onHome={() => {
+            setConfirmedOrder(null);
+            setCheckoutStep(1);
+            setActiveTab('home');
+          }}
         />
       )}
     </div>

@@ -14,7 +14,13 @@ export const DeliveryDashboardView: React.FC = () => {
   const { orders, advanceOrderStatus, setRole, showToast, deliveryTab } = useStore();
 
   const deliveryOrders = orders.filter((o) => o.type === 'delivery');
-  const activeOrders = deliveryOrders.filter((o) => o.currentStepIndex < 5);
+  const activeOrders = deliveryOrders.filter(
+    (o) => o.currentStepIndex < 5 && (o.readyForDelivery || o.currentStepIndex >= 2)
+  );
+  const pendingRoasteryOrders = deliveryOrders.filter(
+    (o) => o.currentStepIndex < 2 && !o.readyForDelivery
+  );
+  const historyOrders = deliveryOrders.filter((o) => o.currentStepIndex >= 5);
 
   return (
     <div className="pb-20 pt-3 px-4 bg-[#FAF7F2] min-h-full space-y-4 select-none">
@@ -106,9 +112,42 @@ export const DeliveryDashboardView: React.FC = () => {
             </span>
           </div>
 
-          {deliveryOrders.map((order) => {
+          {/* Pending Roastery Preparation Notice */}
+          {pendingRoasteryOrders.length > 0 && (
+            <div className="bg-[#FAF7F2] p-3.5 rounded-2xl border border-[#ECE4DA] space-y-1">
+              <div className="flex items-center justify-between text-xs font-bold text-[#865225]">
+                <span>Menunggu Penyiapan Roastery ({pendingRoasteryOrders.length} Pesanan)</span>
+                <span className="text-[10px] bg-[#F4EFE9] text-[#75645C] px-2 py-0.5 rounded-full">
+                  Dalam Sangrai
+                </span>
+              </div>
+              <p className="text-[11px] text-[#75645C] leading-relaxed">
+                Pesanan sedang disangrai & dipacking oleh tim Admin Roastery Senopati. Pesanan akan otomatis muncul di sini setelah Admin menekan tombol <em>Serahkan ke Kurir DO</em>.
+              </p>
+            </div>
+          )}
+
+          {activeOrders.length === 0 && (
+            <div className="bg-white rounded-3xl p-8 border border-[#ECE4DA] text-center space-y-3 depth-card">
+              <CheckCircle2 className="w-10 h-10 text-emerald-600 mx-auto opacity-80" />
+              <h4 className="font-serif text-base font-bold text-[#26160F]">
+                Semua Tugas Antar Selesai!
+              </h4>
+              <p className="text-xs text-[#75645C] max-w-xs mx-auto">
+                Tidak ada paket yang menunggu diantar saat ini. Istirahat sejenak sambil menunggu notifikasi dispatch berikutnya.
+              </p>
+            </div>
+          )}
+
+          {activeOrders.map((order) => {
             const currentStep = order.steps[order.currentStepIndex];
             const isFinished = order.currentStepIndex >= 5;
+            const courierLabel =
+              order.courierService === 'jne_yes'
+                ? 'JNE YES (Next Day)'
+                : order.courierService === 'jne_reg'
+                ? 'JNE Regular'
+                : 'GoSend Instant';
 
             return (
               <div
@@ -123,7 +162,7 @@ export const DeliveryDashboardView: React.FC = () => {
                         #{order.orderNumber}
                       </span>
                       <span className="text-[10px] font-bold bg-[#EFE8E0] text-[#865225] px-2 py-0.5 rounded-md whitespace-nowrap">
-                        GoSend Instant
+                        {courierLabel}
                       </span>
                     </div>
                     <span className="text-[11px] text-[#75645C] mt-0.5 block truncate">
@@ -149,23 +188,23 @@ export const DeliveryDashboardView: React.FC = () => {
                       Penerima Paket:
                     </span>
                     <strong className="text-xs font-bold text-[#26160F] truncate block">
-                      Nathaniel Christian (VIP Member)
+                      {order.customerInfo?.name || 'Nathaniel Christian'} ({order.customerInfo?.isGuest ? 'Tamu' : 'VIP Member'})
                     </strong>
-                    <span className="text-[10.5px] text-[#865225]">
-                      Pesanan: Aceh Gayo & Toraja Sapan (Whole Bean)
+                    <span className="text-[10.5px] text-[#865225] line-clamp-1">
+                      Pesanan: {order.items.map((it) => `${it.product.name} (${it.weight})`).join(', ')}
                     </span>
                   </div>
 
                   <div className="flex items-center gap-1.5 shrink-0">
                     <button
-                      onClick={() => showToast('Menghubungi nomor telepon penerima paket...')}
+                      onClick={() => showToast(`Menghubungi ${order.customerInfo?.phone || '+62 812-9876-5432'}...`)}
                       className="w-8 h-8 rounded-full bg-white text-[#865225] hover:bg-[#FDB882] flex items-center justify-center border border-[#ECE4DA] transition-colors cursor-pointer active:scale-95 shadow-2xs"
                       title="Hubungi Pelanggan"
                     >
                       <Phone className="w-3.5 h-3.5" />
                     </button>
                     <button
-                      onClick={() => showToast('Membuka percakapan WhatsApp dengan pelanggan...')}
+                      onClick={() => showToast(`Membuka obrolan WhatsApp ke ${order.customerInfo?.phone || '+62 812-9876-5432'}...`)}
                       className="w-8 h-8 rounded-full bg-[#26160F] text-[#FDB882] hover:bg-[#1A0D07] flex items-center justify-center transition-colors cursor-pointer active:scale-95 shadow-2xs"
                       title="Kirim Chat"
                     >
@@ -209,10 +248,10 @@ export const DeliveryDashboardView: React.FC = () => {
                           </span>
                         </div>
                         <strong className="text-xs text-[#26160F] block mt-0.5">
-                          Jl. Senopati No. 12, Kebayoran Baru
+                          {order.address || 'Jl. Senopati No. 12, Kebayoran Baru'}
                         </strong>
                         <p className="text-[11px] text-[#75645C]">
-                          Jakarta Selatan (Instruksi: Titip di lobby pos sekuriti)
+                          {order.customerInfo?.destinationCity || 'Jakarta Selatan'} (Instruksi: Titip di lobby pos sekuriti)
                         </p>
                       </div>
                     </div>
@@ -249,6 +288,27 @@ export const DeliveryDashboardView: React.FC = () => {
             </h4>
             <span className="text-xs text-[#75645C]">Minggu Ini</span>
           </div>
+
+          {historyOrders.map((ho) => (
+            <div key={ho.id} className="bg-white rounded-3xl border border-[#ECE4DA] p-4 depth-card space-y-3">
+              <div className="flex items-center justify-between pb-2.5 border-b border-[#F4EFE9]">
+                <div>
+                  <span className="font-serif text-sm font-bold text-[#26160F]">#{ho.orderNumber}</span>
+                  <span className="text-[11px] text-[#75645C] block">Hari ini • Selesai</span>
+                </div>
+                <span className="inline-flex items-center gap-1 text-[10.5px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                  <CheckCircle2 className="w-3.5 h-3.5" /> Selesai Antar
+                </span>
+              </div>
+              <p className="text-xs text-[#5C4D46]">
+                {ho.items.map((it) => `${it.product.name} (${it.weight})`).join(', ')} (Tujuan: {ho.address || 'Jakarta'})
+              </p>
+              <div className="flex items-center justify-between text-xs pt-1 border-t border-[#F4EFE9]">
+                <span className="text-[#75645C]">Ongkir Kurir:</span>
+                <strong className="font-serif text-[#26160F]">Rp {ho.shippingFee ? ho.shippingFee.toLocaleString('id-ID') : '15.000'}</strong>
+              </div>
+            </div>
+          ))}
 
           <div className="bg-white rounded-3xl border border-[#ECE4DA] p-4 depth-card space-y-3">
             <div className="flex items-center justify-between pb-2.5 border-b border-[#F4EFE9]">

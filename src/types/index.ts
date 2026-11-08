@@ -14,6 +14,17 @@ export type GrindProfile = 'whole' | 'coarse' | 'medium' | 'fine';
 
 export type PackageWeight = '200g' | '500g' | '1kg';
 
+export type CourierService = 'gosend' | 'jne_reg' | 'jne_yes' | 'pickup';
+
+export interface CustomerInfo {
+  name: string;
+  email: string;
+  phone: string;
+  isGuest: boolean;
+  destinationCity?: string;
+  postalCode?: string;
+}
+
 export interface FlavorScores {
   acidity: string; // e.g., 'Medium', 'Rendah', 'Cerah'
   body: string;    // e.g., 'Bold', 'Medium', 'Syrupy'
@@ -93,6 +104,12 @@ export interface Order {
   status: 'processing' | 'roasting' | 'on_the_way' | 'ready_pickup' | 'delivered';
   currentStepIndex: number;
   steps: OrderStep[];
+  customerInfo?: CustomerInfo;
+  courierService?: CourierService;
+  trackingCode?: string;
+  isPaymentVerified?: boolean;
+  readyForDelivery?: boolean;
+  address?: string;
   // GoSend Delivery fields
   courier?: {
     name: string;
@@ -117,4 +134,7 @@ export interface Voucher {
   discountAmount: number;
   minSpend: number;
   description: string;
+  discountType?: 'nominal' | 'percent';
+  percentValue?: number;
+  isActive?: boolean;
 }

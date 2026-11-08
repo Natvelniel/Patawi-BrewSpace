@@ -11,13 +11,17 @@
 
 ## 📸 Preview Tampilan Aplikasi (Fixed & Production-Ready)
 
-| Beranda (Metode Seduh & Produk) | Kustomisasi & Profil Cupping | Pilihan Gilingan Lengkap |
+| Beranda (Region Utuh & Zero Ellipsis) | Kustomisasi & Profil Cupping | Pilihan Gilingan Lengkap |
 | :---: | :---: | :---: |
-| <img src="docs/screenshots/home_cards_verified.png" width="260" alt="Beranda Mobile Patawi Coffee dengan Kategori & Kartu Produk Aligned" /> | <img src="docs/screenshots/product_modal_verified.png" width="260" alt="Modal Profil Cupping Sejajar & Altitude MDPL" /> | <img src="docs/screenshots/grind_guide_verified.png" width="260" alt="Panduan Profil Gilingan Sangat Dianjurkan Rapi" /> |
+| <img src="docs/screenshots/home_cards_perfect.png" width="260" alt="Beranda Mobile Patawi Coffee dengan Kategori & Kartu Produk Aligned" /> | <img src="docs/screenshots/product_modal.png" width="260" alt="Modal Profil Cupping Sejajar & Altitude MDPL" /> | <img src="docs/screenshots/grind_guide_verified.png" width="260" alt="Panduan Profil Gilingan Sangat Dianjurkan Rapi" /> |
 
-| Pelacakan Live GPS & Hotline WA | Profil Akun (Email Disamarkan) | Dashboard Kurir (Connected Route) |
+| Konfirmasi Pesanan & Notif Email | Faktur Pembelian Digital Resmi | Dashboard Kurir & Handover Gate |
 | :---: | :---: | :---: |
-| <img src="docs/screenshots/whatsapp_hotline_verified.png" width="260" alt="Pelacakan Pesanan & Hotline WhatsApp Resmi" /> | <img src="docs/screenshots/profile_masked_verified.png" width="260" alt="Profil Nathaniel Christian dengan Email Disamarkan" /> | <img src="docs/screenshots/delivery_dashboard_verified.png" width="260" alt="Dashboard Kurir dengan Rute Stepper Terhubung" /> |
+| <img src="docs/screenshots/order_confirmed_modal.png" width="260" alt="Layar Sukses Pesanan dengan Notifikasi Email Terkirim" /> | <img src="docs/screenshots/invoice_modal.png" width="260" alt="Faktur Resmi Digital dengan NPWP dan QR Validasi" /> | <img src="docs/screenshots/kurir_handed_over_order.png" width="260" alt="Dashboard Kurir dengan Tugas Serah Terima Siap Antar" /> |
+
+| Admin Inventaris & Edit Stok | Admin Laporan Finansial & Omzet | Admin Manajemen Kupon Promo |
+| :---: | :---: | :---: |
+| <img src="docs/screenshots/admin_inventory.png" width="260" alt="Manajemen Stok dan Harga Biji Kopi Real-Time" /> | <img src="docs/screenshots/admin_reports.png" width="260" alt="Laporan Omzet Penjualan dan Tren Mingguan" /> | <img src="docs/screenshots/admin_vouchers.png" width="260" alt="Kelola Promo dan Tambah Voucher Diskon" /> |
 
 ---
 
@@ -29,12 +33,30 @@
   - **Mode Admin Roastery**: 4 tab operasional sangrai (*Antrean Pesanan [badge antrean], Stok Biji Kopi, Laporan Roastery, Profil Roaster*).
   - Mengeliminasi menu belanja yang tidak relevan saat sedang bertugas sebagai kurir atau admin.
 
+- **Alur Pelanggan & Guest Checkout Suite (`CartView.tsx` & `OrderConfirmationModal.tsx`):**
+  - **Guest Checkout (Checkout Tamu)**: Opsi pemesanan instan tanpa kewajiban login. Dilengkapi input nama lengkap, email invoice, dan no. WhatsApp.
+  - **Pilihan Ekspedisi Nasional & Lokal**:
+    - 🛵 *GoSend Instant Delivery (Jakarta)* — Rp 15.000 (25-40 Menit, Live GPS Tracking)
+    - 📦 *JNE Regular / SiCepat Standard* — Rp 22.000 (2-3 Hari ke seluruh Indonesia)
+    - ⚡ *JNE YES (Next Day Delivery)* — Rp 35.000 (1 Hari Tiba)
+    - 🏪 *Pick Up Sendiri di Outlet Senopati* — GRATIS
+  - **Layar Konfirmasi Sukses Pesanan**: Alert notifikasi otomatis pengiriman faktur ke email pemesan, ringkasan penerima & metode pengiriman, tombol pelacakan live, dan tombol faktur digital.
+  - **Faktur Pembelian Digital Resmi (`InvoiceModal.tsx`)**: Lengkap dengan identitas Patawi Coffee Senopati, NPWP roastery, nomor faktur `#PTW-XXXXX`, rincian item, PPN 11% inklusif, QR code sah validasi roastery, tanda tangan Head Roaster Budi Santoso, tombol unduh PDF, dan tombol kirim ulang ke email.
+  - **Garansi Keranjang Batal/Keluar**: Keranjang belanja pelanggan tetap tersimpan aman saat modal bayar QRIS ditutup.
+
+- **Admin / Owner Roastery Suite (`AdminDashboardView.tsx`, `ProductManagementModal.tsx`, `VoucherManagementModal.tsx`):**
+  - **Katalog CRUD & Pengaturan Harga**: Tambah varian biji kopi baru (asal daerah, MDPL, proses, rasa, cupping score, harga dasar) dan hapus produk yang discontinued.
+  - **Manajemen Stok Real-Time**: Update stok fisik biji kopi (kg) dengan restock cepat `+5 kg` dan indikator status stok (*Aman* vs *Menipis*).
+  - **Manajemen Kode Promo (Voucher Manager)**: Tambah kupon promo baru (persen / nominal), atur minimal belanja, serta toggle status aktif/nonaktif kupon seketika.
+  - **Laporan Penjualan Finansial (Revenue Reports)**: Perhitungan omzet Rp real-time, total transaksi berhasil, AOV (*Average Order Value*), serta grafik tren penjualan mingguan (Senin–Minggu) berbasis visual SVG bebas dependensi pihak ketiga.
+  - **Gerbang Serah Terima Kurir (Dispatch Handover Gate)**: Tombol pengesahan pesanan *"Serahkan ke Kurir DO (Siap Diantar)"* yang secara otomatis menyinkronkan antrean tugas kurir pengantar.
+
 - **Dashboard Pengantaran Mitra Kurir (`DeliveryDashboardView.tsx`):**
-  - **Header Kurir & Live Status**: Status online *Siap Antar* dengan dot hijau berdenyut, nomor plat motor `B 4521 SRX`, dan identitas terverifikasi.
-  - **3 Metrik Harian Kurir**: *Tugas Hari Ini (2 Selesai)*, *Tepat Waktu (100%)*, dan *Rating Mitra (★ 4.9)*.
-  - **Connected Stepper Route**: Rute visual dengan garis konektor vertikal yang kokoh menghubungkan Pick-up Outlet Senopati ke Drop-off Alamat Pelanggan.
-  - **Penerima Paket & Kontak**: Informasi penerima *Nathaniel Christian* dengan tombol telepon dan chat cepat.
-  - **Elevated Dispatch Action**: Tombol interaktif untuk memajukan status pengantaran hingga selesai serah terima.
+  - **Penapisan Handover Gate Terpadu**: Kurir hanya menerima tugas yang sudah disahkan/diserahkan oleh Admin Roastery (`readyForDelivery` atau tahap 2+), dengan kotak status informasi pesanan yang masih dalam sangrai outlet.
+  - **Data Pemesan & Kontak Real-Time**: Nama pemesan (Member / Tamu), telepon, dan tombol direct chat WhatsApp dinamis per pesanan.
+  - **Connected Stepper Route**: Rute visual menghubungkan Pick-up Roastery Senopati Flagship ke Drop-off alamat pelanggan.
+  - **Simulasi Progres Pengantaran**: Majukan status kurir dari pengambilan paket hingga *"Pesanan Selesai Diterima"*.
+  - **Riwayat Pengantaran & Saldo**: Tab riwayat selesai dan tab dompet performa kurir lengkap dengan komisi pengantaran.
 
 - **Privasi Pengguna & Penyamaran Email (`ProfileView.tsx` & `AuthModal.tsx`):**
   - Nama akun tetap ditampilkan lengkap sebagai **Nathaniel Christian** (VIP Gold Member).

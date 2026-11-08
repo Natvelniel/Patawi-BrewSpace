@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useStore } from '../../context/StoreContext';
+import { CustomerInfo, CourierService, Order } from '../../types';
 import { X, QrCode, CheckCircle2, ShieldCheck, Timer } from 'lucide-react';
 
 interface QRISPaymentModalProps {
   deliveryType: 'delivery' | 'pickup';
   address: string;
-  onSuccess: () => void;
+  customerInfo: CustomerInfo;
+  courierService: CourierService;
+  onSuccess: (order: Order) => void;
   onClose: () => void;
 }
 
 export const QRISPaymentModal: React.FC<QRISPaymentModalProps> = ({
   deliveryType,
   address,
+  customerInfo,
+  courierService,
   onSuccess,
   onClose,
 }) => {
@@ -19,7 +24,8 @@ export const QRISPaymentModal: React.FC<QRISPaymentModalProps> = ({
   const [secondsLeft, setSecondsLeft] = useState(300); // 5 minutes countdown
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const grandTotal = total + (deliveryType === 'delivery' ? 15000 : 0);
+  const shippingFee = deliveryType === 'pickup' ? 0 : courierService === 'jne_yes' ? 35000 : courierService === 'jne_reg' ? 22000 : 15000;
+  const grandTotal = total + shippingFee;
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -37,10 +43,10 @@ export const QRISPaymentModal: React.FC<QRISPaymentModalProps> = ({
   const handleSimulatePayment = () => {
     setIsProcessing(true);
     setTimeout(() => {
-      createOrder(deliveryType, address);
+      const newOrder = createOrder(deliveryType, address, customerInfo, courierService);
       setIsProcessing(false);
       showToast('Pembayaran QRIS BCA Terverifikasi Otomatis! 🎉');
-      onSuccess();
+      onSuccess(newOrder);
     }, 1200);
   };
 

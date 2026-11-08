@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import { useStore } from '../../context/StoreContext';
-import { COFFEE_PRODUCTS } from '../../data/coffeeProducts';
 import { RoastLevel } from '../../types';
 import {
   Search,
@@ -38,6 +37,7 @@ export const HomeView: React.FC = () => {
     filterCriteria,
     setFilterCriteria,
     resetFilter,
+    products,
   } = useStore();
 
   const categories = [
@@ -51,7 +51,7 @@ export const HomeView: React.FC = () => {
 
   // Filter and sort products reactively
   const filteredProducts = useMemo(() => {
-    const list = COFFEE_PRODUCTS.filter((p) => {
+    const list = products.filter((p) => {
       // 1. Search Query
       if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase();
@@ -292,7 +292,7 @@ export const HomeView: React.FC = () => {
           {categories.map((cat) => {
             const Icon = cat.icon;
             const isSelected = selectedCategory === cat.id;
-            const count = COFFEE_PRODUCTS.filter((p) => p.brewMethods?.includes(cat.id)).length;
+            const count = products.filter((p) => p.brewMethods?.includes(cat.id)).length;
             return (
               <button
                 key={cat.id}
@@ -431,14 +431,10 @@ export const HomeView: React.FC = () => {
 
                   {/* Info Area */}
                   <div className="flex-1 flex flex-col">
-                    {/* Region, Altitude & Star Rating Aligned */}
+                    {/* Region & Star Rating Aligned (Zero Truncation) */}
                     <div className="flex items-center justify-between text-[10.5px] font-bold text-[#865225]">
-                      <div className="flex items-center gap-1 min-w-0 pr-1">
-                        <span className="truncate uppercase tracking-wider">{p.region}</span>
-                        <span className="text-[#C86826] shrink-0">•</span>
-                        <span className="whitespace-nowrap text-[#75645C] text-[10px] shrink-0 font-semibold">{p.altitude}</span>
-                      </div>
-                      <span className="flex items-center gap-0.5 text-[#C86826] shrink-0 font-bold ml-auto">
+                      <span className="truncate uppercase tracking-wider pr-1 font-semibold">{p.region}</span>
+                      <span className="flex items-center gap-0.5 text-[#C86826] shrink-0 font-bold ml-auto text-[11px]">
                         <Star className="w-3 h-3 fill-[#C86826]" />
                         {p.rating}
                       </span>
@@ -454,14 +450,19 @@ export const HomeView: React.FC = () => {
                       {p.flavorNotes.join(', ')}
                     </p>
 
-                    {/* Roast & Process Pills (whitespace-nowrap solid) */}
-                    <div className="flex items-center gap-1.5 mt-1.5 mb-2.5 flex-wrap">
-                      <span className="text-[10px] font-semibold bg-[#F4EFE9] text-[#865225] px-2 py-0.5 rounded-md whitespace-nowrap shrink-0">
+                    {/* Roast, Process & Altitude Pills (whitespace-nowrap solid) */}
+                    <div className="flex items-center gap-1 mt-1.5 mb-2.5 flex-wrap">
+                      <span className="text-[9.5px] font-semibold bg-[#F4EFE9] text-[#865225] px-1.5 py-0.5 rounded-md whitespace-nowrap shrink-0">
                         {p.roastLevel}
                       </span>
-                      <span className="text-[10px] font-semibold bg-[#FAF7F2] border border-[#ECE4DA] text-[#5C4D46] px-1.5 py-0.5 rounded-md whitespace-nowrap shrink-0">
+                      <span className="text-[9.5px] font-semibold bg-[#FAF7F2] border border-[#ECE4DA] text-[#5C4D46] px-1.5 py-0.5 rounded-md whitespace-nowrap shrink-0">
                         {p.process}
                       </span>
+                      {p.altitude && (
+                        <span className="text-[9px] font-medium text-[#75645C] bg-white border border-[#ECE4DA] px-1.5 py-0.5 rounded-md whitespace-nowrap shrink-0">
+                          {p.altitude}
+                        </span>
+                      )}
                     </div>
 
                     {/* Price & Add Button */}

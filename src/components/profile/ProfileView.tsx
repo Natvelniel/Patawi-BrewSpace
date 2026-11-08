@@ -1,6 +1,5 @@
 import React from 'react';
 import { useStore } from '../../context/StoreContext';
-import { COFFEE_PRODUCTS } from '../../data/coffeeProducts';
 import {
   Heart,
   MapPin,
@@ -24,9 +23,10 @@ export const ProfileView: React.FC = () => {
     isLoggedIn,
     setShowAuthModal,
     logout,
+    products,
   } = useStore();
 
-  const favProducts = COFFEE_PRODUCTS.filter((p) => favorites.includes(p.id));
+  const favProducts = products.filter((p) => favorites.includes(p.id));
 
   // Penyamaran email untuk privasi & keamanan pengguna (e.g. nat••••••09@gmail.com)
   const maskEmail = (email: string) => {

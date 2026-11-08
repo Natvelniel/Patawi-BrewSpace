@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import { useStore } from '../../context/StoreContext';
-import { COFFEE_PRODUCTS } from '../../data/coffeeProducts';
 import { Search, Plus, Star, SlidersHorizontal, Heart, Coffee } from 'lucide-react';
 
 export const CatalogView: React.FC = () => {
@@ -16,6 +15,7 @@ export const CatalogView: React.FC = () => {
     filterCriteria,
     setFilterCriteria,
     resetFilter,
+    products,
   } = useStore();
 
   const origins = [
@@ -27,7 +27,7 @@ export const CatalogView: React.FC = () => {
   ];
 
   const filtered = useMemo(() => {
-    const list = COFFEE_PRODUCTS.filter((p) => {
+    const list = products.filter((p) => {
       // 1. Search Query
       if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase();
@@ -279,14 +279,10 @@ export const CatalogView: React.FC = () => {
 
                 {/* Product Meta */}
                 <div className="flex-1 flex flex-col">
-                  {/* Region, Altitude & Star Rating Aligned (NO COLLISION) */}
+                  {/* Region & Star Rating Aligned (Zero Truncation) */}
                   <div className="flex items-center justify-between text-[10.5px] font-bold text-[#865225]">
-                    <div className="flex items-center gap-1 min-w-0 pr-1">
-                      <span className="truncate uppercase tracking-wider">{p.region}</span>
-                      <span className="text-[#C86826] shrink-0">•</span>
-                      <span className="whitespace-nowrap text-[#75645C] text-[10px] shrink-0 font-semibold">{p.altitude}</span>
-                    </div>
-                    <span className="flex items-center gap-0.5 text-[#C86826] shrink-0 font-bold ml-auto">
+                    <span className="truncate uppercase tracking-wider pr-1 font-semibold">{p.region}</span>
+                    <span className="flex items-center gap-0.5 text-[#C86826] shrink-0 font-bold ml-auto text-[11px]">
                       <Star className="w-3 h-3 fill-[#C86826]" />
                       {p.rating}
                     </span>
@@ -302,14 +298,19 @@ export const CatalogView: React.FC = () => {
                     {p.flavorNotes.join(', ')}
                   </p>
 
-                  {/* Roast Level & Process Pills (whitespace-nowrap solid) */}
-                  <div className="flex items-center gap-1.5 mt-2 mb-3 flex-wrap">
-                    <span className="text-[10px] font-semibold bg-[#F4EFE9] text-[#865225] px-2 py-0.5 rounded-md whitespace-nowrap shrink-0">
+                  {/* Roast Level, Process & Altitude Pills (whitespace-nowrap solid) */}
+                  <div className="flex items-center gap-1 mt-1.5 mb-2.5 flex-wrap">
+                    <span className="text-[9.5px] font-semibold bg-[#F4EFE9] text-[#865225] px-1.5 py-0.5 rounded-md whitespace-nowrap shrink-0">
                       {p.roastLevel}
                     </span>
-                    <span className="text-[10px] font-semibold bg-[#FAF7F2] border border-[#ECE4DA] text-[#5C4D46] px-1.5 py-0.5 rounded-md whitespace-nowrap shrink-0">
+                    <span className="text-[9.5px] font-semibold bg-[#FAF7F2] border border-[#ECE4DA] text-[#5C4D46] px-1.5 py-0.5 rounded-md whitespace-nowrap shrink-0">
                       {p.process}
                     </span>
+                    {p.altitude && (
+                      <span className="text-[9px] font-medium text-[#75645C] bg-white border border-[#ECE4DA] px-1.5 py-0.5 rounded-md whitespace-nowrap shrink-0">
+                        {p.altitude}
+                      </span>
+                    )}
                   </div>
 
                   {/* Price & Add Icon */}
