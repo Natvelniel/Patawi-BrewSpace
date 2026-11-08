@@ -15,7 +15,7 @@ export const AppHeader: React.FC = () => {
   const activeOrdersCount = orders.filter((o) => o.status !== 'delivered').length;
 
   return (
-    <header className="sticky top-0 z-30 bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#ECE4DA] px-5 pt-3.5 pb-2.5 transition-colors select-none shrink-0">
+    <header className="sticky top-0 z-30 bg-[#FAF7F2]/95 backdrop-blur-xl border-b border-[#ECE4DA]/80 px-5 pt-[max(0.75rem,env(safe-area-inset-top,12px))] pb-2.5 transition-colors select-none shrink-0 shadow-[0_2px_10px_rgba(38,22,15,0.03)]">
       <div className="flex items-center justify-between">
         {/* Brand Logo */}
         <div className="flex flex-col">

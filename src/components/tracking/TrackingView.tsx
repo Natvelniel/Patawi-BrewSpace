@@ -5,6 +5,7 @@ import {
   Bike,
   Phone,
   MessageSquare,
+  MessageCircle,
   CheckCircle2,
   Clock,
   Navigation,
@@ -45,7 +46,7 @@ export const TrackingView: React.FC = () => {
   const activeOrders = orders.filter((o) => o.status !== 'delivered');
 
   return (
-    <div className="pb-8 pt-3 px-4 bg-[#FAF7F2] min-h-full space-y-5">
+    <div className="pb-16 pt-3 px-4 bg-[#FAF7F2] min-h-full space-y-5">
       {/* 1. Header Strip */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
@@ -98,11 +99,22 @@ export const TrackingView: React.FC = () => {
                     className="w-full h-full object-cover"
                   />
 
-                  {/* Top Right Live Badge */}
-                  <div className="absolute top-3 right-3 flex items-center gap-1.5 bg-black/80 backdrop-blur-xs text-white px-3 py-1 rounded-full text-[10px] font-bold shadow-xs">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 -ml-3.5" />
-                    Live GPS
+                  {/* Top Right Live Badge with Centered Bip */}
+                  <div className="absolute top-3 right-3 flex items-center gap-1.5 bg-[#160C07]/90 backdrop-blur-md text-white px-3 py-1.5 rounded-full text-[10px] font-bold shadow-md border border-white/10 select-none">
+                    <span className="relative flex h-2 w-2 items-center justify-center shrink-0">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+                    </span>
+                    <span className="leading-none tracking-wide font-semibold text-[10.5px]">Live GPS</span>
+                  </div>
+
+                  {/* Pulsing Courier Pin on Map */}
+                  <div className="absolute top-[48%] left-[52%] -translate-x-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-none">
+                    <span className="absolute w-9 h-9 rounded-full bg-[#C86826]/30 animate-ping" />
+                    <span className="absolute w-6 h-6 rounded-full bg-[#C86826]/40" />
+                    <div className="relative w-7 h-7 rounded-full bg-[#26160F] border-2 border-white shadow-lg flex items-center justify-center">
+                      <Bike className="w-3.5 h-3.5 text-[#FDB882]" />
+                    </div>
                   </div>
 
                   {/* Bottom Left ETA Strip */}
@@ -428,33 +440,61 @@ export const TrackingView: React.FC = () => {
         ))}
       </div>
 
-      {/* 3. Customer Care & WhatsApp Support Banner */}
-      <div className="bg-[#FAF7F2] rounded-3xl p-4 border border-[#ECE4DA] space-y-3">
+      {/* 3. Customer Care & WhatsApp Support Hotline */}
+      <div className="bg-white rounded-3xl p-4.5 depth-card space-y-3.5 shadow-sm">
         <div className="flex items-start gap-3">
-          <div className="p-2.5 bg-[#FDF3EB] rounded-2xl text-[#865225] border border-[#FDB882]/40">
-            <Headphones className="w-5 h-5 text-[#C86826]" />
+          <div className="w-10 h-10 rounded-2xl bg-[#FDF3EB] border border-[#FDB882]/40 flex items-center justify-center text-[#C86826] shrink-0 shadow-xs">
+            <Headphones className="w-5 h-5" />
           </div>
-          <div>
-            <h4 className="text-xs font-bold text-[#26160F]">
-              Butuh Bantuan dengan Pesanan Anda?
-            </h4>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2">
+              <h4 className="text-xs font-bold text-[#26160F]">
+                Roastery Care & Hotline
+              </h4>
+              <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[9px] font-bold shrink-0">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                Online
+              </span>
+            </div>
             <p className="text-[11px] text-[#75645C] mt-0.5 leading-relaxed">
-              Tim Customer Care & Roaster kami siap mendampingi setiap hari pukul 08:00 - 21:00 WIB.
+              Konsultasi profil sangrai & kendala pesanan siap didampingi (08:00 - 21:00 WIB).
             </p>
           </div>
         </div>
 
+        {/* Dummy Prototype Hotline Info Bar */}
+        <div className="bg-[#FAF7F2] rounded-2xl p-2.5 px-3 border border-[#ECE4DA] flex items-center justify-between text-xs">
+          <div className="flex items-center gap-2 min-w-0">
+            <span className="text-[11px] font-medium text-[#75645C] shrink-0">No. Prototipe:</span>
+            <span className="font-mono font-bold text-[#26160F] text-xs tracking-wide truncate">+62 812-0000-8888</span>
+          </div>
+          <button
+            onClick={() => {
+              if (navigator.clipboard) {
+                navigator.clipboard.writeText('+6281200008888');
+              }
+              showToast('Nomor prototipe disalin ke clipboard');
+            }}
+            className="text-[10px] font-bold text-[#C86826] hover:text-[#9A4710] bg-[#FDF3EB] hover:bg-[#FCEADE] px-2.5 py-1 rounded-lg transition-colors cursor-pointer shrink-0 border border-[#FDB882]/30 active:scale-95"
+            title="Salin Nomor WhatsApp"
+          >
+            Salin
+          </button>
+        </div>
+
+        {/* WhatsApp Action Button */}
         <button
           onClick={() =>
             window.open(
-              'https://wa.me/6281234567890?text=Halo%20Patawi%20Coffee%20Roastery,%20saya%20ingin%20bertanya%20mengenai%20pesanan%20saya',
+              'https://wa.me/6281200008888?text=Halo%20Patawi%20Coffee%20Roastery,%20saya%20ingin%20bertanya%20mengenai%20pesanan%20saya',
               '_blank'
             )
           }
-          className="w-full flex items-center justify-center gap-2 bg-[#865225] hover:bg-[#78471b] text-white py-2.5 rounded-xl text-xs font-bold shadow-xs transition-all cursor-pointer active:scale-95"
+          className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] active:scale-[0.98] text-white py-2.5 rounded-xl text-xs font-bold shadow-xs transition-all duration-150 cursor-pointer"
         >
-          <MessageSquare className="w-4 h-4 text-[#FDB882]" />
-          Hubungi WhatsApp Roastery (+62 812-3456-7890)
+          <MessageCircle className="w-4 h-4 text-white shrink-0" />
+          <span className="font-semibold text-xs tracking-tight">Chat WhatsApp Roastery</span>
+          <span className="bg-black/15 text-white text-[9.5px] px-1.5 py-0.2 rounded-full font-bold ml-1">Prototipe</span>
         </button>
       </div>
 

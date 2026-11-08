@@ -1,6 +1,6 @@
 # Patawi-BrewSpace ☕
 
-> **Patawi Coffee** — Aplikasi Web Pemesanan Kopi Artisanal & Specialty Roastery. Dibuat berdasarkan Sistem Desain Figma Patawi Coffee secara interaktif, responsif, dan fungsional penuh.
+> **Patawi Coffee** — Aplikasi Web Pemesanan Kopi Artisanal & Specialty Roastery. Dibuat berdasarkan Sistem Desain Figma Patawi Coffee secara interaktif, responsif, dan fungsional penuh. Berstandar **Production Ready** dengan kedalaman visual (*visual depth*), ritme spasi 8pt, serta *mobile safe-area viewport*.
 
 [![Vite](https://img.shields.io/badge/Vite-6.x-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
 [![React](https://img.shields.io/badge/React-19.x-61DAFB?logo=react&logoColor=black)](https://react.dev/)
@@ -9,15 +9,15 @@
 
 ---
 
-## 📸 Preview Tampilan Aplikasi (UI Refresh)
+## 📸 Preview Tampilan Aplikasi (Production-Ready)
 
-| Beranda & Promo | Katalog Biji Kopi | Modal Varian & Cupping |
+| Beranda & Promo | Live GPS & Radar Kurir | WhatsApp Care Hotline |
 | :---: | :---: | :---: |
-| <img src="docs/screenshots/home.png" width="260" alt="Beranda Patawi Coffee" /> | <img src="docs/screenshots/catalog.png" width="260" alt="Katalog Kopi" /> | <img src="docs/screenshots/modal.png" width="260" alt="Modal Detail & Grind Size" /> |
+| <img src="docs/screenshots/home_mobile.png" width="260" alt="Beranda Mobile Patawi Coffee" /> | <img src="docs/screenshots/tracking_mobile.png" width="260" alt="Pelacakan Pesanan Live GPS" /> | <img src="docs/screenshots/whatsapp_hotline_mobile.png" width="260" alt="Hotline WhatsApp Prototipe" /> |
 
-| Keranjang & Stepper Checkout | Pelacakan Pesanan & Live GPS |
-| :---: | :---: |
-| <img src="docs/screenshots/cart.png" width="280" alt="Keranjang Belanja" /> | <img src="docs/screenshots/tracking.png" width="280" alt="Pelacakan Pesanan Live" /> |
+| Keranjang Belanja & Stepper | Modal Detail & Cupping | Desktop Bezel Frame Mode |
+| :---: | :---: | :---: |
+| <img src="docs/screenshots/cart_mobile.png" width="260" alt="Keranjang Belanja Mobile" /> | <img src="docs/screenshots/modal.png" width="260" alt="Modal Detail Varian Biji Kopi" /> | <img src="docs/screenshots/desktop_bezel.png" width="260" alt="Desktop Bezel Mockup" /> |
 
 ---
 
@@ -25,10 +25,17 @@
 
 - **Desain Otentik & Responsive (Mobile-First):**
   - Mengadaptasi sistem desain dari Figma (`4w9MNCQRO1UHqnjsssakY4`).
-  - **Zero Floating Navigation**: Bilah navigasi bawah dan home indicator terkunci presisi di dalam frame smartphone saat dibuka di browser desktop.
+  - **Zero Drowning Navigation**: Dilengkapi `viewport-fit=cover`, padding aman `env(safe-area-inset-bottom)`, dan layout fleksibel penuh sehingga navigasi bawah tidak pernah terpotong di perangkat Android maupun iPhone.
   - **Tipografi Harmonis**: `Playfair Display` (Serif untuk Judul/Brand) & `Plus Jakarta Sans` (UI Sans-serif).
   - **Palet Artisan Earth-Tone**: `#26160F` (Dark Roast Espresso), `#FAF7F2` (Warm Milk Cream), `#C86826` (Caramel Honey).
-  - Ritme spasi konsisten 8pt, eliminasi AI slop, dan kontras rasio ramah aksesibilitas (WCAG AA).
+  - **Visual Depth Multi-Layer**: Menggunakan bayangan ambient halus (`rgba(38,22,15,0.05)`), pantulan tepi atas putih (*rim lighting*), dan frosted glass surface (`backdrop-blur-xl`).
+
+- **Pelacakan Pesanan Real-Time (Live Tracking):**
+  - **Bip Live GPS Presisi**: Indikator radar konsentris hijau yang berkedip tepat di tengah badge Live GPS.
+  - **Pin Kurir Dinamis**: Ikon motor kurir GoSend berdenyut langsung di atas peta Jakarta.
+  - **WhatsApp Roastery Hotline**: Layanan pelanggan resmi prototipe dengan nomor bersih `+62 812-0000-8888`, tombol salin cepat, dan status online real-time.
+  - **Linimasa 6 Tahap Pengiriman**: *Pesanan Diterima → Konfirmasi Roastery → Roasting & Packing → Kurir Menuju Outlet → Diambil Kurir → Selesai*.
+  - **Pick Up di Outlet**: Menampilkan **PIN 4 Digit Barista** besar (`7 4 9 2`) serta panduan ambil di Counter Senopati.
 
 - **Eksplorasi Katalog & Beranda:**
   - Pencarian real-time biji kopi berdasarkan nama, varietas origin, dan flavor notes.
@@ -48,12 +55,6 @@
   - Kupon diskon promo (contoh: `PATAWIFRESH` & `BEANS20`).
   - Pilihan opsi pengiriman: *GoSend Instant* atau *Pick Up di Outlet Senopati*.
   - Simulator pembayaran dinamis **QRIS BCA** dengan countdown timer dan verifikasi otomatis.
-
-- **Pelacakan Pesanan Real-Time (Live Tracking):**
-  - **GoSend Instant:** Tampilan peta GPS live Jakarta, radar pulse, estimasi tiba (ETA), profil kurir, tombol telepon, dan **live chat langsung dengan driver**.
-  - **Linimasa 6 Tahap Pengiriman:** *Pesanan Diterima → Konfirmasi Roastery → Roasting & Packing → Kurir Menuju Outlet → Diambil Kurir → Selesai*.
-  - **Pick Up di Outlet:** Menampilkan **PIN 4 Digit Barista** besar (`7 4 9 2`) serta navigasi rute ke outlet Senopati.
-  - **Riwayat Pesanan:** Fitur *Pesan Lagi* (reorder) dan unduh invoice.
 
 - **Multi-Role Header Switcher:**
   - **Customer:** Pengalaman belanja pembeli.
@@ -76,7 +77,7 @@
 ```
 UI/
 ├── docs/
-│   └── screenshots/          # Tangkapan layar tampilan aplikasi
+│   └── screenshots/          # Tangkapan layar tampilan aplikasi (Mobile & Desktop)
 ├── public/
 │   └── assets/               # Aset vektor (SVG) dan gambar lokal dari Figma
 ├── src/
@@ -88,15 +89,15 @@ UI/
 │   │   ├── home/             # Beranda, Banner Promo, & Modal Panduan Gilingan
 │   │   ├── layout/           # Header (Role Switcher) & Bottom Navigation
 │   │   ├── profile/          # Profil Member, Poin Patawi, & Pengaturan
-│   │   └── tracking/         # Pelacakan GPS, Chat Driver, & PIN Barista
+│   │   └── tracking/         # Pelacakan GPS, Chat Driver, Hotline WhatsApp, & PIN Barista
 │   ├── context/
 │   │   └── StoreContext.tsx  # Global State Management (Cart, Voucher, Orders, Roles)
 │   ├── data/
 │   │   └── coffeeProducts.ts # Mock Data Biji Kopi Specialty & Pesanan Aktif
 │   ├── types/
 │   │   └── index.ts          # Definisi TypeScript Interfaces & Enums
-│   ├── App.tsx               # Root Component dengan Device Frame & Tab Router
-│   ├── index.css             # Konfigurasi Tailwind CSS v4 & Utilitas Desain
+│   ├── App.tsx               # Root Component dengan Device Frame & Safe-Area Layout
+│   ├── index.css             # Konfigurasi Tailwind CSS v4, Token Kedalaman, & Utilitas
 │   └── main.tsx              # Entry Point React DOM
 └── package.json
 ```

@@ -38,7 +38,7 @@ const MainApp: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#160C07] flex flex-col items-center justify-center p-0 md:py-2 md:px-4 text-[#1B1C1A] selection:bg-[#C86826] selection:text-white">
+    <div className="h-dvh h-[100dvh] w-full bg-[#160C07] flex flex-col items-center justify-start md:justify-center p-0 md:py-2 md:px-4 text-[#1B1C1A] selection:bg-[#C86826] selection:text-white overflow-hidden">
       {/* Desktop Helper Toolbar */}
       <div className="w-full max-w-[400px] md:max-w-xl hidden md:flex items-center justify-between px-2 mb-2 text-white/70 text-xs">
         <div className="flex items-center gap-2">
@@ -70,8 +70,8 @@ const MainApp: React.FC = () => {
       <main
         className={`w-full transition-all duration-300 relative bg-[#FAF7F2] flex flex-col overflow-hidden ${
           isFullWidthDesktop
-            ? 'max-w-2xl min-h-[90vh] md:rounded-3xl md:border md:border-[#382015] md:shadow-2xl'
-            : 'max-w-[400px] h-[100dvh] md:h-[min(760px,calc(100vh-60px))] md:rounded-[44px] md:border-[8px] md:border-[#22130C] md:ring-1 md:ring-white/15 md:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.85)]'
+            ? 'max-w-2xl h-full md:min-h-[90vh] md:max-h-[95vh] md:rounded-3xl md:border md:border-[#382015] md:shadow-2xl'
+            : 'max-w-full md:max-w-[400px] h-full md:h-[min(760px,calc(100vh-60px))] md:rounded-[44px] md:border-[8px] md:border-[#22130C] md:ring-1 md:ring-white/15 md:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.85)]'
         }`}
       >
         {/* Dynamic Island / Status Bar (Only in Mobile Bezel mode) */}

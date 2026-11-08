@@ -279,8 +279,8 @@ export const ProductDetailModal: React.FC = () => {
           </div>
         </div>
 
-        {/* Sticky Footer */}
-        <div className="px-5 py-3.5 bg-white border-t border-[#ECE4DA] flex items-center gap-3">
+        {/* Sticky Footer with Safe Area */}
+        <div className="px-5 pt-3.5 pb-[max(1rem,env(safe-area-inset-bottom,16px))] bg-white border-t border-[#ECE4DA] flex items-center gap-3 shadow-[0_-4px_20px_rgba(38,22,15,0.04)]">
           <div>
             <span className="text-[11px] text-[#75645C] block leading-tight">
               Subtotal Pesanan

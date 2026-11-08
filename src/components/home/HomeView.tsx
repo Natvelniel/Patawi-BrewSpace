@@ -75,10 +75,10 @@ export const HomeView: React.FC = () => {
   };
 
   return (
-    <div className="pb-8 pt-3 space-y-5 px-4 bg-[#FAF7F2] min-h-full">
+    <div className="pb-16 pt-3 space-y-5 px-4 bg-[#FAF7F2] min-h-full">
       {/* 1. Search Bar */}
       <div className="flex items-center gap-2.5">
-        <div className="flex-1 flex items-center bg-white rounded-2xl px-4 py-2.5 border border-[#ECE4DA] shadow-xs focus-within:border-[#26160F] transition-colors">
+        <div className="flex-1 flex items-center bg-white rounded-2xl px-4 py-2.5 border border-[#ECE4DA] shadow-xs focus-within:border-[#26160F] transition-colors rim-light">
           <Search className="w-4 h-4 text-[#75645C] mr-2.5 shrink-0" />
           <input
             type="text"
@@ -247,7 +247,7 @@ export const HomeView: React.FC = () => {
             return (
               <div
                 key={p.id}
-                className="bg-white rounded-3xl border border-[#ECE4DA] p-3 flex flex-col justify-between shadow-2xs hover:shadow-md transition-all group"
+                className="bg-white rounded-3xl depth-card depth-card-hover rim-light p-3 flex flex-col justify-between group cursor-pointer"
               >
                 {/* Image Box */}
                 <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-[#FAF7F2] mb-2.5">

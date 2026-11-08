@@ -72,7 +72,7 @@ export const CartView: React.FC = () => {
   }
 
   return (
-    <div className="pb-8 pt-3 px-4 bg-[#FAF7F2] min-h-full space-y-4">
+    <div className="pb-20 pt-3 px-4 bg-[#FAF7F2] min-h-full space-y-4">
       {/* 1. Stepper Header (3 Steps) */}
       <div className="bg-white border border-[#ECE4DA] p-1.5 rounded-2xl flex items-center justify-between text-xs font-bold shadow-2xs">
         <div
