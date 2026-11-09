@@ -59,9 +59,9 @@ export const ProductDetailModal: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 backdrop-blur-xs transition-opacity animate-in fade-in select-none">
+    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/65 backdrop-blur-xs transition-opacity animate-in fade-in select-none">
       <div
-        className="w-full max-w-[412px] bg-[#FAF7F2] rounded-t-[32px] max-h-[90vh] flex flex-col shadow-2xl border-t border-[#ECE4DA] overflow-hidden animate-in slide-in-from-bottom duration-300"
+        className="w-full max-w-[412px] bg-[#FAF7F2] rounded-t-[32px] max-h-[90vh] flex flex-col shadow-2xl border-t border-[#ECE4DA] overflow-hidden animate-in slide-in-from-bottom duration-300 depth-card rim-light font-sans"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Grab Handle */}
@@ -70,7 +70,7 @@ export const ProductDetailModal: React.FC = () => {
         </div>
 
         {/* Header */}
-        <div className="px-5 py-3 flex items-start gap-3 border-b border-[#ECE4DA] bg-white/70 backdrop-blur-xs">
+        <div className="px-5 py-3 flex items-start gap-3 border-b border-[#ECE4DA] bg-white/80 backdrop-blur-xs">
           <div className="w-16 h-16 rounded-2xl overflow-hidden bg-[#F4EFE9] shrink-0 border border-[#ECE4DA]">
             <img
               src={product.image}
@@ -90,7 +90,7 @@ export const ProductDetailModal: React.FC = () => {
               {product.name}
             </h3>
             <div className="flex items-baseline gap-1 mt-0.5">
-              <span className="font-serif text-[17px] font-bold text-[#26160F]">
+              <span className="font-serif text-[18px] font-bold text-[#26160F]">
                 Rp {calculatedUnitPrice.toLocaleString('id-ID')}
               </span>
               <span className="text-xs text-[#75645C]">/{selectedWeight}</span>
@@ -98,7 +98,9 @@ export const ProductDetailModal: React.FC = () => {
           </div>
           <button
             onClick={() => setSelectedProductModal(null)}
-            className="w-8 h-8 rounded-full bg-[#EFE8E0] text-[#75645C] hover:text-[#26160F] hover:bg-[#E5DCD2] flex items-center justify-center transition-colors cursor-pointer active:scale-95"
+            className="w-10 h-10 min-w-[40px] min-h-[40px] rounded-full bg-[#EFE8E0] text-[#75645C] hover:text-[#26160F] hover:bg-[#E5DCD2] flex items-center justify-center transition-colors cursor-pointer active:scale-95"
+            title="Tutup Pratinjau Produk"
+            aria-label="Tutup Pratinjau Produk"
           >
             <X className="w-4 h-4" />
           </button>
@@ -285,36 +287,38 @@ export const ProductDetailModal: React.FC = () => {
               value={customNotes}
               onChange={(e) => setCustomNotes(e.target.value)}
               placeholder="Contoh: Sangrai medium-dark, giling Aeropress fine..."
-              className="w-full px-4 py-2.5 rounded-xl border border-[#ECE4DA] bg-white text-xs text-[#26160F] placeholder-[#75645C] focus:outline-hidden focus:border-[#26160F]"
+              className="w-full min-h-[44px] px-4 py-2.5 rounded-xl border border-[#ECE4DA] bg-white text-xs text-[#26160F] placeholder-[#75645C] focus:outline-hidden focus:border-[#26160F] font-sans"
             />
           </div>
         </div>
 
         {/* Sticky Footer with Safe Area */}
-        <div className="px-5 pt-3.5 pb-[max(1rem,env(safe-area-inset-bottom,16px))] bg-white border-t border-[#ECE4DA] flex items-center gap-3 shadow-[0_-4px_20px_rgba(38,22,15,0.04)]">
+        <div className="px-5 pt-3.5 pb-[max(1rem,env(safe-area-inset-bottom,16px))] bg-white border-t border-[#ECE4DA] flex items-center gap-3 shadow-[0_-4px_20px_rgba(38,22,15,0.06)] rim-light">
           <div>
-            <span className="text-[11px] text-[#75645C] block leading-tight">
+            <span className="text-[11px] text-[#75645C] block leading-tight font-medium">
               Subtotal Pesanan
             </span>
-            <span className="font-serif text-[18px] font-bold text-[#26160F] leading-tight">
+            <span className="font-serif text-[19px] font-bold text-[#26160F] leading-tight">
               Rp {subtotal.toLocaleString('id-ID')}
             </span>
           </div>
 
           {/* Quantity Counter */}
-          <div className="flex items-center bg-[#EFE8E0] rounded-xl px-2 py-1.5 ml-auto">
+          <div className="flex items-center bg-[#EFE8E0] rounded-xl px-1.5 py-1 ml-auto border border-[#ECE4DA]">
             <button
               onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-              className="p-1 rounded-lg hover:bg-white text-[#26160F] transition-colors cursor-pointer"
+              className="w-8 h-8 min-w-[32px] min-h-[32px] flex items-center justify-center rounded-lg hover:bg-white text-[#26160F] transition-colors cursor-pointer"
+              aria-label="Kurangi Jumlah"
             >
               <Minus className="w-3.5 h-3.5" />
             </button>
-            <span className="w-8 text-center text-xs font-bold text-[#26160F]">
+            <span className="w-8 text-center text-xs font-bold text-[#26160F] font-mono">
               {quantity}
             </span>
             <button
               onClick={() => setQuantity((q) => q + 1)}
-              className="p-1 rounded-lg hover:bg-white text-[#26160F] transition-colors cursor-pointer"
+              className="w-8 h-8 min-w-[32px] min-h-[32px] flex items-center justify-center rounded-lg hover:bg-white text-[#26160F] transition-colors cursor-pointer"
+              aria-label="Tambah Jumlah"
             >
               <Plus className="w-3.5 h-3.5" />
             </button>
@@ -323,7 +327,8 @@ export const ProductDetailModal: React.FC = () => {
           {/* Add to Cart CTA */}
           <button
             onClick={handleAdd}
-            className="flex items-center justify-center gap-1.5 bg-[#26160F] hover:bg-[#C86826] text-white px-5 py-2.5 rounded-xl font-bold text-xs shadow-sm transition-all cursor-pointer active:scale-95"
+            className="min-h-[44px] flex items-center justify-center gap-1.5 bg-[#26160F] hover:bg-[#C86826] text-white px-5 py-3 rounded-xl font-bold text-xs shadow-sm transition-all cursor-pointer active:scale-95"
+            aria-label="Tambah Pesanan ke Keranjang"
           >
             <ShoppingBag className="w-4 h-4 text-[#FDB882]" />
             Tambah

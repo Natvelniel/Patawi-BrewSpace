@@ -113,22 +113,23 @@ export const HomeView: React.FC = () => {
     searchQuery.trim().length > 0;
 
   return (
-    <div className="pb-16 pt-3 space-y-5 px-4 bg-[#FAF7F2] min-h-full">
+    <div className="pb-24 pt-3 space-y-5 px-4 bg-[#FAF7F2] min-h-full font-sans">
       {/* 1. Search Bar & Filter Drawer Trigger */}
       <div className="flex items-center gap-2.5">
-        <div className="flex-1 flex items-center bg-white rounded-2xl px-4 py-2.5 border border-[#ECE4DA] shadow-xs focus-within:border-[#26160F] transition-colors rim-light">
+        <div className="flex-1 min-h-[44px] flex items-center bg-white rounded-2xl px-4 py-2 border border-[#ECE4DA] shadow-[0_2px_8px_rgba(22,12,7,0.04)] focus-within:border-[#26160F] transition-colors rim-light">
           <Search className="w-4 h-4 text-[#75645C] mr-2.5 shrink-0" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Cari single origin, blend, sangrai..."
-            className="w-full bg-transparent text-xs text-[#26160F] placeholder-[#75645C] focus:outline-hidden"
+            className="w-full bg-transparent text-xs text-[#26160F] placeholder-[#75645C] focus:outline-hidden font-sans"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="text-[#75645C] hover:text-[#26160F] text-xs font-bold cursor-pointer"
+              className="w-7 h-7 flex items-center justify-center text-[#75645C] hover:text-[#26160F] text-sm font-bold cursor-pointer rounded-full hover:bg-[#F4EFE9]"
+              aria-label="Hapus Pencarian"
             >
               ×
             </button>
@@ -136,12 +137,13 @@ export const HomeView: React.FC = () => {
         </div>
         <button
           onClick={() => setShowFilterModal(true)}
-          className={`w-10 h-10 flex items-center justify-center rounded-2xl border transition-all shrink-0 shadow-xs cursor-pointer active:scale-95 ${
+          className={`w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-2xl border transition-all shrink-0 cursor-pointer active:scale-95 ${
             hasActiveFilters
-              ? 'bg-[#26160F] text-[#FDB882] border-[#26160F]'
-              : 'bg-white hover:bg-[#F4EFE9] border-[#ECE4DA] text-[#5C4D46]'
+              ? 'bg-[#26160F] text-[#FDB882] border-[#26160F] shadow-sm rim-light'
+              : 'bg-white hover:bg-[#F4EFE9] border-[#ECE4DA] text-[#5C4D46] shadow-xs depth-card'
           }`}
           title="Filter & Urutkan Produk"
+          aria-label="Buka Filter dan Pengurutan"
         >
           <SlidersHorizontal className="w-4 h-4" />
         </button>
@@ -213,7 +215,7 @@ export const HomeView: React.FC = () => {
       )}
 
       {/* 2. Hero Promo Banner */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#2D1A12] via-[#24130C] to-[#1A0D07] text-white p-5 shadow-md">
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#2D1A12] via-[#24130C] to-[#1A0D07] text-white p-5 shadow-[0_8px_24px_rgba(22,12,7,0.25)] border border-[#382015] rim-light-dark">
         <div className="absolute right-0 top-0 bottom-0 w-[55%] opacity-40 mix-blend-screen pointer-events-none">
           <img
             src="/assets/c291c.png"
@@ -222,27 +224,27 @@ export const HomeView: React.FC = () => {
           />
         </div>
 
-        <div className="relative z-10 max-w-[70%]">
-          <div className="inline-flex items-center gap-1.5 bg-[#865225]/70 text-[#FDB882] text-[11px] font-bold px-3 py-1 rounded-full mb-2.5 border border-white/10">
+        <div className="relative z-10 max-w-[72%]">
+          <div className="inline-flex items-center gap-1.5 bg-[#865225]/80 text-[#FDB882] text-[11px] font-bold px-3 py-1 rounded-full mb-2.5 border border-white/10 shadow-xs">
             <Flame className="w-3.5 h-3.5 text-[#E08A44]" />
             PROMO ARTISAN
           </div>
-          <h2 className="font-serif text-[23px] font-bold text-white tracking-tight leading-tight">
+          <h2 className="font-serif text-[24px] font-bold text-white tracking-tight leading-tight">
             Batch Sangrai Baru
           </h2>
           <p className="text-xs text-[#E0D5CE] mt-1.5 leading-relaxed line-clamp-2">
             Diskon 20% biji kopi sangrai segar pilihan roaster! Gunakan kupon BEANS20 di keranjang.
           </p>
 
-          <div className="flex items-center gap-2 mt-4">
-            <span className="text-[11px] font-semibold bg-black/40 text-[#E0D5CE] px-2.5 py-1 rounded-lg border border-white/10">
+          <div className="flex items-center gap-2 mt-4 flex-wrap">
+            <span className="text-[11px] font-semibold bg-black/50 text-[#E0D5CE] px-2.5 py-1.5 rounded-lg border border-white/10">
               Kupon BEANS20
             </span>
             <button
               onClick={handleClaimPromo}
-              className="inline-flex items-center gap-1 bg-[#FDB882] hover:bg-[#E08A44] text-[#26160F] text-xs font-bold px-3.5 py-1.5 rounded-xl shadow-xs transition-all cursor-pointer active:scale-95"
+              className="min-h-[44px] inline-flex items-center gap-1.5 bg-[#FDB882] hover:bg-[#E08A44] text-[#26160F] text-xs font-bold px-4 py-2 rounded-xl shadow-xs transition-all cursor-pointer active:scale-95"
             >
-              Klaim Promo <ArrowRight className="w-3 h-3" />
+              Klaim Promo <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
         </div>
@@ -281,7 +283,7 @@ export const HomeView: React.FC = () => {
           </div>
           <button
             onClick={() => setActiveTab('catalog')}
-            className="text-xs font-bold text-[#865225] hover:underline cursor-pointer"
+            className="text-xs font-bold text-[#865225] hover:underline cursor-pointer min-h-[44px] flex items-center"
           >
             Lihat Semua &gt;
           </button>
@@ -301,7 +303,7 @@ export const HomeView: React.FC = () => {
                   setSelectedCategory(next);
                   setFilterCriteria((prev) => ({ ...prev, category: next }));
                 }}
-                className={`shrink-0 flex items-center gap-2.5 px-3.5 py-2.5 rounded-2xl border transition-all cursor-pointer active:scale-95 ${
+                className={`shrink-0 min-h-[48px] flex items-center gap-2.5 px-3.5 py-2.5 rounded-2xl border transition-all cursor-pointer active:scale-95 ${
                   isSelected
                     ? 'bg-[#26160F] text-[#FDB882] border-[#26160F] shadow-sm rim-light'
                     : 'bg-white text-[#5C4D46] border-[#ECE4DA] hover:bg-[#FAF7F2] depth-card'
@@ -348,7 +350,7 @@ export const HomeView: React.FC = () => {
                   setSelectedRoast(next);
                   setFilterCriteria((prev) => ({ ...prev, roast: next }));
                 }}
-                className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer active:scale-95 ${
+                className={`shrink-0 min-h-[38px] px-4 py-2 rounded-full text-xs font-semibold transition-all cursor-pointer active:scale-95 flex items-center justify-center ${
                   isSelected
                     ? 'bg-[#26160F] text-white shadow-xs'
                     : 'bg-white text-[#5C4D46] border border-[#ECE4DA] hover:bg-[#F4EFE9]'
@@ -376,7 +378,7 @@ export const HomeView: React.FC = () => {
         </div>
 
         {filteredProducts.length === 0 ? (
-          <div className="bg-white rounded-3xl p-8 border border-[#ECE4DA] text-center space-y-3">
+          <div className="bg-white rounded-3xl p-8 border border-[#ECE4DA] text-center space-y-3 depth-card">
             <Coffee className="w-10 h-10 text-[#C86826] mx-auto opacity-70" />
             <h4 className="font-serif text-base font-bold text-[#26160F]">
               Tidak Ada Kopi yang Cocok
@@ -386,7 +388,7 @@ export const HomeView: React.FC = () => {
             </p>
             <button
               onClick={resetFilter}
-              className="bg-[#26160F] text-[#FDB882] text-xs font-bold px-4 py-2 rounded-xl transition-all cursor-pointer"
+              className="min-h-[44px] bg-[#26160F] text-[#FDB882] text-xs font-bold px-5 py-2.5 rounded-xl transition-all cursor-pointer hover:bg-[#382015] active:scale-95"
             >
               Reset Semua Filter
             </button>
@@ -399,7 +401,7 @@ export const HomeView: React.FC = () => {
                 <div
                   key={p.id}
                   onClick={() => setSelectedProductModal(p)}
-                  className="bg-white rounded-3xl depth-card depth-card-hover rim-light p-3 flex flex-col justify-between group cursor-pointer"
+                  className="bg-white rounded-3xl depth-card depth-card-hover rim-light p-3 flex flex-col justify-between group cursor-pointer border border-[#ECE4DA]"
                 >
                   {/* Image Box - ZERO COLLISION: Clean Single Status Pill on Top-Left & Favorite Heart on Top-Right */}
                   <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-[#FAF7F2] mb-2.5">
@@ -409,16 +411,16 @@ export const HomeView: React.FC = () => {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     {/* Clean Single Badge */}
-                    <span className="absolute top-2 left-2 text-[9.5px] font-bold bg-[#26160F]/85 text-[#FDB882] px-2 py-0.5 rounded-md backdrop-blur-xs whitespace-nowrap shadow-xs">
+                    <span className="absolute top-2 left-2 text-[9.5px] font-bold bg-[#26160F]/90 text-[#FDB882] px-2 py-0.5 rounded-md backdrop-blur-xs whitespace-nowrap shadow-xs">
                       {p.tag || p.process}
                     </span>
-                    {/* Heart Button */}
+                    {/* Heart Button with generous touch hitbox */}
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         toggleFavorite(p.id);
                       }}
-                      className="absolute top-2 right-2 w-7 h-7 bg-white/95 backdrop-blur-xs rounded-full text-[#75645C] hover:text-red-500 flex items-center justify-center transition-colors shadow-xs active:scale-90"
+                      className="absolute top-2 right-2 w-8 h-8 min-w-[32px] min-h-[32px] bg-white/95 backdrop-blur-xs rounded-full text-[#75645C] hover:text-red-500 flex items-center justify-center transition-colors shadow-xs active:scale-90"
                       aria-label="Simpan Favorit"
                     >
                       <Heart
@@ -471,7 +473,7 @@ export const HomeView: React.FC = () => {
                         <span className="text-[10px] text-[#75645C] block leading-tight">
                           200 gram
                         </span>
-                        <span className="font-serif text-[14px] font-bold text-[#26160F] leading-tight">
+                        <span className="font-serif text-[15px] font-bold text-[#26160F] leading-tight">
                           Rp {p.basePrice.toLocaleString('id-ID')}
                         </span>
                       </div>
@@ -481,10 +483,11 @@ export const HomeView: React.FC = () => {
                           e.stopPropagation();
                           setSelectedProductModal(p);
                         }}
-                        className="w-8 h-8 rounded-xl bg-[#26160F] hover:bg-[#C86826] text-white flex items-center justify-center transition-all shadow-xs cursor-pointer active:scale-95"
+                        className="w-10 h-10 min-w-[40px] min-h-[40px] rounded-xl bg-[#26160F] hover:bg-[#C86826] text-white flex items-center justify-center transition-all shadow-xs cursor-pointer active:scale-95"
                         title="Pilih Varian & Tambah"
+                        aria-label="Pilih Varian dan Tambah ke Keranjang"
                       >
-                        <ShoppingBag className="w-3.5 h-3.5 text-[#FDB882]" />
+                        <ShoppingBag className="w-4 h-4 text-[#FDB882]" />
                       </button>
                     </div>
                   </div>
@@ -496,9 +499,9 @@ export const HomeView: React.FC = () => {
       </div>
 
       {/* 7. Banner Edukasi Penggilingan */}
-      <div className="bg-[#EFE8E0] rounded-3xl p-4 flex items-center justify-between gap-3 border border-[#E2D7CC] shadow-2xs">
+      <div className="bg-[#FAF7F2] rounded-3xl p-4 flex items-center justify-between gap-3 border border-[#ECE4DA] depth-card rim-light shadow-xs">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-[#26160F] text-[#FDB882] flex items-center justify-center shrink-0 shadow-xs">
+          <div className="w-11 h-11 rounded-2xl bg-[#26160F] text-[#FDB882] flex items-center justify-center shrink-0 shadow-xs">
             <BookOpen className="w-5 h-5" />
           </div>
           <div>
@@ -512,14 +515,14 @@ export const HomeView: React.FC = () => {
         </div>
         <button
           onClick={() => setShowGrindGuide(true)}
-          className="shrink-0 bg-white text-[#26160F] hover:bg-[#FAF7F2] text-xs font-bold px-3.5 py-1.5 rounded-xl border border-[#D9CEC5] shadow-xs transition-colors cursor-pointer active:scale-95"
+          className="shrink-0 min-h-[44px] bg-white text-[#26160F] hover:bg-[#FAF7F2] text-xs font-bold px-4 py-2 rounded-xl border border-[#ECE4DA] shadow-xs transition-colors cursor-pointer active:scale-95 flex items-center justify-center"
         >
           Panduan
         </button>
       </div>
 
       {/* 8. Storytelling & Ethical Coffee Section */}
-      <div className="bg-white rounded-3xl p-5 border border-[#ECE4DA] shadow-2xs depth-card">
+      <div className="bg-white rounded-3xl p-5 border border-[#ECE4DA] shadow-xs depth-card rim-light">
         <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#865225] uppercase tracking-wider mb-2">
           <Award className="w-4 h-4 text-[#C86826]" />
           Etis & Berkelanjutan
@@ -532,7 +535,7 @@ export const HomeView: React.FC = () => {
         </p>
         <button
           onClick={() => showToast('Membuka dokumentasi proses cupping & kemitraan petani Patawi')}
-          className="inline-flex items-center gap-1.5 text-xs font-bold text-[#865225] mt-3 hover:text-[#26160F] transition-colors cursor-pointer"
+          className="min-h-[44px] inline-flex items-center gap-1.5 text-xs font-bold text-[#865225] mt-3 hover:text-[#26160F] transition-colors cursor-pointer"
         >
           Pelajari Proses Cupping Kami <ArrowRight className="w-3.5 h-3.5" />
         </button>

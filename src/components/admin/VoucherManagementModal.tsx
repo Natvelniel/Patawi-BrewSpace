@@ -36,6 +36,7 @@ export const VoucherManagementModal: React.FC<VoucherManagementModalProps> = ({ 
     };
 
     addVoucher(newVoucher);
+    showToast(`Voucher ${newVoucher.code} berhasil dibuat.`);
     setCode('');
     setDescription('');
     setShowAddForm(false);
@@ -43,15 +44,15 @@ export const VoucherManagementModal: React.FC<VoucherManagementModalProps> = ({ 
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/65 backdrop-blur-xs animate-in fade-in select-none">
-      <div className="bg-white rounded-3xl max-w-[460px] w-full p-5 sm:p-6 shadow-2xl border border-[#ECE4DA] max-h-[92vh] overflow-y-auto no-scrollbar relative animate-in zoom-in-95">
+      <div className="depth-card rim-light bg-white rounded-3xl max-w-[480px] w-full p-5 sm:p-6 shadow-2xl border border-[#ECE4DA] max-h-[92vh] overflow-y-auto no-scrollbar relative animate-in zoom-in-95 font-sans">
         {/* Header */}
         <div className="flex items-center justify-between pb-3.5 border-b border-[#ECE4DA]">
-          <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-2xl bg-[#26160F] text-[#FDB882] flex items-center justify-center shadow-xs shrink-0">
-              <Tag className="w-4 h-4" />
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-2xl bg-[#26160F] text-[#FDB882] flex items-center justify-center shadow-xs shrink-0 border border-[#382015]">
+              <Tag className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-serif text-[18px] font-bold text-[#26160F]">
+              <h3 className="font-serif text-[19px] font-bold text-[#26160F]">
                 Kelola Promo & Voucher
               </h3>
               <p className="text-[11px] text-[#75645C]">
@@ -61,20 +62,21 @@ export const VoucherManagementModal: React.FC<VoucherManagementModalProps> = ({ 
           </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 rounded-full bg-[#FAF7F2] hover:bg-[#EFE8E0] text-[#75645C] hover:text-[#26160F] flex items-center justify-center transition-colors cursor-pointer"
+            className="w-9 h-9 rounded-full bg-[#FAF7F2] hover:bg-[#EFE8E0] text-[#75645C] hover:text-[#26160F] flex items-center justify-center transition-colors cursor-pointer border border-[#ECE4DA]"
+            title="Tutup Modal"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Action Bar */}
-        <div className="mt-4 flex items-center justify-between">
+        <div className="mt-4 flex items-center justify-between gap-2">
           <span className="text-xs font-bold text-[#26160F]">
             Daftar Kupon Aktif ({vouchers.length})
           </span>
           <button
             onClick={() => setShowAddForm(!showAddForm)}
-            className="flex items-center gap-1.5 bg-[#26160F] hover:bg-[#C86826] text-white px-3 py-1.5 rounded-xl text-xs font-bold shadow-2xs transition-all cursor-pointer active:scale-95"
+            className="min-h-[44px] flex items-center gap-1.5 bg-[#26160F] hover:bg-[#C86826] text-white px-3.5 py-2 rounded-xl text-xs font-bold shadow-xs transition-all cursor-pointer active:scale-95 border border-[#382015]"
           >
             <Plus className="w-3.5 h-3.5 text-[#FDB882]" />
             {showAddForm ? 'Batal Tambah' : 'Tambah Voucher'}
@@ -102,11 +104,11 @@ export const VoucherManagementModal: React.FC<VoucherManagementModalProps> = ({ 
                 onChange={(e) => setCode(e.target.value.toUpperCase())}
                 placeholder="CONTOH: BEANSSENOPATI"
                 required
-                className="w-full bg-white border border-[#ECE4DA] rounded-xl px-3 py-2 font-mono text-xs font-bold text-[#26160F] focus:outline-hidden focus:border-[#C86826]"
+                className="w-full bg-white border border-[#ECE4DA] rounded-xl px-3.5 py-2 font-mono text-xs font-bold text-[#26160F] focus:outline-hidden focus:border-[#C86826] min-h-[44px]"
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 gap-2.5">
               <div>
                 <label className="text-[10.5px] font-bold text-[#75645C] block mb-1">
                   Potongan Diskon (Rp) *
@@ -116,7 +118,7 @@ export const VoucherManagementModal: React.FC<VoucherManagementModalProps> = ({ 
                   value={discountAmount}
                   onChange={(e) => setDiscountAmount(e.target.value)}
                   required
-                  className="w-full bg-white border border-[#ECE4DA] rounded-xl px-2.5 py-1.5 font-bold text-xs text-[#26160F] focus:outline-hidden focus:border-[#C86826]"
+                  className="w-full bg-white border border-[#ECE4DA] rounded-xl px-3 py-2 font-bold text-xs text-[#26160F] focus:outline-hidden focus:border-[#C86826] min-h-[44px]"
                 />
               </div>
               <div>
@@ -128,7 +130,7 @@ export const VoucherManagementModal: React.FC<VoucherManagementModalProps> = ({ 
                   value={minSpend}
                   onChange={(e) => setMinSpend(e.target.value)}
                   required
-                  className="w-full bg-white border border-[#ECE4DA] rounded-xl px-2.5 py-1.5 font-bold text-xs text-[#26160F] focus:outline-hidden focus:border-[#C86826]"
+                  className="w-full bg-white border border-[#ECE4DA] rounded-xl px-3 py-2 font-bold text-xs text-[#26160F] focus:outline-hidden focus:border-[#C86826] min-h-[44px]"
                 />
               </div>
             </div>
@@ -142,13 +144,13 @@ export const VoucherManagementModal: React.FC<VoucherManagementModalProps> = ({ 
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Diskon spesial festival seduh Senopati"
-                className="w-full bg-white border border-[#ECE4DA] rounded-xl px-3 py-2 text-xs text-[#26160F] focus:outline-hidden focus:border-[#C86826]"
+                className="w-full bg-white border border-[#ECE4DA] rounded-xl px-3.5 py-2 text-xs text-[#26160F] focus:outline-hidden focus:border-[#C86826] min-h-[44px]"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full bg-[#C86826] hover:bg-[#9A4710] text-white py-2.5 rounded-xl font-bold text-xs shadow-xs transition-all cursor-pointer active:scale-95"
+              className="min-h-[44px] w-full bg-[#C86826] hover:bg-[#D47A33] text-white py-2.5 px-4 rounded-xl font-bold text-xs shadow-xs transition-all cursor-pointer active:scale-95 border border-[#E08A44]/40"
             >
               Simpan & Aktifkan Voucher
             </button>
@@ -156,67 +158,73 @@ export const VoucherManagementModal: React.FC<VoucherManagementModalProps> = ({ 
         )}
 
         {/* Voucher List */}
-        <div className="mt-3.5 space-y-2.5">
+        <div className="mt-3.5 space-y-3">
           {vouchers.map((v) => {
             const isActive = v.isActive !== false;
             return (
               <div
                 key={v.code}
-                className={`p-3.5 rounded-2xl border transition-all ${
+                className={`p-4 rounded-2xl border transition-all ${
                   isActive
-                    ? 'bg-white border-[#ECE4DA] depth-card'
+                    ? 'depth-card rim-light bg-white border-[#ECE4DA]'
                     : 'bg-[#FAF7F2] border-dashed border-[#D9CEC5] opacity-60'
                 }`}
               >
-                <div className="flex items-start justify-between gap-2">
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <span className="font-mono font-bold text-xs bg-[#FAF7F2] text-[#26160F] px-2 py-0.5 rounded border border-[#ECE4DA]">
+                <div className="flex items-start justify-between gap-2.5">
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="font-mono font-bold text-xs bg-[#FAF7F2] text-[#26160F] px-2.5 py-1 rounded border border-[#ECE4DA]">
                         {v.code}
                       </span>
                       <span
-                        className={`text-[9.5px] font-bold px-2 py-0.2 rounded-full ${
+                        className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
                           isActive
-                            ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                            : 'bg-gray-100 text-gray-600'
+                            ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+                            : 'bg-[#ECE4DA] text-[#75645C]'
                         }`}
                       >
                         {isActive ? 'Aktif' : 'Nonaktif'}
                       </span>
                     </div>
 
-                    <h5 className="font-serif text-[14px] font-bold text-[#C86826] mt-1">
+                    <h5 className="font-serif text-[15px] font-bold text-[#C86826] mt-1.5">
                       Potongan Rp {v.discountAmount.toLocaleString('id-ID')}
                     </h5>
                     <p className="text-[11px] text-[#75645C] mt-0.5">
                       Min. Belanja: Rp {v.minSpend.toLocaleString('id-ID')}
                     </p>
-                    <span className="text-[10px] text-[#865225] italic block mt-0.5">
+                    <span className="text-[10.5px] text-[#865225] italic block mt-0.5">
                       "{v.description}"
                     </span>
                   </div>
 
                   {/* Actions */}
-                  <div className="flex items-center gap-1.5 shrink-0 pt-0.5">
+                  <div className="flex items-center gap-2 shrink-0 pt-0.5">
                     <button
                       type="button"
-                      onClick={() => toggleVoucherStatus(v.code)}
-                      className={`p-2 rounded-xl border transition-colors cursor-pointer ${
+                      onClick={() => {
+                        toggleVoucherStatus(v.code);
+                        showToast(`Status voucher ${v.code} diperbarui.`);
+                      }}
+                      className={`min-h-[44px] min-w-[44px] flex items-center justify-center p-2 rounded-xl border transition-colors cursor-pointer ${
                         isActive
                           ? 'bg-[#FAF7F2] hover:bg-amber-50 text-[#75645C] hover:text-amber-700 border-[#ECE4DA]'
-                          : 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                          : 'bg-emerald-50 text-emerald-800 border-emerald-200'
                       }`}
                       title={isActive ? 'Nonaktifkan Voucher' : 'Aktifkan Voucher'}
                     >
-                      <Power className="w-3.5 h-3.5" />
+                      <Power className="w-4 h-4" />
                     </button>
                     <button
                       type="button"
-                      onClick={() => deleteVoucher(v.code)}
-                      className="p-2 rounded-xl bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 transition-colors cursor-pointer"
+                      onClick={() => {
+                        deleteVoucher(v.code);
+                        showToast(`Voucher ${v.code} telah dihapus.`);
+                      }}
+                      className="min-h-[44px] min-w-[44px] flex items-center justify-center p-2 rounded-xl bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 transition-colors cursor-pointer"
                       title="Hapus Voucher"
                     >
-                      <Trash2 className="w-3.5 h-3.5" />
+                      <Trash2 className="w-4 h-4" />
                     </button>
                   </div>
                 </div>

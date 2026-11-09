@@ -97,22 +97,23 @@ export const CatalogView: React.FC = () => {
     searchQuery.trim().length > 0;
 
   return (
-    <div className="pb-16 pt-3 space-y-4 px-4 bg-[#FAF7F2] min-h-full">
+    <div className="pb-24 pt-3 space-y-4 px-4 bg-[#FAF7F2] min-h-full font-sans">
       {/* Search Bar & Filter Drawer Trigger */}
       <div className="flex items-center gap-2.5">
-        <div className="flex-1 flex items-center bg-white rounded-2xl px-4 py-2.5 border border-[#ECE4DA] shadow-xs focus-within:border-[#26160F] transition-colors rim-light">
+        <div className="flex-1 min-h-[44px] flex items-center bg-white rounded-2xl px-4 py-2 border border-[#ECE4DA] shadow-[0_2px_8px_rgba(22,12,7,0.04)] focus-within:border-[#26160F] transition-colors rim-light">
           <Search className="w-4 h-4 text-[#75645C] mr-2.5 shrink-0" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Cari varietas, daerah asal, atau rasa..."
-            className="w-full bg-transparent text-xs text-[#26160F] placeholder-[#75645C] focus:outline-hidden"
+            className="w-full bg-transparent text-xs text-[#26160F] placeholder-[#75645C] focus:outline-hidden font-sans"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="text-[#75645C] hover:text-[#26160F] text-xs font-bold cursor-pointer"
+              className="w-7 h-7 flex items-center justify-center text-[#75645C] hover:text-[#26160F] text-sm font-bold cursor-pointer rounded-full hover:bg-[#F4EFE9]"
+              aria-label="Hapus Pencarian"
             >
               ×
             </button>
@@ -120,12 +121,13 @@ export const CatalogView: React.FC = () => {
         </div>
         <button
           onClick={() => setShowFilterModal(true)}
-          className={`w-10 h-10 flex items-center justify-center rounded-2xl border transition-all shrink-0 shadow-xs cursor-pointer active:scale-95 ${
+          className={`w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-2xl border transition-all shrink-0 cursor-pointer active:scale-95 ${
             hasActiveFilters
-              ? 'bg-[#26160F] text-[#FDB882] border-[#26160F]'
-              : 'bg-white hover:bg-[#F4EFE9] border-[#ECE4DA] text-[#5C4D46]'
+              ? 'bg-[#26160F] text-[#FDB882] border-[#26160F] shadow-sm rim-light'
+              : 'bg-white hover:bg-[#F4EFE9] border-[#ECE4DA] text-[#5C4D46] shadow-xs depth-card'
           }`}
           title="Filter & Urutkan Katalog"
+          aria-label="Buka Filter dan Pengurutan Katalog"
         >
           <SlidersHorizontal className="w-4 h-4" />
         </button>
@@ -143,6 +145,7 @@ export const CatalogView: React.FC = () => {
               <button
                 onClick={() => setSelectedOrigin('Semua Asal')}
                 className="hover:text-white cursor-pointer ml-0.5"
+                aria-label="Hapus Filter Asal"
               >
                 ×
               </button>
@@ -154,6 +157,7 @@ export const CatalogView: React.FC = () => {
               <button
                 onClick={() => setFilterCriteria((prev) => ({ ...prev, category: 'Semua' }))}
                 className="hover:text-white cursor-pointer ml-0.5"
+                aria-label="Hapus Filter Seduh"
               >
                 ×
               </button>
@@ -165,6 +169,7 @@ export const CatalogView: React.FC = () => {
               <button
                 onClick={() => setFilterCriteria((prev) => ({ ...prev, roast: 'Semua' }))}
                 className="hover:text-white cursor-pointer ml-0.5"
+                aria-label="Hapus Filter Sangrai"
               >
                 ×
               </button>
@@ -176,6 +181,7 @@ export const CatalogView: React.FC = () => {
               <button
                 onClick={() => setFilterCriteria((prev) => ({ ...prev, process: 'Semua' }))}
                 className="hover:text-white cursor-pointer ml-0.5"
+                aria-label="Hapus Filter Proses"
               >
                 ×
               </button>
@@ -198,7 +204,7 @@ export const CatalogView: React.FC = () => {
             <button
               key={origin}
               onClick={() => setSelectedOrigin(origin)}
-              className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer active:scale-95 ${
+              className={`shrink-0 min-h-[38px] px-4 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer active:scale-95 flex items-center justify-center ${
                 isSelected
                   ? 'bg-[#26160F] text-white shadow-xs'
                   : 'bg-white text-[#5C4D46] border border-[#ECE4DA] hover:bg-[#F4EFE9]'
@@ -213,7 +219,7 @@ export const CatalogView: React.FC = () => {
       {/* Status Info Row */}
       <div className="flex items-center justify-between text-xs pt-0.5">
         <span className="font-semibold text-[#5C4D46]">
-          Menampilkan <strong className="text-[#26160F] font-bold">{filtered.length} Varian</strong> Biji Kopi
+          Menampilkan <strong className="text-[#26160F] font-bold font-serif">{filtered.length} Varian</strong> Biji Kopi
         </span>
         <div className="flex items-center gap-1.5 text-[#865225] font-bold text-[11px]">
           <span className="w-2 h-2 rounded-full bg-[#865225]" />
@@ -223,7 +229,7 @@ export const CatalogView: React.FC = () => {
 
       {/* Catalog Grid (ZERO COLLISION: Clean Single Status Badge + Rating Below Image + Full 2-line Title) */}
       {filtered.length === 0 ? (
-        <div className="bg-white rounded-3xl p-8 border border-[#ECE4DA] text-center space-y-3">
+        <div className="bg-white rounded-3xl p-8 border border-[#ECE4DA] text-center space-y-3 depth-card rim-light">
           <Coffee className="w-10 h-10 text-[#C86826] mx-auto opacity-70" />
           <h4 className="font-serif text-base font-bold text-[#26160F]">
             Tidak Menemukan Biji Kopi
@@ -233,7 +239,7 @@ export const CatalogView: React.FC = () => {
           </p>
           <button
             onClick={resetFilter}
-            className="bg-[#26160F] text-[#FDB882] text-xs font-bold px-4 py-2 rounded-xl transition-all cursor-pointer"
+            className="min-h-[44px] bg-[#26160F] text-[#FDB882] text-xs font-bold px-5 py-2.5 rounded-xl transition-all cursor-pointer hover:bg-[#382015] active:scale-95"
           >
             Reset Semua Filter
           </button>
@@ -246,7 +252,7 @@ export const CatalogView: React.FC = () => {
               <div
                 key={p.id}
                 onClick={() => setSelectedProductModal(p)}
-                className="bg-white rounded-3xl depth-card depth-card-hover rim-light p-3 flex flex-col justify-between cursor-pointer group"
+                className="bg-white rounded-3xl depth-card depth-card-hover rim-light p-3 flex flex-col justify-between cursor-pointer group border border-[#ECE4DA]"
               >
                 {/* Image Box - ZERO COLLISION: Clean Single Status Pill on Top-Left & Favorite Heart on Top-Right */}
                 <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-[#FAF7F2] mb-2.5">
@@ -256,7 +262,7 @@ export const CatalogView: React.FC = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   {/* Clean Single Status Badge on Top-Left */}
-                  <span className="absolute top-2 left-2 text-[9.5px] font-bold bg-[#26160F]/85 text-[#FDB882] px-2 py-0.5 rounded-md backdrop-blur-xs whitespace-nowrap shadow-xs">
+                  <span className="absolute top-2 left-2 text-[9.5px] font-bold bg-[#26160F]/90 text-[#FDB882] px-2 py-0.5 rounded-md backdrop-blur-xs whitespace-nowrap shadow-xs">
                     {p.tag || p.process}
                   </span>
 
@@ -266,7 +272,7 @@ export const CatalogView: React.FC = () => {
                       e.stopPropagation();
                       toggleFavorite(p.id);
                     }}
-                    className="absolute top-2 right-2 w-7 h-7 bg-white/95 backdrop-blur-xs rounded-full text-[#75645C] hover:text-red-500 flex items-center justify-center transition-colors shadow-xs active:scale-90"
+                    className="absolute top-2 right-2 w-8 h-8 min-w-[32px] min-h-[32px] bg-white/95 backdrop-blur-xs rounded-full text-[#75645C] hover:text-red-500 flex items-center justify-center transition-colors shadow-xs active:scale-90"
                     aria-label="Simpan Favorit"
                   >
                     <Heart
@@ -319,11 +325,14 @@ export const CatalogView: React.FC = () => {
                       <span className="text-[10px] text-[#75645C] block leading-tight">
                         Mulai dari
                       </span>
-                      <span className="font-serif text-[14px] font-bold text-[#26160F] leading-tight">
+                      <span className="font-serif text-[15px] font-bold text-[#26160F] leading-tight">
                         Rp {p.basePrice.toLocaleString('id-ID')}
                       </span>
                     </div>
-                    <div className="w-8 h-8 rounded-xl bg-[#26160F] text-[#FDB882] flex items-center justify-center group-hover:bg-[#C86826] group-hover:text-white transition-colors shadow-xs active:scale-95">
+                    <div
+                      className="w-10 h-10 min-w-[40px] min-h-[40px] rounded-xl bg-[#26160F] text-[#FDB882] flex items-center justify-center group-hover:bg-[#C86826] group-hover:text-white transition-colors shadow-xs active:scale-95"
+                      aria-label="Pilih Varian dan Tambah"
+                    >
                       <Plus className="w-4 h-4" />
                     </div>
                   </div>

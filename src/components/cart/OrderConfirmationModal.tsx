@@ -31,7 +31,7 @@ export const OrderConfirmationModal: React.FC<OrderConfirmationModalProps> = ({
   return (
     <>
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/65 backdrop-blur-xs animate-in fade-in select-none">
-        <div className="bg-[#FAF7F2] rounded-3xl max-w-[420px] w-full p-6 shadow-2xl border border-[#ECE4DA] text-center relative animate-in zoom-in-95 max-h-[92vh] overflow-y-auto no-scrollbar">
+        <div className="bg-[#FAF7F2] rounded-3xl max-w-[420px] w-full p-6 shadow-2xl border border-[#ECE4DA] text-center relative animate-in zoom-in-95 max-h-[92vh] overflow-y-auto no-scrollbar depth-card rim-light font-sans">
           {/* Animated Gold/Green Success Icon */}
           <div className="mx-auto w-16 h-16 rounded-full bg-emerald-100 border-2 border-emerald-400 flex items-center justify-center text-emerald-600 shadow-md mb-3">
             <CheckCircle2 className="w-9 h-9" />
@@ -50,7 +50,7 @@ export const OrderConfirmationModal: React.FC<OrderConfirmationModalProps> = ({
           </p>
 
           {/* Email Notification Card */}
-          <div className="mt-4 bg-white p-3.5 rounded-2xl border border-[#ECE4DA] text-left shadow-2xs space-y-2">
+          <div className="mt-4 bg-white p-3.5 rounded-2xl border border-[#ECE4DA] text-left shadow-2xs depth-card space-y-2">
             <div className="flex items-center gap-2 text-xs font-bold text-[#26160F]">
               <Mail className="w-4 h-4 text-[#C86826] shrink-0" />
               <span>Invoice Terkirim Otomatis</span>
@@ -64,7 +64,7 @@ export const OrderConfirmationModal: React.FC<OrderConfirmationModalProps> = ({
           </div>
 
           {/* Order Details Brief Card */}
-          <div className="mt-3 bg-white p-3.5 rounded-2xl border border-[#ECE4DA] text-left shadow-2xs space-y-2 text-xs">
+          <div className="mt-3 bg-white p-3.5 rounded-2xl border border-[#ECE4DA] text-left shadow-2xs depth-card space-y-2 text-xs">
             <div className="flex justify-between items-center pb-2 border-b border-[#F4EFE9]">
               <span className="text-[#75645C]">Nomor Pesanan:</span>
               <strong className="font-mono text-[#26160F] text-xs">#{order.orderNumber}</strong>
@@ -89,7 +89,7 @@ export const OrderConfirmationModal: React.FC<OrderConfirmationModalProps> = ({
 
             <div className="flex justify-between items-center pt-0.5">
               <span className="text-[#75645C] font-bold">Total Pembayaran:</span>
-              <span className="font-serif text-[16px] font-bold text-[#C86826]">
+              <span className="font-serif text-[18px] font-bold text-[#C86826]">
                 Rp {order.total.toLocaleString('id-ID')}
               </span>
             </div>
@@ -99,7 +99,7 @@ export const OrderConfirmationModal: React.FC<OrderConfirmationModalProps> = ({
           <div className="mt-5 space-y-2">
             <button
               onClick={() => setShowInvoiceModal(true)}
-              className="w-full flex items-center justify-center gap-2 bg-white hover:bg-[#FAF7F2] text-[#26160F] border border-[#ECE4DA] py-2.5 rounded-2xl font-bold text-xs shadow-2xs transition-all cursor-pointer active:scale-95"
+              className="w-full min-h-[44px] flex items-center justify-center gap-2 bg-white hover:bg-[#FAF7F2] text-[#26160F] border border-[#ECE4DA] py-3 rounded-2xl font-bold text-xs shadow-2xs transition-all cursor-pointer active:scale-95"
             >
               <FileText className="w-4 h-4 text-[#C86826]" />
               Lihat Pratinjau Invoice Resmi Digital
@@ -107,7 +107,7 @@ export const OrderConfirmationModal: React.FC<OrderConfirmationModalProps> = ({
 
             <button
               onClick={onTrack}
-              className="w-full flex items-center justify-center gap-2 bg-[#26160F] hover:bg-[#C86826] text-white py-3 rounded-2xl font-bold text-xs shadow-xs transition-all cursor-pointer active:scale-95"
+              className="w-full min-h-[44px] flex items-center justify-center gap-2 bg-[#26160F] hover:bg-[#C86826] text-white py-3 rounded-2xl font-bold text-xs shadow-xs transition-all cursor-pointer active:scale-95"
             >
               <Navigation className="w-4 h-4 text-[#FDB882]" />
               Lacak Status Pengiriman Real-Time
@@ -115,7 +115,7 @@ export const OrderConfirmationModal: React.FC<OrderConfirmationModalProps> = ({
 
             <button
               onClick={onHome}
-              className="w-full flex items-center justify-center gap-1.5 text-xs font-semibold text-[#75645C] hover:text-[#26160F] py-2 transition-colors cursor-pointer"
+              className="w-full min-h-[44px] flex items-center justify-center gap-1.5 text-xs font-semibold text-[#75645C] hover:text-[#26160F] py-2.5 transition-colors cursor-pointer"
             >
               <Home className="w-3.5 h-3.5" /> Kembali Belanja ke Beranda
             </button>

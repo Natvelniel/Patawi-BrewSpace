@@ -51,51 +51,53 @@ export const QRISPaymentModal: React.FC<QRISPaymentModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in">
-      <div className="bg-white rounded-3xl max-w-[400px] w-full p-6 shadow-2xl border border-[#EAE8E4] relative animate-in zoom-in-95">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/65 backdrop-blur-xs animate-in fade-in select-none">
+      <div className="bg-white rounded-3xl max-w-[400px] w-full p-6 shadow-2xl border border-[#ECE4DA] relative animate-in zoom-in-95 depth-card rim-light font-sans">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-1.5 rounded-full text-[#817470] hover:bg-[#EFEEEA] transition-colors"
+          className="absolute top-4 right-4 w-10 h-10 min-w-[40px] min-h-[40px] flex items-center justify-center rounded-full bg-[#EFE8E0] text-[#75645C] hover:text-[#26160F] hover:bg-[#E5DCD2] transition-colors cursor-pointer"
+          aria-label="Tutup Pembayaran QRIS"
+          title="Tutup Pembayaran"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Header */}
         <div className="text-center pt-1">
-          <span className="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#865225] bg-[#FDF3EB] px-3 py-1 rounded-full uppercase tracking-wider mb-2">
-            <QrCode className="w-3.5 h-3.5 text-[#E08A44]" />
+          <span className="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#865225] bg-[#FDF3EB] px-3 py-1 rounded-full uppercase tracking-wider mb-2 border border-[#FDB882]/40">
+            <QrCode className="w-3.5 h-3.5 text-[#C86826]" />
             QRIS Dinamis • BCA & All E-Wallet
           </span>
-          <h3 className="font-serif text-[20px] font-bold text-[#2B1810]">
+          <h3 className="font-serif text-[20px] font-bold text-[#26160F]">
             Pindai untuk Membayar
           </h3>
-          <p className="text-[12px] text-[#817470] mt-0.5">
+          <p className="text-[12px] text-[#75645C] mt-0.5">
             Gopay, OVO, Dana, BCA Mobile, Livin, ShopeePay
           </p>
         </div>
 
         {/* QR Code Container */}
-        <div className="my-5 p-4 bg-[#FBF9F5] rounded-2xl border border-[#EAE8E4] flex flex-col items-center">
-          <div className="w-52 h-52 bg-white rounded-xl p-3 shadow-inner border border-[#EAE8E4] flex flex-col items-center justify-center">
+        <div className="my-5 p-4 bg-[#FAF7F2] rounded-2xl border border-[#ECE4DA] flex flex-col items-center">
+          <div className="w-52 h-52 bg-white rounded-xl p-3 shadow-inner border border-[#ECE4DA] flex flex-col items-center justify-center">
             {/* SVG QR Visual */}
             <svg
               viewBox="0 0 100 100"
-              className="w-full h-full text-[#2B1810]"
+              className="w-full h-full text-[#26160F]"
               fill="currentColor"
             >
               {/* Corner position markers */}
-              <rect x="5" y="5" width="25" height="25" fill="#2B1810" rx="3" />
+              <rect x="5" y="5" width="25" height="25" fill="#26160F" rx="3" />
               <rect x="9" y="9" width="17" height="17" fill="white" />
-              <rect x="13" y="13" width="9" height="9" fill="#2B1810" />
+              <rect x="13" y="13" width="9" height="9" fill="#26160F" />
 
-              <rect x="70" y="5" width="25" height="25" fill="#2B1810" rx="3" />
+              <rect x="70" y="5" width="25" height="25" fill="#26160F" rx="3" />
               <rect x="74" y="9" width="17" height="17" fill="white" />
-              <rect x="78" y="13" width="9" height="9" fill="#2B1810" />
+              <rect x="78" y="13" width="9" height="9" fill="#26160F" />
 
-              <rect x="5" y="70" width="25" height="25" fill="#2B1810" rx="3" />
+              <rect x="5" y="70" width="25" height="25" fill="#26160F" rx="3" />
               <rect x="9" y="74" width="17" height="17" fill="white" />
-              <rect x="13" y="78" width="9" height="9" fill="#2B1810" />
+              <rect x="13" y="78" width="9" height="9" fill="#26160F" />
 
               {/* Data modules pattern */}
               <rect x="35" y="8" width="6" height="6" />
@@ -108,9 +110,9 @@ export const QRISPaymentModal: React.FC<QRISPaymentModalProps> = ({
               <rect x="8" y="48" width="14" height="6" />
               <rect x="8" y="58" width="8" height="6" />
 
-              <rect x="35" y="35" width="30" height="30" fill="#2B1810" rx="2" />
+              <rect x="35" y="35" width="30" height="30" fill="#26160F" rx="2" />
               <circle cx="50" cy="50" r="8" fill="white" />
-              <circle cx="50" cy="50" r="4" fill="#E08A44" />
+              <circle cx="50" cy="50" r="4" fill="#C86826" />
 
               <rect x="70" y="35" width="6" height="14" />
               <rect x="80" y="35" width="12" height="6" />
@@ -126,21 +128,21 @@ export const QRISPaymentModal: React.FC<QRISPaymentModalProps> = ({
 
           {/* Amount */}
           <div className="mt-3 text-center">
-            <span className="text-[11px] text-[#817470]">Total Pembayaran</span>
-            <div className="font-serif text-[22px] font-bold text-[#2B1810]">
+            <span className="text-[11px] text-[#75645C] font-medium">Total Pembayaran</span>
+            <div className="font-serif text-[24px] font-bold text-[#26160F]">
               Rp {grandTotal.toLocaleString('id-ID')}
             </div>
           </div>
         </div>
 
         {/* Timer & Security */}
-        <div className="flex items-center justify-between text-[12px] text-[#817470] mb-4 px-1">
+        <div className="flex items-center justify-between text-[12px] text-[#75645C] mb-4 px-1">
           <div className="flex items-center gap-1.5 font-medium">
-            <Timer className="w-4 h-4 text-[#E08A44]" />
-            Sisa Waktu: <strong className="text-[#2B1810]">{formatTimer(secondsLeft)}</strong>
+            <Timer className="w-4 h-4 text-[#C86826]" />
+            Sisa Waktu: <strong className="text-[#26160F] font-mono">{formatTimer(secondsLeft)}</strong>
           </div>
-          <div className="flex items-center gap-1 text-[11px] text-[#865225]">
-            <ShieldCheck className="w-4 h-4" /> Terverifikasi Bank Indonesia
+          <div className="flex items-center gap-1 text-[11px] text-[#865225] font-semibold">
+            <ShieldCheck className="w-4 h-4 text-emerald-600" /> Terverifikasi Bank Indonesia
           </div>
         </div>
 
@@ -148,7 +150,7 @@ export const QRISPaymentModal: React.FC<QRISPaymentModalProps> = ({
         <button
           onClick={handleSimulatePayment}
           disabled={isProcessing}
-          className="w-full bg-[#2B1810] hover:bg-[#1B1C1A] text-white py-3 rounded-xl font-bold text-[14px] shadow-sm flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-60"
+          className="w-full min-h-[48px] bg-[#26160F] hover:bg-[#382015] active:scale-[0.98] text-white py-3.5 rounded-xl font-bold text-[14px] shadow-sm flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-60"
         >
           {isProcessing ? (
             <div className="flex items-center gap-2">

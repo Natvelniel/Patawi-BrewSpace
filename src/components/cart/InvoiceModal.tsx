@@ -34,7 +34,7 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({ order, onClose }) =>
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/65 backdrop-blur-xs animate-in fade-in select-none">
-      <div className="bg-white rounded-3xl max-w-[460px] w-full p-5 sm:p-6 shadow-2xl border border-[#ECE4DA] max-h-[92vh] overflow-y-auto no-scrollbar relative animate-in zoom-in-95">
+      <div className="bg-[#FAF7F2] rounded-3xl max-w-[460px] w-full p-5 sm:p-6 depth-card rim-light border border-[#ECE4DA] shadow-[0_8px_32px_rgba(22,12,7,0.18)] max-h-[92vh] overflow-y-auto no-scrollbar relative animate-in zoom-in-95">
         {/* Header Actions */}
         <div className="flex items-center justify-between pb-3.5 border-b border-[#ECE4DA]">
           <div className="flex items-center gap-2">
@@ -45,7 +45,7 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({ order, onClose }) =>
           </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 rounded-full bg-[#FAF7F2] hover:bg-[#EFE8E0] text-[#75645C] hover:text-[#26160F] flex items-center justify-center transition-colors cursor-pointer"
+            className="min-w-[40px] min-h-[40px] w-10 h-10 rounded-full bg-white hover:bg-[#EFE8E0] border border-[#ECE4DA] text-[#75645C] hover:text-[#26160F] flex items-center justify-center transition-colors cursor-pointer"
             title="Tutup Faktur"
           >
             <X className="w-4 h-4" />
@@ -84,7 +84,7 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({ order, onClose }) =>
           </div>
 
           {/* Customer & Shipping Details Bar */}
-          <div className="bg-[#FAF7F2] p-3 rounded-2xl border border-[#ECE4DA] grid grid-cols-2 gap-2 text-xs">
+          <div className="bg-white p-3.5 rounded-2xl border border-[#ECE4DA] depth-card grid grid-cols-2 gap-2 text-xs">
             <div>
               <span className="text-[9.5px] text-[#75645C] uppercase font-bold tracking-wider block">
                 Penerima / Pemesan:
@@ -119,8 +119,8 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({ order, onClose }) =>
           </div>
 
           {/* Itemized Table */}
-          <div className="border border-[#ECE4DA] rounded-2xl overflow-hidden">
-            <div className="bg-[#EFE8E0]/70 px-3 py-2 text-[10.5px] font-bold text-[#75645C] grid grid-cols-12 gap-1 uppercase tracking-wider">
+          <div className="border border-[#ECE4DA] rounded-2xl overflow-hidden bg-white shadow-xs">
+            <div className="bg-[#F3EFEA] px-3 py-2 text-[10.5px] font-bold text-[#5C4D46] grid grid-cols-12 gap-1 uppercase tracking-wider">
               <span className="col-span-7">Biji Kopi & Profil</span>
               <span className="col-span-2 text-center">Qty</span>
               <span className="col-span-3 text-right">Subtotal</span>
@@ -205,13 +205,13 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({ order, onClose }) =>
         <div className="mt-5 pt-3 border-t border-[#ECE4DA] grid grid-cols-2 gap-2">
           <button
             onClick={handleDownload}
-            className="flex items-center justify-center gap-1.5 bg-[#26160F] hover:bg-[#C86826] text-white py-2.5 rounded-xl font-bold text-xs shadow-xs transition-all cursor-pointer active:scale-95"
+            className="min-h-[44px] flex items-center justify-center gap-1.5 bg-[#26160F] hover:bg-[#C86826] text-white py-2.5 px-3 rounded-xl font-bold text-xs shadow-md transition-all cursor-pointer active:scale-95"
           >
             <Download className="w-3.5 h-3.5 text-[#FDB882]" /> Unduh PDF
           </button>
           <button
             onClick={handleResendEmail}
-            className="flex items-center justify-center gap-1.5 bg-[#FAF7F2] hover:bg-[#EFE8E0] text-[#26160F] border border-[#ECE4DA] py-2.5 rounded-xl font-bold text-xs transition-all cursor-pointer active:scale-95"
+            className="min-h-[44px] flex items-center justify-center gap-1.5 bg-white hover:bg-[#EFE8E0] text-[#26160F] border border-[#ECE4DA] py-2.5 px-3 rounded-xl font-bold text-xs transition-all cursor-pointer active:scale-95"
           >
             <Mail className="w-3.5 h-3.5 text-[#865225]" /> Kirim ke Email
           </button>

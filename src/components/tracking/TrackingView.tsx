@@ -46,7 +46,7 @@ export const TrackingView: React.FC = () => {
   const activeOrders = orders.filter((o) => o.status !== 'delivered');
 
   return (
-    <div className="pb-16 pt-3 px-4 bg-[#FAF7F2] min-h-full space-y-5">
+    <div className="pb-24 pt-3 px-4 bg-[#FAF7F2] min-h-full space-y-5">
       {/* 1. Header Strip */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
@@ -66,7 +66,7 @@ export const TrackingView: React.FC = () => {
           return (
             <div
               key={order.id}
-              className="bg-white rounded-3xl border border-[#ECE4DA] shadow-2xs overflow-hidden"
+              className="bg-white rounded-3xl border border-[#ECE4DA] depth-card rim-light shadow-[0_4px_16px_rgba(22,12,7,0.06)] overflow-hidden"
             >
               {/* Header Badge Strip */}
               <div className="p-4 bg-[#FAF7F2] border-b border-[#ECE4DA] flex items-center justify-between">
@@ -134,7 +134,7 @@ export const TrackingView: React.FC = () => {
                     </div>
                     <button
                       onClick={() => advanceOrderStatus(order.id)}
-                      className="bg-[#C86826] hover:bg-[#B3581C] text-white text-[10.5px] font-bold px-3 py-1.5 rounded-lg transition-colors cursor-pointer active:scale-95 shrink-0 shadow-xs ml-2"
+                      className="min-h-[36px] bg-[#C86826] hover:bg-[#B3581C] text-white text-[11px] font-bold px-3 py-1.5 rounded-lg transition-colors cursor-pointer active:scale-95 shrink-0 shadow-xs ml-2"
                       title="Simulasi pergerakan kurir"
                     >
                       Perbarui Rute
@@ -176,14 +176,14 @@ export const TrackingView: React.FC = () => {
                     <div className="flex items-center gap-2 shrink-0">
                       <button
                         onClick={() => showToast(`Menghubungi driver ${order.courier?.name}...`)}
-                        className="w-9 h-9 rounded-full bg-[#FDF3EB] text-[#865225] hover:bg-[#FDB882] flex items-center justify-center transition-colors cursor-pointer active:scale-95 border border-[#FDB882]/40 shadow-2xs"
+                        className="min-w-[40px] min-h-[40px] w-10 h-10 rounded-full bg-[#FDF3EB] text-[#865225] hover:bg-[#FDB882] flex items-center justify-center transition-colors cursor-pointer active:scale-95 border border-[#FDB882]/40 shadow-xs"
                         title="Telepon Driver"
                       >
                         <Phone className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => setActiveDriverChat(true)}
-                        className="w-9 h-9 rounded-full bg-[#26160F] text-[#FDB882] hover:bg-[#1A0D07] flex items-center justify-center transition-colors cursor-pointer active:scale-95 shadow-2xs"
+                        className="min-w-[40px] min-h-[40px] w-10 h-10 rounded-full bg-[#26160F] text-[#FDB882] hover:bg-[#1A0D07] flex items-center justify-center transition-colors cursor-pointer active:scale-95 shadow-xs"
                         title="Kirim Pesan ke Driver"
                       >
                         <MessageSquare className="w-4 h-4" />
@@ -291,7 +291,7 @@ export const TrackingView: React.FC = () => {
         return (
           <div
             key={order.id}
-            className="bg-white rounded-3xl border border-[#ECE4DA] shadow-2xs overflow-hidden"
+            className="bg-white rounded-3xl border border-[#ECE4DA] depth-card rim-light shadow-[0_4px_16px_rgba(22,12,7,0.06)] overflow-hidden"
           >
             {/* Peach Top Header */}
             <div className="p-4 bg-[#FDE8D7] border-b border-[#FDB882]/30 flex items-center justify-between">
@@ -312,7 +312,7 @@ export const TrackingView: React.FC = () => {
 
             {/* PIN Card */}
             <div className="p-4 space-y-4">
-              <div className="bg-[#FAF7F2] rounded-2xl p-4 text-center border border-[#ECE4DA]">
+              <div className="bg-[#FAF7F2] rounded-2xl p-4 text-center border border-[#ECE4DA] depth-card">
                 <span className="text-[11px] font-bold text-[#865225] tracking-wider uppercase block mb-2">
                   PIN PENGAMBILAN BARISTA
                 </span>
@@ -376,7 +376,7 @@ export const TrackingView: React.FC = () => {
                       '_blank'
                     )
                   }
-                  className="flex items-center gap-1 bg-[#26160F] text-[#FDB882] hover:bg-[#C86826] hover:text-white text-[11px] font-bold px-3 py-2 rounded-xl transition-all shrink-0 cursor-pointer active:scale-95"
+                  className="min-h-[40px] flex items-center gap-1.5 bg-[#26160F] text-[#FDB882] hover:bg-[#C86826] hover:text-white text-[11px] font-bold px-3.5 py-2 rounded-xl transition-all shrink-0 cursor-pointer active:scale-95 shadow-xs"
                 >
                   <Navigation className="w-3.5 h-3.5" />
                   Rute
@@ -404,7 +404,7 @@ export const TrackingView: React.FC = () => {
         {ORDER_HISTORY.map((item) => (
           <div
             key={item.id}
-            className="bg-white rounded-3xl border border-[#ECE4DA] p-4 shadow-2xs space-y-3"
+            className="bg-white rounded-3xl border border-[#ECE4DA] p-4.5 depth-card rim-light shadow-[0_4px_16px_rgba(22,12,7,0.06)] space-y-3.5"
           >
             <div className="flex items-center justify-between text-xs">
               <span className="font-bold text-[#26160F]">#{item.orderNumber}</span>
@@ -432,7 +432,7 @@ export const TrackingView: React.FC = () => {
             <div className="grid grid-cols-2 gap-2 pt-2 border-t border-[#F4EFE9]">
               <button
                 onClick={() => handleReorder(item)}
-                className="flex items-center justify-center gap-1.5 bg-[#26160F] hover:bg-[#C86826] text-white py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer active:scale-95"
+                className="min-h-[44px] flex items-center justify-center gap-1.5 bg-[#26160F] hover:bg-[#C86826] text-white py-2.5 px-3 rounded-xl text-xs font-bold transition-all cursor-pointer active:scale-95 shadow-xs"
               >
                 <RotateCcw className="w-3.5 h-3.5 text-[#FDB882]" />
                 Pesan Lagi
@@ -442,7 +442,7 @@ export const TrackingView: React.FC = () => {
                 onClick={() =>
                   showToast('Mengunduh Invoice PDF Resmi Patawi Coffee Roastery #PTW-87902')
                 }
-                className="flex items-center justify-center gap-1.5 bg-[#EFE8E0] hover:bg-[#E5DCD2] text-[#26160F] py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer active:scale-95"
+                className="min-h-[44px] flex items-center justify-center gap-1.5 bg-[#FAF7F2] hover:bg-[#E5DCD2] text-[#26160F] border border-[#ECE4DA] py-2.5 px-3 rounded-xl text-xs font-bold transition-all cursor-pointer active:scale-95"
               >
                 <FileDown className="w-3.5 h-3.5" />
                 Unduh Invoice
@@ -453,7 +453,7 @@ export const TrackingView: React.FC = () => {
       </div>
 
       {/* 3. Customer Care & WhatsApp Support Hotline */}
-      <div className="bg-white rounded-3xl p-4.5 depth-card space-y-3.5 shadow-sm">
+      <div className="bg-white rounded-3xl p-5 depth-card rim-light border border-[#ECE4DA] space-y-3.5 shadow-[0_4px_16px_rgba(22,12,7,0.06)]">
         <div className="flex items-start gap-3">
           <div className="w-10 h-10 rounded-2xl bg-[#FDF3EB] border border-[#FDB882]/40 flex items-center justify-center text-[#C86826] shrink-0 shadow-xs">
             <Headphones className="w-5 h-5" />
@@ -487,7 +487,7 @@ export const TrackingView: React.FC = () => {
               }
               showToast('Nomor prototipe disalin ke clipboard');
             }}
-            className="text-[10px] font-bold text-[#C86826] hover:text-[#9A4710] bg-[#FDF3EB] hover:bg-[#FCEADE] px-2.5 py-1 rounded-lg transition-colors cursor-pointer shrink-0 border border-[#FDB882]/30 active:scale-95"
+            className="min-h-[32px] text-[10px] font-bold text-[#C86826] hover:text-[#9A4710] bg-[#FDF3EB] hover:bg-[#FCEADE] px-3 py-1.5 rounded-lg transition-colors cursor-pointer shrink-0 border border-[#FDB882]/30 active:scale-95"
             title="Salin Nomor WhatsApp"
           >
             Salin
@@ -502,7 +502,7 @@ export const TrackingView: React.FC = () => {
               '_blank'
             )
           }
-          className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] active:scale-[0.98] text-white py-2.5 rounded-xl text-xs font-bold shadow-xs transition-all duration-150 cursor-pointer"
+          className="min-h-[48px] w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] active:scale-[0.98] text-white py-3 px-4 rounded-xl text-xs font-bold shadow-xs transition-all duration-150 cursor-pointer"
         >
           <MessageCircle className="w-4 h-4 text-white shrink-0" />
           <span className="font-semibold text-xs tracking-tight">Chat WhatsApp Roastery</span>
@@ -513,11 +513,11 @@ export const TrackingView: React.FC = () => {
       {/* Driver Chat Modal */}
       {activeDriverChat && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in select-none">
-          <div className="bg-white rounded-3xl max-w-[380px] w-full p-4 shadow-2xl border border-[#ECE4DA] flex flex-col h-[420px]">
+          <div className="bg-[#FAF7F2] rounded-3xl max-w-[380px] w-full p-4.5 shadow-2xl border border-[#ECE4DA] depth-card rim-light flex flex-col h-[440px]">
             {/* Modal Header */}
             <div className="flex items-center justify-between pb-3 border-b border-[#ECE4DA]">
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-full overflow-hidden bg-[#EFE8E0]">
+                <div className="w-9 h-9 rounded-full overflow-hidden bg-[#EFE8E0] border border-[#ECE4DA]">
                   <img src="/assets/9e21e.png" alt="Driver" className="w-full h-full object-cover" />
                 </div>
                 <div>
@@ -529,7 +529,7 @@ export const TrackingView: React.FC = () => {
               </div>
               <button
                 onClick={() => setActiveDriverChat(false)}
-                className="text-[#75645C] hover:text-[#26160F] text-xs font-bold cursor-pointer"
+                className="min-w-[40px] min-h-[40px] flex items-center justify-center rounded-xl bg-white border border-[#ECE4DA] text-[#75645C] hover:text-[#26160F] text-xs font-bold cursor-pointer transition-colors"
               >
                 Tutup
               </button>
@@ -543,7 +543,7 @@ export const TrackingView: React.FC = () => {
                   className={`p-2.5 rounded-xl max-w-[85%] ${
                     m.startsWith('Anda:')
                       ? 'ml-auto bg-[#26160F] text-white rounded-tr-none'
-                      : 'bg-[#FAF7F2] text-[#26160F] rounded-tl-none border border-[#ECE4DA]'
+                      : 'bg-white text-[#26160F] rounded-tl-none border border-[#ECE4DA]'
                   }`}
                 >
                   {m}
@@ -552,17 +552,17 @@ export const TrackingView: React.FC = () => {
             </div>
 
             {/* Input Form */}
-            <form onSubmit={handleSendMessage} className="pt-2 border-t border-[#ECE4DA] flex gap-2">
+            <form onSubmit={handleSendMessage} className="pt-2.5 border-t border-[#ECE4DA] flex gap-2">
               <input
                 type="text"
                 value={chatMessage}
                 onChange={(e) => setChatMessage(e.target.value)}
                 placeholder="Ketik pesan untuk driver..."
-                className="flex-1 bg-[#FAF7F2] px-3.5 py-2 rounded-xl text-xs text-[#26160F] border border-[#ECE4DA] focus:outline-hidden"
+                className="min-h-[44px] flex-1 bg-white px-3.5 py-2.5 rounded-xl text-xs text-[#26160F] border border-[#ECE4DA] focus:outline-hidden font-sans"
               />
               <button
                 type="submit"
-                className="bg-[#26160F] text-[#FDB882] px-3.5 py-2 rounded-xl text-xs font-bold cursor-pointer"
+                className="min-h-[44px] bg-[#26160F] hover:bg-[#C86826] text-[#FDB882] px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer transition-colors active:scale-95"
               >
                 Kirim
               </button>

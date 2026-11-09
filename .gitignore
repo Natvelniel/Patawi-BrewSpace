@@ -28,3 +28,5 @@ dist-ssr
 
 # Agent tooling
 .agents
+anti-slop/
+toolbar-overflow-evidence.png

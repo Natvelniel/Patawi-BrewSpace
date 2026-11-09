@@ -58,7 +58,7 @@ export const FilterModal: React.FC = () => {
   return (
     <div className="fixed inset-0 z-50 flex items-end md:items-center justify-center bg-black/65 backdrop-blur-xs transition-opacity animate-in fade-in select-none p-0 md:p-4">
       <div
-        className="w-full max-w-[420px] bg-[#FAF7F2] rounded-t-[32px] md:rounded-[32px] max-h-[92vh] flex flex-col shadow-2xl border border-[#ECE4DA] overflow-hidden animate-in slide-in-from-bottom duration-300"
+        className="w-full max-w-[420px] bg-[#FAF7F2] rounded-t-[32px] md:rounded-[32px] max-h-[92vh] flex flex-col shadow-2xl border border-[#ECE4DA] overflow-hidden animate-in slide-in-from-bottom duration-300 depth-card rim-light font-sans"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Grab Handle for Mobile */}
@@ -70,21 +70,22 @@ export const FilterModal: React.FC = () => {
         <div className="px-6 py-4 flex items-center justify-between border-b border-[#ECE4DA] bg-white/80 backdrop-blur-md">
           <div className="flex items-center gap-2">
             <SlidersHorizontal className="w-4 h-4 text-[#C86826]" />
-            <h3 className="font-serif text-[17px] font-bold text-[#26160F]">
+            <h3 className="font-serif text-[18px] font-bold text-[#26160F]">
               Filter & Urutkan
             </h3>
           </div>
           <div className="flex items-center gap-2">
             <button
               onClick={resetFilter}
-              className="text-xs text-[#75645C] hover:text-[#26160F] flex items-center gap-1 font-semibold cursor-pointer px-2 py-1 rounded-lg hover:bg-[#EFE8E0] transition-colors"
+              className="min-h-[36px] text-xs text-[#75645C] hover:text-[#26160F] flex items-center gap-1 font-semibold cursor-pointer px-2.5 py-1.5 rounded-lg hover:bg-[#EFE8E0] transition-colors"
             >
-              <RotateCcw className="w-3 h-3" /> Reset
+              <RotateCcw className="w-3.5 h-3.5" /> Reset
             </button>
             <button
               onClick={() => setShowFilterModal(false)}
-              className="w-8 h-8 rounded-full bg-[#EFE8E0] text-[#75645C] hover:text-[#26160F] hover:bg-[#E5DCD2] flex items-center justify-center transition-colors cursor-pointer active:scale-95"
-              aria-label="Tutup"
+              className="w-10 h-10 min-w-[40px] min-h-[40px] rounded-full bg-[#EFE8E0] text-[#75645C] hover:text-[#26160F] hover:bg-[#E5DCD2] flex items-center justify-center transition-colors cursor-pointer active:scale-95"
+              aria-label="Tutup Filter"
+              title="Tutup Filter"
             >
               <X className="w-4 h-4" />
             </button>
@@ -222,13 +223,13 @@ export const FilterModal: React.FC = () => {
         </div>
 
         {/* Sticky Apply Footer */}
-        <div className="p-4 bg-white border-t border-[#ECE4DA] flex items-center gap-3">
+        <div className="p-4 bg-white border-t border-[#ECE4DA] flex items-center gap-3 rim-light">
           <button
             onClick={() => {
               setShowFilterModal(false);
               showToast(`Filter diterapkan: ${matchingCount} biji kopi ditemukan`);
             }}
-            className="w-full bg-[#26160F] hover:bg-[#3E2419] active:scale-[0.98] text-white py-3 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+            className="w-full min-h-[44px] bg-[#26160F] hover:bg-[#3E2419] active:scale-[0.98] text-white py-3.5 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center justify-center gap-1.5 cursor-pointer"
           >
             Tampilkan {matchingCount} Biji Kopi
           </button>

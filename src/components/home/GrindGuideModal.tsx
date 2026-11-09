@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStore } from '../../context/StoreContext';
-import { X, Coffee, Flame, Droplets, Gauge, Sparkles } from 'lucide-react';
+import { X, Coffee, Flame, Droplets, Gauge, Sparkles, CheckCircle2 } from 'lucide-react';
 
 export const GrindGuideModal: React.FC = () => {
   const { showGrindGuide, setShowGrindGuide } = useStore();
@@ -39,8 +39,8 @@ export const GrindGuideModal: React.FC = () => {
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200 select-none">
-      <div className="bg-[#FAF7F2] rounded-3xl max-w-[420px] w-full p-5 shadow-2xl border border-[#ECE4DA] max-h-[90vh] overflow-y-auto no-scrollbar">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/65 backdrop-blur-xs animate-in fade-in duration-200 select-none">
+      <div className="bg-[#FAF7F2] rounded-3xl max-w-[420px] w-full p-5 shadow-2xl border border-[#ECE4DA] max-h-[90vh] overflow-y-auto no-scrollbar depth-card rim-light">
         <div className="flex items-center justify-between pb-3.5 border-b border-[#ECE4DA]">
           <div className="flex items-center gap-2.5">
             <div className="w-10 h-10 rounded-2xl bg-[#26160F] text-[#FDB882] flex items-center justify-center shadow-xs shrink-0">
@@ -57,8 +57,9 @@ export const GrindGuideModal: React.FC = () => {
           </div>
           <button
             onClick={() => setShowGrindGuide(false)}
-            className="w-8 h-8 rounded-full bg-[#EFE8E0] text-[#75645C] hover:text-[#26160F] hover:bg-[#E5DCD2] flex items-center justify-center transition-colors cursor-pointer active:scale-95"
+            className="w-10 h-10 min-w-[40px] min-h-[40px] rounded-full bg-[#EFE8E0] text-[#75645C] hover:text-[#26160F] hover:bg-[#E5DCD2] flex items-center justify-center transition-colors cursor-pointer active:scale-95"
             title="Tutup Panduan"
+            aria-label="Tutup Panduan"
           >
             <X className="w-4 h-4" />
           </button>
@@ -102,7 +103,7 @@ export const GrindGuideModal: React.FC = () => {
                   {g.desc}
                 </p>
                 <div className="mt-2.5 flex items-start gap-1.5 text-[11px] bg-[#F4EFE9] border border-[#ECE4DA] px-2.5 py-1.5 rounded-xl">
-                  <span className="text-[#C86826] shrink-0 mt-0.5">⚡</span>
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#C86826] shrink-0 mt-0.5" />
                   <div className="min-w-0 flex-1 leading-snug">
                     <span className="text-[#75645C]">Cocok untuk: </span>
                     <strong className="text-[#26160F]">{g.gear}</strong>
@@ -116,7 +117,7 @@ export const GrindGuideModal: React.FC = () => {
         <div className="mt-4 pt-3.5 border-t border-[#ECE4DA]">
           <button
             onClick={() => setShowGrindGuide(false)}
-            className="w-full bg-[#26160F] hover:bg-[#3E2419] text-[#FDB882] py-3 rounded-2xl font-bold text-xs shadow-xs transition-all cursor-pointer active:scale-95"
+            className="w-full min-h-[44px] bg-[#26160F] hover:bg-[#3E2419] text-[#FDB882] py-3 rounded-2xl font-bold text-xs shadow-xs transition-all cursor-pointer active:scale-95 flex items-center justify-center"
           >
             Mengerti, Lanjutkan Belanja
           </button>

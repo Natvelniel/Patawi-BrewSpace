@@ -2,11 +2,15 @@
 
 > **Patawi Coffee** — Aplikasi Web Pemesanan Kopi Artisanal & Sistem Operasional Specialty Roastery.
 > Didesain secara interaktif, ramah pengguna, dan fungsional penuh untuk menghubungkan **Pembeli (Customer)**, **Pengelola Roastery (Admin/Owner)**, dan **Armada Kurir (Delivery Order)** dalam satu ekosistem yang terintegrasi.
+>
+> 🌟 **Branch `experiment`**: Telah di-upgrade dengan sistem desain **Anti-Slop** (bebas template generik AI), kedalaman taktil visual (*tactile depth*), tipografi *Playfair Display & Plus Jakarta Sans*, dan rangkaian 75 pengujian otomatis (*automated test suite*).
 
 [![Vite](https://img.shields.io/badge/Vite-6.x-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
 [![React](https://img.shields.io/badge/React-19.x-61DAFB?logo=react&logoColor=black)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Tests](https://img.shields.io/badge/Tests-75%2F75%20Passing-brightgreen?logo=vitest&logoColor=white)](tests/run-all.cjs)
+[![Anti--Slop](https://img.shields.io/badge/Anti--Slop-Certified%20Clean-success)](anti-slop/)
 
 ---
 
@@ -64,6 +68,13 @@ Setelah itu, buka browser favorit Anda dan kunjungi tautan:
 👉 **`http://localhost:5173`**
 
 *(Opsional) Untuk mematikan server, tekan tombol `Ctrl + C` di terminal.*
+
+### 4. Jalankan Pengujian Otomatis (Testing Suite)
+Untuk memverifikasi keutuhan sistem dari logika kalkulasi, batas stok, hingga audit Anti-Slop:
+```bash
+node tests/run-all.cjs
+```
+> Menjalankan 15 berkas test suite (75 skenario) dengan hasil **75/75 PASSING**.
 
 ---
 
@@ -161,9 +172,18 @@ Klik tombol **`Kurir`** di header atas untuk masuk ke mode armada kurir:
 
 ---
 
-## 🎨 Ringkasan Pembenahan Visual UI (Craftsmanship)
+## 🎨 Ringkasan Pembenahan Visual UI & Anti-Slop (Craftsmanship)
 
-Aplikasi ini telah melalui pembersihan visual menyeluruh:
+Aplikasi pada branch `experiment` ini telah melalui pembersihan visual dan perombakan arsitektur desain secara menyeluruh:
+- **Prinsip Anti-Slop (No Generic AI UI)**: 
+  - Tidak ada gradien warna ungu/biru neon khas AI generik.
+  - Tidak ada badge palsu ("AI-Powered", "Next-Gen", dll) atau buzzword korporat.
+  - Tidak ada kartu melayang (*ghost cards*) tanpa batas tegas; semua wadah informasi menggunakan kontur 1px yang nyata (*tactile border*) dengan rim-light hangat.
+  - Zero em dashes (`—`) di seluruh teks antarmuka maupun kode program.
+- **Hierarki Tipografi Berkarakter**:
+  - Judul editorial dan display menggunakan **Playfair Display** yang memancarkan aura roastery klasik premium.
+  - Kontrol, label, tombol, dan teks isi menggunakan **Plus Jakarta Sans** dengan kontras tinggi yang memenuhi standar aksesibilitas WCAG AA/AAA.
+- **Ergonomi Sentuhan & Mobile-First**: Semua tombol navigasi, filter, dan tab interaktif memiliki tap target minimal 44 × 44 px, aman digunakan di satu tangan pada layar ponsel (390px hingga 430px) maupun layar desktop.
 - **Zero Ellipsis pada Nama Daerah**: Asal daerah seperti `ACEH TENGAH`, `SULAWESI SELATAN`, dan `BANGLI, BALI` tampil penuh 100% tanpa terpotong (`ACEH...`).
 - **Profil Rasa Cupping Sejajar**: Indikator *Keasaman, Ketebalan, dan Manis* disajikan dalam 3 micro-card rapi dengan progress bar rata dasar, menghilangkan tumpang-tindih teks.
 - **Panduan Gilingan "Sangat Dianjurkan"**: Lencana rekomendasi utama berbalut aksen emas roastery dengan ikon sparkles dan border tebal 2px.
